@@ -4,8 +4,6 @@
   
   Só queremos commits com nomes todos javardados CARALHO ahahahah.
   
-╭━┳━╭━╭━╮╮┃┈┈┈┣▅╋▅┫┃┃┈┃┈╰━╰━━━━━━╮╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣╲┃┈┈┈┈┈┈┈┈┈▉▉▉╲┃┈┈┈┈┈┈┈┈┈◥▉◤╲┃┈┈┈┈╭━┳━━━━╯╲┣━━━━━━┫
-
 
 
 
