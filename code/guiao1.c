@@ -6,9 +6,8 @@
 #include <math.h>
 
 int handle(STACK *s, char *token){
-    add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || e_bit(s,token) || ou_bit(s,token) || xor_bit(s,token) || not_bit(s,token) || value(s,token);
-    return 0;
-}
+    return add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || e_bit(s,token) || ou_bit(s,token) || xor_bit(s,token) || not_bit(s,token) || value(s,token);
+    }
 
 int sub(STACK *s, char *token)
 {
