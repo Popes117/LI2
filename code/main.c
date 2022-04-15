@@ -14,11 +14,11 @@ int main(){
         {
            handle(s,token);
         }
-        for (int i = 1; i <= s -> sp; i++)
-    {
-        int z = pop(s);
+        for (int i = 1; i <= s->sp; i++)
+        {
+        int z = s->stack[i];
         printf("%d",z);
-    }
+        }
     printf("\n");
     }
 }
