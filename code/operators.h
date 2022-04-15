@@ -4,9 +4,11 @@
 #include <string.h>
 #include <math.h>
 
-int add(STACK *s, char *token);
+int handle(STACK *s, char *token);
 
 int sub(STACK *s, char *token);
+
+int add(STACK *s, char *token);
 
 int mult(STACK *s, char *token);
 
@@ -28,6 +30,4 @@ int xou_bit(STACK *s, char *token);
 
 int not_bit(STACK *s, char *token);
 
-int value(STACK *s, char *token);
-
-void handle(STACK *s, char *token);
+int value(STACK *s, char *token); 

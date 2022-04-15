@@ -1,4 +1,5 @@
 #define MAX 1000
+#pragma once
 
 typedef struct {
         int stack[MAX];
@@ -9,4 +10,4 @@ STACK *new_stack();
 
 void push(STACK *s, int elem);
 
-int pop(STACK *s);
+int pop(STACK *s); 

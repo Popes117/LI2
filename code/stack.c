@@ -16,4 +16,4 @@ int pop(STACK *s){
         int r = s->stack[s->sp];
         s->sp--;
         return r;
-}
+} 

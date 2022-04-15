@@ -2,22 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 #include "operators.h"
-#include <math.h>
 #include "stack.h"
+#include <math.h>
 
-int sub(STACK *s, char token[])
+int handle(STACK *s, char *token){
+    add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || value(s,token); 
+    return 0;
+}
+
+int sub(STACK *s, char *token)
 {
     if (strcmp(token, "-") == 0)
     {
         int x = pop(s);
         int y = pop(s);
-        push(s,x-y);
+        push(s,y-x);
         return 1;
     }
     return 0;
 }
 
-int add(STACK *s, char token[]){
+int add(STACK *s, char *token){
     if (strcmp(token, "+") == 0)
     {
         int x = pop(s);
@@ -28,31 +33,31 @@ int add(STACK *s, char token[]){
     return 0;
 }
 
-int mult(STACK *s, char token[])
+int mult(STACK *s, char *token)
 {
     if (strcmp(token, "*") == 0)
     {
         int x = pop(s);
         int y = pop(s);
-        push(s,(x*y));
+        push(s,(y*x));
         return 1;
     }
     return 0;
 }
 
-int division(STACK *s, char token[])
+int division(STACK *s, char *token)
 {
     if (strcmp(token, "/") == 0)
     {
         int x = pop(s);
         int y = pop(s);
-        push(s,x/y);
+        push(s,y/x);
         return 1;
     }
     return 0;
 }
 
-int add1(STACK *s, char token[])
+int add1(STACK *s, char *token)
 {
     if (strcmp(token, ")") == 0)
     {
@@ -63,7 +68,7 @@ int add1(STACK *s, char token[])
     return 0;
 }
 
-int sub1(STACK *s, char token[])
+int sub1(STACK *s, char *token)
 {if (strcmp(token, "(") == 0)
     {
         int x = pop(s);
@@ -73,43 +78,42 @@ int sub1(STACK *s, char token[])
     return 0;
 }
 
-int mod(STACK *s, char token[])
+int mod(STACK *s, char *token)
 {if (strcmp(token, "%") == 0)
     {
         int x = pop(s);
         int y = pop(s);
-        push(s,x%y);
+        push(s,y%x);
         return 1;
     }
     return 0;
 }
 
-int expo(STACK *s, char token[])
+int expo(STACK *s, char *token)
 {if (strcmp(token, "#") == 0)
     {
         int x = pop(s);
         int y = pop(s);
-        push(s,pow(x,y));
+        push(s,pow(y,x));
         return 1;
     }
     return 0;
 }
 
-int e_bit(STACK *s, char token[]);
+int e_bit(STACK *s, char *token);
 
-int ou_bit(STACK *s, char token[]);
+int ou_bit(STACK *s, char *token);
 
-int xou_bit(STACK *s, char token[]);
+int xou_bit(STACK *s, char *token);
 
-int not_bit(STACK *s, char token[]);
+int not_bit(STACK *s, char *token);
 
-int value(STACK *s, char token[]){
+int value(STACK *s, char *token){
     int val;
     sscanf(token,"%d",&val);
         push(s,val);
         return 1;
 }
 
-void handle(STACK *s, char token[]){
-    add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || value(s,token); 
-}
+
+
