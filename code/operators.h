@@ -26,7 +26,7 @@ int e_bit(STACK *s, char *token);
 
 int ou_bit(STACK *s, char *token);
 
-int xou_bit(STACK *s, char *token);
+int xor_bit(STACK *s, char *token);
 
 int not_bit(STACK *s, char *token);
 

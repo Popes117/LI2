@@ -6,7 +6,7 @@
 #include <math.h>
 
 int handle(STACK *s, char *token){
-    add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || value(s,token); 
+    add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || e_bit(s,token) || ou_bit(s,token) || xor_bit(s,token) || not_bit(s,token) || value(s,token);
     return 0;
 }
 
@@ -100,13 +100,52 @@ int expo(STACK *s, char *token)
     return 0;
 }
 
-int e_bit(STACK *s, char *token);
+int e_bit(STACK *s, char *token)
+{
+    if (strcmp(token, "&") == 0)
+    {
+        int x = pop(s);
+        int y = pop(s);
+        push(s,y&x);
+        return 1;
+    }
+    return 0;
+}
 
-int ou_bit(STACK *s, char *token);
+int ou_bit(STACK *s, char *token)
+{
+    if (strcmp(token, "|") == 0)
+    {
+        int x = pop(s);
+        int y = pop(s);
+        push(s,y|x);
+        return 1;
+    }
+    return 0;
+}
 
-int xou_bit(STACK *s, char *token);
+int xor_bit(STACK *s, char *token)
+{
+    if (strcmp(token, "^") == 0)
+    {
+        int x = pop(s);
+        int y = pop(s);
+        push(s,y^x);
+        return 1;
+    }
+    return 0;
+}
 
-int not_bit(STACK *s, char *token);
+int not_bit(STACK *s, char *token)
+{
+    if (strcmp(token, "~") == 0)
+    {
+        int x = pop(s);
+        push(s,~x);
+        return 1;
+    }
+    return 0;
+}
 
 int value(STACK *s, char *token){
     int val;
