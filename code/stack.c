@@ -7,13 +7,13 @@ STACK * new_stack() {
         return (STACK *) malloc(sizeof(STACK));
 }
 
-void push(STACK *s, int elem){
+void push(STACK *s, Container container){
         s->sp++;
-        s->stack[s->sp] = elem;
+        s->stack[s->sp] = container;        
 }
 
-int pop(STACK *s){
-        int r = s->stack[s->sp];
+Container pop(STACK *s){
+        Container r = s->stack[s->sp];
         s->sp--;
         return r;
 }
