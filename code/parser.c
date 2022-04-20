@@ -41,7 +41,12 @@ void parser(char *line, STACK *s){
         else if (strcmp(token, "&") == 0) e_bit(s);
         else if (strcmp(token, "|") == 0) ou_bit(s);
         else if (strcmp(token, "^") == 0) xor_bit(s);
-        else if (strcmp(token, "~") == 0) not_bit(s); */
+        else if (strcmp(token, "~") == 0) not_bit(s);*/
+        else if (strcmp(token, "_") == 0) duplica(s);
+        else if (strcmp(token, ";") == 0) popes(s);
+        else if (strcmp(token, "\\") == 0) switch2(s);
+        else if (strcmp(token, "@") == 0) roda3(s);
+        else if (strcmp(token, "$") == 0) copy(s);
         else{
            Container container;
            container.label = 3;

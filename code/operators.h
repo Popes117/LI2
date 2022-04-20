@@ -30,3 +30,13 @@ void xor_bit(STACK *s);
 
 void not_bit(STACK *s);
 */
+
+void duplica(STACK *s);
+
+void popes(STACK *s);
+
+void switch2(STACK *s);
+
+void roda3(STACK *s);
+
+void copy(STACK *s);
