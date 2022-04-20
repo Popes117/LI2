@@ -5,153 +5,154 @@
 #include "stack.h"
 #include <math.h>
 
-int handle(STACK *s, char *token){
-    return add(s,token) || sub(s,token) || mult(s,token) || division(s,token) || mod(s,token) || add1(s,token) || sub1(s,token) || expo(s,token) || e_bit(s,token) || ou_bit(s,token) || xor_bit(s,token) || not_bit(s,token) || value(s,token);
-    }
-
-int sub(STACK *s, char *token)
+void sub(STACK *s)
 {
-    if (strcmp(token, "-") == 0)
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    
+    if (y.label == 3 || x.label == 3)
     {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,y-x);
-        return 1;
+        z.label = 3;
+        z.type.car = toChar(y).type.car-toChar(x).type.car;
     }
-    return 0;
+    else if (y.label == 1 || x.label == 1)
+    {
+        z.label = 1;
+        z.type.numD = toDouble(y).type.numD-toDouble(x).type.numD;
+    }
+    else{
+        z.label = x.label;
+        z.type.numI = y.type.numI-x.type.numI;
+    }
+    push(s,z);
 }
 
-int add(STACK *s, char *token){
-    if (strcmp(token, "+") == 0)
+void add(STACK *s){
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    if (y.label == 3 || x.label == 3)
     {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,x+y);
-        return 1;
+        z.label = 3;
+        z.type.car = toChar(x).type.car+toChar(y).type.car;
     }
-    return 0;
+    else if (y.label == 1 || x.label == 1)
+    {
+        z.label = 1;
+        z.type.numD = toDouble(x).type.numD+toDouble(y).type.numD;
+    }
+    else
+    {
+        z.label = x.label;
+        z.type.numI = x.type.numI+y.type.numI;
+    }
+    push(s,z);
 }
 
-int mult(STACK *s, char *token)
+void mult(STACK *s)
 {
-    if (strcmp(token, "*") == 0)
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    if (y.label == 1 || x.label == 1)
     {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,(y*x));
-        return 1;
+        z.label = 1;
+        z.type.numD = toDouble(x).type.numD*toDouble(y).type.numD;
     }
-    return 0;
+    else
+    {
+        z.label = x.label;
+        z.type.numI = x.type.numI-y.type.numI;
+    }
+    push(s,z);
 }
 
-int division(STACK *s, char *token)
+void division(STACK *s)
 {
-    if (strcmp(token, "/") == 0)
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    if (y.label == x.label && x.label == 2)
     {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,y/x);
-        return 1;
+        z.label = x.label;
+        z.type.numI = x.type.numI/y.type.numI;
     }
-    return 0;
+    else
+    {
+        z.label = 1;
+        z.type.numD = toDouble(y).type.numD/toDouble(x).type.numD;
+    }
+    push(s,z);
 }
 
-int add1(STACK *s, char *token)
+void add1(STACK *s)
 {
-    if (strcmp(token, ")") == 0)
-    {
-        int x = pop(s);
-        push(s,x+1);
-        return 1;
-    }
-    return 0;
+    Container y = pop(s);
+    if(y.label == 1)y.type.numD++;
+    if(y.label == 2)y.type.numI++;
+    else y.type.car++;
+    push(s,z);
 }
 
-int sub1(STACK *s, char *token)
-{if (strcmp(token, "(") == 0)
-    {
-        int x = pop(s);
-        push(s,x-1);
-        return 1;
-    }
-    return 0;
-}
-
-int mod(STACK *s, char *token)
-{if (strcmp(token, "%") == 0)
-    {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,y%x);
-        return 1;
-    }
-    return 0;
-}
-
-int expo(STACK *s, char *token)
-{if (strcmp(token, "#") == 0)
-    {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,pow(y,x));
-        return 1;
-    }
-    return 0;
-}
-
-int e_bit(STACK *s, char *token)
+void sub1(STACK *s)
 {
-    if (strcmp(token, "&") == 0)
-    {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,y&x);
-        return 1;
-    }
-    return 0;
+    Container y = pop(s);
+    Container z;
+    z.label = 2;
+    z.type.numI = 1;
+    push(s,z);
+    sub(s);
 }
 
-int ou_bit(STACK *s, char *token)
+void mod(STACK *s)
 {
-    if (strcmp(token, "|") == 0)
-    {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,y|x);
-        return 1;
-    }
-    return 0;
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    z.label = 2;
+    z.type.numI= toInt(y).type.numI%toInt(x).type.numI;
+    push(s,z);
 }
-
-int xor_bit(STACK *s, char *token)
+/*
+void expo(STACK *s)
 {
-    if (strcmp(token, "^") == 0)
-    {
-        int x = pop(s);
-        int y = pop(s);
-        push(s,y^x);
-        return 1;
-    }
-    return 0;
+
+    push(s,pow(y,x));
 }
 
-int not_bit(STACK *s, char *token)
+void e_bit(STACK *s)
 {
-    if (strcmp(token, "~") == 0)
-    {
-        int x = pop(s);
-        push(s,~x);
-        return 1;
-    }
-    return 0;
+    
+    push(s,y&x);
 }
 
-int value(STACK *s, char *token){
-    int val;
-    sscanf(token,"%d",&val);
-        push(s,val);
-        return 1;
+void ou_bit(STACK *s)
+{
+    
+    push(s,y|x);
 }
+
+void xor_bit(STACK *s)
+{
+    
+    push(s,y^x);
+}
+
+void not_bit(STACK *s)
+{
+    
+    void x = pop(s);
+    push(s,~x);
+}
+*/
+
+
+
+
 
 
 

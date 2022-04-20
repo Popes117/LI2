@@ -1,5 +1,5 @@
 #include "parser.h"
-#include "operadores.h"
+#include "operators.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -23,19 +23,26 @@ void parser(char *line, STACK *s){
             }
             else{
                 long x;
-                sscanf(token,"%lu",&x);
+                sscanf(token,"%li",&x);
                 Container container;
                 container.label = 2;
                 container.type.numI = x;
                 push(s,container);
             }
         }
-        /*
-            Coloca Aqui todas as funções, Ou seja, encadear else if para cada um dos símbolos(aka "+", "-", etc. e chamar as respetivas funções aqui.)
-            Também temos de corrigir os parametros q vamos dar na função do guião 1
-            Value e Handle não serão mais necessárias porque isso fará parte deste parser
-        */
-       else{
+        else if (strcmp(token, "-") == 0) sub(s);
+        else if (strcmp(token, "+") == 0) add(s);
+        else if (strcmp(token, "*") == 0) mult(s);
+        else if (strcmp(token, "/") == 0) division(s);
+        else if (strcmp(token, ")") == 0) add1(s);
+        else if (strcmp(token, "(") == 0) sub1(s);
+        else if (strcmp(token, "%") == 0) mod(s);
+       /*  else if (strcmp(token, "#") == 0) expo(s);
+        else if (strcmp(token, "&") == 0) e_bit(s);
+        else if (strcmp(token, "|") == 0) ou_bit(s);
+        else if (strcmp(token, "^") == 0) xor_bit(s);
+        else if (strcmp(token, "~") == 0) not_bit(s); */
+        else{
            Container container;
            container.label = 3;
            container.type.car = *token;

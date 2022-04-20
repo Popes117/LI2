@@ -1,33 +1,32 @@
 #include "stack.h"
+#include "type_changes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#pragma once
 
-int handle(STACK *s, char *token);
+void sub(STACK *s);
 
-int sub(STACK *s, char *token);
+void add(STACK *s);
 
-int add(STACK *s, char *token);
+void mult(STACK *s);
 
-int mult(STACK *s, char *token);
+void division(STACK *s);
 
-int division(STACK *s, char *token);
+void add1(STACK *s);
 
-int add1(STACK *s, char *token);
+void sub1(STACK *s);
 
-int sub1(STACK *s, char *token);
+void mod(STACK *s);
 
-int mod(STACK *s, char *token);
+//void expo(STACK *s);
+/*
+void e_bit(STACK *s);
 
-int expo(STACK *s, char *token);
+void ou_bit(STACK *s);
 
-int e_bit(STACK *s, char *token);
+void xor_bit(STACK *s);
 
-int ou_bit(STACK *s, char *token);
-
-int xor_bit(STACK *s, char *token);
-
-int not_bit(STACK *s, char *token);
-
-int value(STACK *s, char *token); 
+void not_bit(STACK *s);
+*/
