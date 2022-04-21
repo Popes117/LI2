@@ -8,14 +8,14 @@
 
 void parser(STACK *s){
     char line[BUFSIZ];
-    char *rest = line;
+    //char *rest = line;
     char *token;
     if (fgets(line,BUFSIZ,stdin) != NULL)
     {
         char *rest = line;
         while ((token = strtok_r(rest," \n",&rest) )!= NULL)
         {
-            if (isdigit(*token) || token[0] == '-' && isdigit(token[1]))
+            if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
             {
                 if(isFloat(token)){
                     double x;
