@@ -50,7 +50,7 @@ void parser(STACK *s){
             else if (strcmp(token, ";") == 0) popes(s);
             else if (strcmp(token, "\\") == 0) switch2(s);
             else if (strcmp(token, "@") == 0) roda3(s);
-            // else if (strcmp(token, "$") == 0) copy(s);
+            else if (strcmp(token, "$") == 0) copy(s);
             else if (strcmp(token, "l") == 0) nextLine(s);
             else if (strcmp(token, "f") == 0) ConvFloat(s);
             else if (strcmp(token, "i") == 0) ConvInt(s);

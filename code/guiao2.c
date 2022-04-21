@@ -53,8 +53,13 @@ void roda3(STACK *s)
     }
 }
 
-//void copy(STACK *s){}
+void copy(STACK *s){
 
+    int x = pop(s).type.numI;
+    Container y = s->stack[s->sp - x];
+    push(s,y);
+
+}
 
 void nextLine(STACK *s){
     parser(s);
