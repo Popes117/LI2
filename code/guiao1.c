@@ -66,7 +66,7 @@ void mult(STACK *s)
     else
     {
         z.label = x.label;
-        z.type.numI = x.type.numI-y.type.numI;
+        z.type.numI = x.type.numI*y.type.numI;
     }
     push(s,z);
 }
@@ -79,7 +79,7 @@ void division(STACK *s)
     if (y.label == x.label && x.label == 2)
     {
         z.label = x.label;
-        z.type.numI = x.type.numI/y.type.numI;
+        z.type.numI = y.type.numI/x.type.numI;
     }
     else
     {
@@ -95,17 +95,16 @@ void add1(STACK *s)
     if(y.label == 1)y.type.numD++;
     if(y.label == 2)y.type.numI++;
     else y.type.car++;
-    push(s,z);
+    push(s,y);
 }
 
 void sub1(STACK *s)
 {
     Container y = pop(s);
-    Container z;
-    z.label = 2;
-    z.type.numI = 1;
-    push(s,z);
-    sub(s);
+    if(y.label == 1)y.type.numD--;
+    if(y.label == 2)y.type.numI--;
+    else y.type.car--;
+    push(s,y);
 }
 
 void mod(STACK *s)
