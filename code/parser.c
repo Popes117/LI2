@@ -1,5 +1,5 @@
 #include "parser.h"
-#include "operadores.h"
+#include "operators.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -23,13 +23,14 @@ void parser(char *line, STACK *s){
             }
             else{
                 long x;
-                sscanf(token,"%lu",&x);
+                sscanf(token,"%li",&x);
                 Container container;
                 container.label = 2;
                 container.type.numI = x;
                 push(s,container);
             }
         }
+<<<<<<< HEAD:code/parser.c
         /*
             Coloca Aqui todas as funções, Ou seja, encadear else if para cada um dos símbolos(aka "+", "-", etc. e chamar as respetivas funções aqui.)
             Também temos de corrigir os parametros q vamos dar na função do guião 1
@@ -49,6 +50,26 @@ void parser(char *line, STACK *s){
         else if (strcmp(token, "~") == 0) not_bit(STACK *s);
         
        else{
+=======
+        else if (strcmp(token, "-") == 0) sub(s);
+        else if (strcmp(token, "+") == 0) add(s);
+        else if (strcmp(token, "*") == 0) mult(s);
+        else if (strcmp(token, "/") == 0) division(s);
+        else if (strcmp(token, ")") == 0) add1(s);
+        else if (strcmp(token, "(") == 0) sub1(s);
+        else if (strcmp(token, "%") == 0) mod(s);
+       /*  else if (strcmp(token, "#") == 0) expo(s);
+        else if (strcmp(token, "&") == 0) e_bit(s);
+        else if (strcmp(token, "|") == 0) ou_bit(s);
+        else if (strcmp(token, "^") == 0) xor_bit(s);
+        else if (strcmp(token, "~") == 0) not_bit(s);*/
+        else if (strcmp(token, "_") == 0) duplica(s);
+        else if (strcmp(token, ";") == 0) popes(s);
+        else if (strcmp(token, "\\") == 0) switch2(s);
+        else if (strcmp(token, "@") == 0) roda3(s);
+        else if (strcmp(token, "$") == 0) copy(s);
+        else{
+>>>>>>> 428c0159614cc7a15a731166c305cea95dd7b5b1:parser.c
            Container container;
            container.label = 3;
            container.type.car = *token;

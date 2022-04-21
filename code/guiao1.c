@@ -5,75 +5,153 @@
 #include "stack.h"
 #include <math.h>
 
-
-int sub(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
-    push(s,y-x);
+void sub(STACK *s)
+{
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    
+    if (y.label == 3 || x.label == 3)
+    {
+        z.label = 3;
+        z.type.car = toChar(y).type.car-toChar(x).type.car;
+    }
+    else if (y.label == 1 || x.label == 1)
+    {
+        z.label = 1;
+        z.type.numD = toDouble(y).type.numD-toDouble(x).type.numD;
+    }
+    else{
+        z.label = x.label;
+        z.type.numI = y.type.numI-x.type.numI;
+    }
+    push(s,z);
 }
 
-int add(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
-    push(s,x+y);
+void add(STACK *s){
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    if (y.label == 3 || x.label == 3)
+    {
+        z.label = 3;
+        z.type.car = toChar(x).type.car+toChar(y).type.car;
+    }
+    else if (y.label == 1 || x.label == 1)
+    {
+        z.label = 1;
+        z.type.numD = toDouble(x).type.numD+toDouble(y).type.numD;
+    }
+    else
+    {
+        z.label = x.label;
+        z.type.numI = x.type.numI+y.type.numI;
+    }
+    push(s,z);
 }
 
-int mult(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
-    push(s,(y*x));
+void mult(STACK *s)
+{
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    if (y.label == 1 || x.label == 1)
+    {
+        z.label = 1;
+        z.type.numD = toDouble(x).type.numD*toDouble(y).type.numD;
+    }
+    else
+    {
+        z.label = x.label;
+        z.type.numI = x.type.numI*y.type.numI;
+    }
+    push(s,z);
 }
 
-int division(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
-    push(s,y/x);
+void division(STACK *s)
+{
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    if (y.label == x.label && x.label == 2)
+    {
+        z.label = x.label;
+        z.type.numI = x.type.numI/y.type.numI;
+    }
+    else
+    {
+        z.label = 1;
+        z.type.numD = toDouble(y).type.numD/toDouble(x).type.numD;
+    }
+    push(s,z);
 }
 
-int add1(STACK *s) {
-    int x = pop(s);
-    push(s,x+1);
+void add1(STACK *s)
+{
+    Container y = pop(s);
+    if(y.label == 1)y.type.numD++;
+    if(y.label == 2)y.type.numI++;
+    else y.type.car++;
+    push(s,y);
 }
 
-int sub1(STACK *s) {
-    int x = pop(s);
-    push(s,x-1);
+void sub1(STACK *s)
+{
+    Container y = pop(s);
+    if(y.label == 1)y.type.numD--;
+    if(y.label == 2)y.type.numI--;
+    else y.type.car--;
+    push(s,y);
 }
 
-int mod(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
-    push(s,y%x);
+void mod(STACK *s)
+{
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    z.label = 2;
+    z.type.numI= toInt(y).type.numI%toInt(x).type.numI;
+    push(s,z);
 }
+/*
+void expo(STACK *s)
+{
 
-int expo(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
     push(s,pow(y,x));
 }
 
-int e_bit(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
+void e_bit(STACK *s)
+{
+    
     push(s,y&x);
 }
 
-int ou_bit(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
+void ou_bit(STACK *s)
+{
+    
     push(s,y|x);
 }
 
-int xor_bit(STACK *s) {
-    int x = pop(s);
-    int y = pop(s);
+void xor_bit(STACK *s)
+{
+    
     push(s,y^x);
 }
 
-int not_bit(STACK *s) {
-    int x = pop(s);
+void not_bit(STACK *s)
+{
+    
+    void x = pop(s);
     push(s,~x);
 }
+*/
+
+
+
+
 
 
 

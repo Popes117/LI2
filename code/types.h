@@ -1,5 +1,3 @@
-#define MAX 1000
-#pragma once
 
 typedef struct {
         int label; 
@@ -10,18 +8,19 @@ typedef struct {
         */
         union HoldType {
                 long numI;
+
                 double numD;
+                
                 char car;
         } type;
+
 } Container;
 
-typedef struct {
-        Container stack[MAX];
-        int sp;
-} STACK;
+// #define LONG type.numI;
 
-STACK *new_stack();
+// #define DOUBLE type.numD;
 
-void push(STACK *s, Container container);
+// #define CHAR type.car;
 
-Container pop(STACK *s);
+
+
