@@ -15,7 +15,7 @@ void parser(STACK *s){
         char *rest = line;
         while ((token = strtok_r(rest," \n",&rest) )!= NULL)
         {
-            if (isdigit(*token))
+            if (isdigit(*token) || token[0] == '-' && isdigit(token[1]))
             {
                 if(isFloat(token)){
                     double x;
