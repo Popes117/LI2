@@ -3,6 +3,6 @@
 #include "stack.h"
 #pragma once
 
-void parser(char *line, STACK *s);
+void parser(STACK *s);
 
 int isFloat(char *token);

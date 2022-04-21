@@ -116,38 +116,55 @@ void mod(STACK *s)
     z.type.numI= toInt(y).type.numI%toInt(x).type.numI;
     push(s,z);
 }
-/*
+
 void expo(STACK *s)
 {
-
-    push(s,pow(y,x));
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    z.label = 1;
+    z.type.numD = pow(toDouble(y).type.numD,toDouble(x).type.numD);
+    push(s,z);
 }
 
 void e_bit(STACK *s)
 {
-    
-    push(s,y&x);
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    z.label = 2;
+    z.type.numI = toInt(y).type.numI&toInt(x).type.numI;
+    push(s,z);
 }
 
 void ou_bit(STACK *s)
 {
-    
-    push(s,y|x);
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    z.label = 2;
+    z.type.numI = toInt(y).type.numI|toInt(x).type.numI;
+    push(s,z);
 }
 
 void xor_bit(STACK *s)
 {
-    
-    push(s,y^x);
+    Container x = pop(s);
+    Container y = pop(s);
+    Container z;
+    z.label = 2;
+    z.type.numI = toInt(y).type.numI^toInt(x).type.numI;
+    push(s,z);
+
 }
 
 void not_bit(STACK *s)
 {
-    
-    void x = pop(s);
-    push(s,~x);
+    Container x = pop(s);
+    x.type.numI = ~toInt(x).type.numI;
+    push(s,x);
 }
-*/
+
 
 
 
