@@ -19,7 +19,7 @@ void duplica(STACK *s)
 void popes(STACK *s)
 {
     {
-        Container x = pop(s);
+        pop(s);
         Container y = pop(s);
         Container z = pop(s);
 

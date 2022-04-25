@@ -8,7 +8,7 @@
 
 void parser(STACK *s){
     char line[BUFSIZ];
-    char *rest = line;
+    //char *rest = line;
     char *token;
     Container vars[26];
     fill(vars);
@@ -17,7 +17,7 @@ void parser(STACK *s){
         char *rest = line;
         while ((token = strtok_r(rest," \n",&rest) )!= NULL)
         {
-            if (isdigit(*token) || token[0] == '-' && isdigit(token[1]))
+            if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
             {
                 if(isFloat(token)){
                     double x;
@@ -57,7 +57,6 @@ void parser(STACK *s){
             else if (strcmp(token, "f") == 0) ConvFloat(s);
             else if (strcmp(token, "i") == 0) ConvInt(s);
             else if (strcmp(token, "c") == 0) ConvChar(s);
-
             else if (strcmp(token, "?") == 0) ifelse(s);
             else if (strcmp(token, "=") == 0) igual(s);
             else if (strcmp(token, "<") == 0) menor(s);
