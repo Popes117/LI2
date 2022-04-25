@@ -2,14 +2,16 @@
 #include "operators.h"
 #include <stdlib.h>
 #include <ctype.h>
+#include "type_changes.h"
 #include <stdio.h>
 #include <string.h>
-
 
 void parser(STACK *s){
     char line[BUFSIZ];
     char *rest = line;
     char *token;
+    Container vars[26];
+    fill(vars);
     if (fgets(line,BUFSIZ,stdin) != NULL)
     {
         char *rest = line;
@@ -55,6 +57,22 @@ void parser(STACK *s){
             else if (strcmp(token, "f") == 0) ConvFloat(s);
             else if (strcmp(token, "i") == 0) ConvInt(s);
             else if (strcmp(token, "c") == 0) ConvChar(s);
+
+            else if (strcmp(token, "?") == 0) ifelse(s);
+            else if (strcmp(token, "=") == 0) igual(s);
+            else if (strcmp(token, "<") == 0) menor(s);
+            else if (strcmp(token, ">") == 0) maior(s);
+            else if (strcmp(token, "e&") == 0) eAnd(s);
+            else if (strcmp(token, "e|") == 0) eOr(s);
+            else if (strcmp(token, "e<") == 0) eMenor(s);
+            else if (strcmp(token, "e>") == 0) eMaior(s);
+            else if (strcmp(token, "!")) nots(s);
+            else if (token[0] >= 65 && token[0] <91) 
+            {
+                int x = token[0];
+                push(s,vars[x-65]);
+            }
+            else if (token[0] == ':') coloca(s,vars,token);
             else{
                Container container;
                container.label = 3;

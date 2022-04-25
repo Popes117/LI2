@@ -47,3 +47,23 @@ void ConvChar(STACK *s);
 void ConvInt(STACK *s);
 
 void ConvFloat(STACK *s);
+
+void coloca(STACK *s,Container *vars, char *token);
+
+void ifelse(STACK *s);
+
+void maior(STACK *s);
+
+void igual(STACK *s);
+
+void menor(STACK *s);
+
+void eAnd(STACK *s);
+
+void eOr(STACK *s);
+
+void eMaior(STACK *s);
+
+void eMenor(STACK *s);
+
+void nots(STACK *s);
