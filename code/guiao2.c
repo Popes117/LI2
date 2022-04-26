@@ -8,12 +8,11 @@
 
 void duplica(STACK *s)
 {
-        Container x = pop(s);
+    Container x = pop(s);
 
-        push(s,x);
-        push(s,x);
-       
-       
+    push(s,x);
+    push(s,x);
+            
 }
 
 void popes(STACK *s)
@@ -61,3 +60,22 @@ void copy(STACK *s){
 
 }
 
+void nextLine(STACK *s){
+    parser(s);
+}
+
+void ConvChar(STACK *s)
+{
+   Container x = pop(s);
+   push(s,toChar(x)); 
+}
+void ConvInt(STACK *s)
+{
+   Container x = pop(s);
+   push(s,toInt(x)); 
+}
+void ConvFloat(STACK *s)
+{
+   Container x = pop(s);
+   push(s,toDouble(x)); 
+}

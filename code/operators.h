@@ -20,8 +20,8 @@ void sub1(STACK *s);
 
 void mod(STACK *s);
 
-//void expo(STACK *s);
-/*
+void expo(STACK *s);
+
 void e_bit(STACK *s);
 
 void ou_bit(STACK *s);
@@ -29,7 +29,6 @@ void ou_bit(STACK *s);
 void xor_bit(STACK *s);
 
 void not_bit(STACK *s);
-*/
 
 void duplica(STACK *s);
 
@@ -40,3 +39,11 @@ void switch2(STACK *s);
 void roda3(STACK *s);
 
 void copy(STACK *s);
+
+void nextLine(STACK *s);
+
+void ConvChar(STACK *s);
+
+void ConvInt(STACK *s);
+
+void ConvFloat(STACK *s);
