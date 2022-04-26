@@ -1,46 +1,47 @@
 #include "type_changes.h"
+#include "macro.h"
 
-Container toInt(Container container){
-    if (container.label == 1)
+Container toInt(Container x){
+    if ( _Xlabel_ == 1)
     {
-        container.label = 2;
-        container.type.numI = container.type.numD;
+         _Xlabel_ = 2;
+        _XnumI_ = _XnumD_;
     }
-    else if (container.label == 3)
+    else if ( _Xlabel_ == 3)
     {
-        container.label = 2;
-        container.type.numI = container.type.car;
+         _Xlabel_ = 2;
+        _XnumI_ = _Xcar_;
     }
-    return container;
+    return x;
 }
 
-Container toDouble(Container container){
-    if (container.label == 2)
+Container toDouble(Container x){
+    if ( _Xlabel_ == 2)
     {
-        container.label = 1;
-        container.type.numD = container.type.numI;
+         _Xlabel_ = 1;
+        _XnumD_= _XnumI_;
     }
-    if (container.label == 3)
+    if ( _Xlabel_ == 3)
     {
-        container.label = 1;
-        container.type.numD = container.type.car;
+         _Xlabel_ = 1;
+        _XnumD_ = _Xcar_;
     }
-    return container;
+    return x;
 }
 
-Container toChar(Container container){
-    if (container.label == 1)
+Container toChar(Container x){
+    if ( _Xlabel_ == 1)
     {
-        int x = container.type.numD;
-        container.label = 3;
-        container.type.car = x;
+        int n = _XnumD_;
+         _Xlabel_ = 3;
+        _Xcar_ = n;
     }
-    if (container.label == 2)
+    if ( _Xlabel_ == 2)
     {
-        container.label = 3;
-        container.type.car = container.type.numI;
+         _Xlabel_ = 3;
+        _Xcar_ = _XnumI_;
     }
-    return container;
+    return x;
 }
 
 void fill(Container *vars){
@@ -69,25 +70,25 @@ void fill(Container *vars){
 }
 
 int comparaCont(Container x, Container y){
-    if(x.label != 3 && y.label != 3)
+    if( _Xlabel_ != 3 && y.label != 3)
     {
         x = toDouble(x);
         y = toDouble(y);
-        if (x.type.numD == y.type.numD) return 1;
-        else if (x.type.numD > y.type.numD) return 2;
+        if (_XnumD_== _YnumD_) return 1;
+        else if (_XnumD_ > _YnumD_) return 2;
         else return 3;
     }
     else
     {
         x = toChar(x);
         y = toChar(y);
-        if (x.type.car == y.type.car) return 1;
+        if (_Xcar_ == _Ycar_) return 1;
         else return 0;
     }
 }
 
-int isZero(Container container){
-    if (container.label == 1) return (container.type.numD != 0);
-    else if (container.label == 2) return (container.type.numI != 0);
+int isZero(Container x){
+    if ( _Xlabel_ == 1) return (_XnumD_ != 0);
+    else if ( _Xlabel_ == 2) return (_XnumI_ != 0);
     return 0;
 }

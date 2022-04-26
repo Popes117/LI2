@@ -65,13 +65,13 @@ void parser(STACK *s){
             else if (strcmp(token, "e|") == 0) eOr(s);
             else if (strcmp(token, "e<") == 0) eMenor(s);
             else if (strcmp(token, "e>") == 0) eMaior(s);
-            else if (strcmp(token, "!")) nots(s);
+            else if (token[0] == '!') nots(s);
             else if (token[0] >= 65 && token[0] <91) 
             {
                 int x = token[0];
                 push(s,vars[x-65]);
-            }
-            else if (token[0] == ':') coloca(s,vars,token);
+            } 
+            else if (token[0] == ':') coloca(s,vars,token); 
             else{
                Container container;
                container.label = 3;
