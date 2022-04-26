@@ -62,6 +62,8 @@ void maior(STACK *s){
 void menor(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
+    x = toDouble(x);
+    y = toDouble(y);
     if(comparaCont(x,y) == 3)
     {
         Container True;
@@ -140,6 +142,7 @@ void eMenor(STACK *s){
 
 void nots(STACK *s){
     Container x = pop(s);
+    x = toDouble(x);
     if (!isZero(x))
     {
         Container True;
