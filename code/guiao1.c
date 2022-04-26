@@ -188,11 +188,3 @@ void not_bit(STACK *s)
     _XnumI_ = ~_XnumI_;
     push(s,x);
 }
-
-
-
-
-
-
-
-
