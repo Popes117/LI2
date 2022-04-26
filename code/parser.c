@@ -63,8 +63,8 @@ void parser(STACK *s){
             else if (strcmp(token, ">") == 0) maior(s);
             else if (strcmp(token, "e&") == 0) eAnd(s);
             else if (strcmp(token, "e|") == 0) eOr(s);
-            else if (strcmp(token, "e<") == 0) eMenor(s);
             else if (strcmp(token, "e>") == 0) eMaior(s);
+            else if (strcmp(token, "e<") == 0) eMenor(s);
             else if (token[0] == '!') nots(s);
             else if (token[0] >= 65 && token[0] <91) 
             {
