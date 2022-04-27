@@ -17,19 +17,19 @@ void sub(STACK *s)
     {
         x = toChar(x);
         y = toChar(y);
-        z.label = 3;
-        z.type.car = _Ycar_-_Xcar_;
+        _Zlabel_ = 3;
+        _Zcar_ = _Ycar_-_Xcar_;
     }
     else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
         x = toDouble(x);
         y = toDouble(y);
-        z.label = 1;
-        z.type.numD = _YnumD_-_XnumD_;
+        _Zlabel_ = 1;
+        _ZnumD_ = _YnumD_-_XnumD_;
     }
     else{
-        z.label =_Xlabel_;
-        z.type.numI = _YnumI_-_XnumI_;
+        _Zlabel_ =_Xlabel_;
+        _ZnumI_ = _YnumI_-_XnumI_;
     }
     push(s,z);
 }
@@ -43,20 +43,20 @@ void add(STACK *s){
     {
         x = toChar(x);
         y = toChar(y);
-        z.label = 3;
-        z.type.car = _Xcar_+_Ycar_;
+        _Zlabel_ = 3;
+        _Zcar_ = _Xcar_+_Ycar_;
     }
     else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
         x = toDouble(x);
         y = toDouble(y);
-        z.label = 1;
-        z.type.numD = _XnumD_+_YnumD_;
+        _Zlabel_ = 1;
+        _ZnumD_ = _XnumD_+_YnumD_;
     }
     else
     {
-        z.label =_Xlabel_;
-        z.type.numI = _XnumI_+_YnumI_;
+        _Zlabel_ =_Xlabel_;
+        _ZnumI_ = _XnumI_+_YnumI_;
     }
     push(s,z);
 }
@@ -71,13 +71,13 @@ void mult(STACK *s)
     {
         x = toDouble(x);
         y = toDouble(y);
-        z.label = 1;
-        z.type.numD = _XnumD_*_YnumD_;
+        _Zlabel_ = 1;
+        _ZnumD_ = _XnumD_*_YnumD_;
     }
     else
     {
-        z.label =_Xlabel_;
-        z.type.numI = _XnumI_*_YnumI_;
+        _Zlabel_ =_Xlabel_;
+        _ZnumI_ = _XnumI_*_YnumI_;
     }
     push(s,z);
 }
@@ -87,17 +87,17 @@ void division(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (_Ylabel_ ==_Xlabel_ &&_Xlabel_ == 2)
+    if (_Ylabel_ ==_Xlabel_ && _Xlabel_ == 2)
     {
-        z.label =_Xlabel_;
-        z.type.numI = _YnumI_/_XnumI_;
+        _Zlabel_ =_Xlabel_;
+        _ZnumI_ = _YnumI_/_XnumI_;
     }
     else
     {
         x = toDouble(x);
         y = toDouble(y);
-        z.label = 1;
-        z.type.numD = _YnumD_/_XnumD_;
+        _Zlabel_ = 1;
+        _ZnumD_ = _YnumD_/_XnumD_;
     }
     push(s,z);
 }
@@ -127,8 +127,8 @@ void mod(STACK *s)
     Container z;
     x = toInt(x);
     y = toInt(y);
-    z.label = 2;
-    z.type.numI= _YnumI_%_XnumI_;
+    _Zlabel_ = 2;
+    _ZnumI_= _YnumI_%_XnumI_;
     push(s,z);
 }
 
@@ -139,8 +139,8 @@ void expo(STACK *s)
     Container z;
     x = toDouble(x);
     y = toDouble(y);
-    z.label = 1;
-    z.type.numD = pow(_YnumD_,_XnumD_);
+    _Zlabel_ = 1;
+    _ZnumD_ = pow(_YnumD_,_XnumD_);
     push(s,z);
 }
 
@@ -151,8 +151,8 @@ void e_bit(STACK *s)
     Container z;
     x = toInt(x);
     y = toInt(y);
-    z.label = 2;
-    z.type.numI = _YnumI_&_XnumI_;
+    _Zlabel_ = 2;
+    _ZnumI_ = _YnumI_&_XnumI_;
     push(s,z);
 }
 
@@ -163,8 +163,8 @@ void ou_bit(STACK *s)
     Container z;
     x = toInt(x);
     y = toInt(y);
-    z.label = 2;
-    z.type.numI = _YnumI_|_XnumI_;
+    _Zlabel_ = 2;
+    _ZnumI_ = _YnumI_|_XnumI_;
     push(s,z);
 }
 
@@ -175,8 +175,8 @@ void xor_bit(STACK *s)
     Container z;
     x = toInt(x);
     y = toInt(y);
-    z.label = 2;
-    z.type.numI = _YnumI_^_XnumI_;
+    _Zlabel_ = 2;
+    _ZnumI_ = _YnumI_^_XnumI_;
     push(s,z);
 
 }
