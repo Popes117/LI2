@@ -5,6 +5,7 @@
 #include "stack.h"
 #include <math.h>
 #include "type_changes.h"
+#include "macro.h"
 
 void coloca(STACK *s, Container *vars, char *token){
     Container x = pop(s);
@@ -27,15 +28,15 @@ void igual(STACK *s){
     if(comparaCont(x,y) == 1)
     {
         Container True;
-        True.label = 2;
-        True.type.numI = 1;
+        _Truelabel_ = 2;
+        _TruenumI_ = 1;
         push(s,True);
     }
     else
     {
         Container False;
-        False.label = 2;
-        False.type.numI = 0;
+        _Falselabel_ = 2;
+        _FalsenumI_ = 0;
         push(s,False);
     }
 }
@@ -48,15 +49,15 @@ void maior(STACK *s){
     if(comparaCont(x,y) == 2)
     {
         Container True;
-        True.label = 2;
-        True.type.numI = 1;
+        _Truelabel_ = 2;
+        _TruenumI_ = 1;
         push(s,True);
     }
     else
     {
         Container False;
-        False.label = 2;
-        False.type.numI = 0;
+        _Falselabel_ = 2;
+        _FalsenumI_ = 0;
         push(s,False);
     }
 }
@@ -69,15 +70,15 @@ void menor(STACK *s){
     if(comparaCont(x,y) == 3)
     {
         Container True;
-        True.label = 2;
-        True.type.numI = 1;
+        _Truelabel_ = 2;
+        _TruenumI_ = 1;
         push(s,True);
     }
     else
     {
         Container False;
-        False.label = 2;
-        False.type.numI = 0;
+        _Falselabel_ = 2;
+        _FalsenumI_ = 0;
         push(s,False);
     }
 }
@@ -91,8 +92,8 @@ void eAnd(STACK *s){
     }
     else{
         Container False;
-        False.label = 2;
-        False.type.numI = 0;
+        _Falselabel_ = 2;
+        _FalsenumI_ = 0;
         push(s,False);
     }
 }
@@ -110,8 +111,8 @@ void eOr(STACK *s){
     }
     else{
         Container False;
-        False.label = 2;
-        False.type.numI = 0;
+        _Falselabel_ = 2;
+        _FalsenumI_ = 0;
         push(s,False);
     }
 }
@@ -148,15 +149,15 @@ void nots(STACK *s){
     if (!isZero(x))
     {
         Container True;
-        True.label = 2;
-        True.type.numI = 1;
+        _Truelabel_ = 2;
+        _TruenumI_ = 1;
         push(s,True);
     }
     else
     {
         Container False;
-        False.label = 2;
-        False.type.numI = 0;
+        _Falselabel_ = 2;
+        _FalsenumI_ = 0;
         push(s,False);
     }
 }
