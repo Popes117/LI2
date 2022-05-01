@@ -22,7 +22,7 @@ int main(){
             else if (z.label == 1){
                 printf("%g",z.type.numD);
             }
-            else{
+            else if (z.label == 4){
                 printf("%s",z.str);
                 // Em vez do print dar free(z.str);
             }

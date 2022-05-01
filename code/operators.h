@@ -40,7 +40,7 @@ void roda3(STACK *s);
 
 void copy(STACK *s);
 
-void nextLine(STACK *s, char *line);
+void nextLine(STACK *s);
 
 void ConvChar(STACK *s);
 
@@ -67,3 +67,5 @@ void eMaior(STACK *s);
 void eMenor(STACK *s);
 
 void nots(STACK *s);
+
+void readFile(STACK *s);

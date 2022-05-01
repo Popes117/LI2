@@ -18,8 +18,9 @@ STACK* reallocSTACK(STACK *s){
 }
 
 void push(STACK *s, Container container){
+        if(s->size == s->sp) s = reallocSTACK(s);
         s->sp++;
-        s->stack[s->sp] = container;        
+        s->stack[s->sp] = container;
 }
 
 Container pop(STACK *s){

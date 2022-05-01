@@ -20,7 +20,7 @@ typedef struct Container{
         */
        union{
                 char *str;
-                STACK *c;
+                STACK *a;
                 Type type;
        };
 } Container;

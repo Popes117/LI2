@@ -61,8 +61,12 @@ void copy(STACK *s){
 
 }
 
-void nextLine(STACK *s, char *line){
-    parser(s,line);
+void nextLine(STACK *s){
+    char linha[BUFSIZ];
+    if (fgets(linha,BUFSIZ,stdin) != NULL)
+    {
+        parser(s,linha);
+    }
 }
 
 void ConvChar(STACK *s)
