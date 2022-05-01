@@ -40,7 +40,7 @@ void roda3(STACK *s);
 
 void copy(STACK *s);
 
-void nextLine(STACK *s);
+void nextLine(STACK *s, char *line);
 
 void ConvChar(STACK *s);
 

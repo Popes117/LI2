@@ -6,81 +6,123 @@
 #include <stdio.h>
 #include <string.h>
 
-void parser(STACK *s){
-    char line[BUFSIZ];
+char* alloccStr(){
+    return malloc (100*sizeof(char));
+}
+char* string_parse(STACK *s, char *rest, char *str)
+{
+    size_t i = 0;
+    for (size_t n = 0; rest[n] != '"';i++,n++)
+    {
+        str[i] = rest[n];
+    }
+    str[i] = '\0';
+    return rest + i + 1;
+}
+
+void parser(STACK *s, char *line){
     //char *rest = line;
     char *token;
     Container vars[26];
     fill(vars);
-    if (fgets(line,BUFSIZ,stdin) != NULL)
+    char *rest = line;
+    while ((token = strtok_r(rest," \n",&rest))!= NULL)
     {
-        char *rest = line;
-        while ((token = strtok_r(rest," \n",&rest) )!= NULL)
+        if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
         {
-            if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
-            {
-                if(isFloat(token)){
-                    double x;
-                    sscanf(token,"%lf",&x);
-                    Container container;
-                    container.label = 1;
-                    container.type.numD = x;
-                    push(s,container);
-                }
-                else{
-                    long x;
-                    sscanf(token,"%li",&x);
-                    Container container;
-                    container.label = 2;
-                    container.type.numI = x;
-                    push(s,container);
-                }
+            if(isFloat(token)){
+                double x;
+                sscanf(token,"%lf",&x);
+                Container container;
+                container.label = 1;
+                container.type.numD = x;
+                push(s,container);
             }
-            else if (strcmp(token, "-") == 0) sub(s);
-            else if (strcmp(token, "+") == 0) add(s);
-            else if (strcmp(token, "*") == 0) mult(s);
-            else if (strcmp(token, "/") == 0) division(s);
-            else if (strcmp(token, "(") == 0) sub1(s); 
-            else if (strcmp(token, ")") == 0) add1(s);
-            else if (strcmp(token, "%") == 0) mod(s);
-            else if (strcmp(token, "#") == 0) expo(s);
-            else if (strcmp(token, "&") == 0) e_bit(s);
-            else if (strcmp(token, "|") == 0) ou_bit(s);
-            else if (strcmp(token, "^") == 0) xor_bit(s);
-            else if (strcmp(token, "~") == 0) not_bit(s);
-            else if (strcmp(token, "_") == 0) duplica(s);
-            else if (strcmp(token, ";") == 0) popes(s);
-            else if (strcmp(token, "\\") == 0) switch2(s);
-            else if (strcmp(token, "@") == 0) roda3(s);
-            else if (strcmp(token, "$") == 0) copy(s);
-            else if (strcmp(token, "l") == 0) nextLine(s);
-            else if (strcmp(token, "f") == 0) ConvFloat(s);
-            else if (strcmp(token, "i") == 0) ConvInt(s);
-            else if (strcmp(token, "c") == 0) ConvChar(s);
-            else if (strcmp(token, "?") == 0) ifelse(s);
-            else if (strcmp(token, "=") == 0) igual(s);
-            else if (strcmp(token, "<") == 0) menor(s);
-            else if (strcmp(token, ">") == 0) maior(s);
-            else if (strcmp(token, "e&") == 0) eAnd(s);
-            else if (strcmp(token, "e|") == 0) eOr(s);
-            else if (strcmp(token, "e>") == 0) eMaior(s);
-            else if (strcmp(token, "e<") == 0) eMenor(s);
-            else if (token[0] == '!') nots(s);
-            else if (token[0] >= 65 && token[0] <91) 
-            {
-                int x = token[0];
-                push(s,vars[x-65]);
-            } 
-            else if (token[0] == ':') coloca(s,vars,token); 
             else{
-               Container container;
-               container.label = 3;
-               container.type.car = *token;
-               push(s,container);
-           }
+                long x;
+                sscanf(token,"%li",&x);
+                Container container;
+                container.label = 2;
+                container.type.numI = x;
+                push(s,container);
+            }
         }
+        else if (strcmp(token, "-") == 0) sub(s);
+        else if (strcmp(token, "+") == 0) add(s);
+        else if (strcmp(token, "*") == 0) mult(s);
+        else if (strcmp(token, "/") == 0) division(s);
+        else if (strcmp(token, "(") == 0) sub1(s); 
+        else if (strcmp(token, ")") == 0) add1(s);
+        else if (strcmp(token, "%") == 0) mod(s);
+        else if (strcmp(token, "#") == 0) expo(s);
+        else if (strcmp(token, "&") == 0) e_bit(s);
+        else if (strcmp(token, "|") == 0) ou_bit(s);
+        else if (strcmp(token, "^") == 0) xor_bit(s);
+        else if (strcmp(token, "~") == 0) not_bit(s);
+        else if (strcmp(token, "_") == 0) duplica(s);
+        else if (strcmp(token, ";") == 0) popes(s);
+        else if (strcmp(token, "\\") == 0) switch2(s);
+        else if (strcmp(token, "@") == 0) roda3(s);
+        else if (strcmp(token, "$") == 0) copy(s);
+        else if (strcmp(token, "l") == 0) {
+            char linha[BUFSIZ];
+            if (fgets(linha,BUFSIZ,stdin) != NULL)
+            {
+                nextLine(s,linha);
+            }
+        }
+        
+        else if (strcmp(token, "f") == 0) ConvFloat(s);
+        else if (strcmp(token, "i") == 0) ConvInt(s);
+        else if (strcmp(token, "c") == 0) ConvChar(s);
+        else if (strcmp(token, "?") == 0) ifelse(s);
+        else if (strcmp(token, "=") == 0) igual(s);
+        else if (strcmp(token, "<") == 0) menor(s);
+        else if (strcmp(token, ">") == 0) maior(s);
+        else if (strcmp(token, "e&") == 0) eAnd(s);
+        else if (strcmp(token, "e|") == 0) eOr(s);
+        else if (strcmp(token, "e>") == 0) eMaior(s);
+        else if (strcmp(token, "e<") == 0) eMenor(s);
+        else if (token[0] == '"')
+        {
+            ++token;
+            Container z;
+            z.label = 4;
+            z.str = alloccStr();
+            if (token[strlen(token)-1] == '"')
+            {
+                size_t i = 0;
+                for (; token[i] != '"';i++)
+                {
+                    z.str[i] = token[i];
+                }
+                z.str[i] = '\0';
+                push(s,z);
+            }
+            else
+            {
+            rest = string_parse(s,rest,z.str);
+            token = strcat(token," ");
+            z.str = strcat(token, z.str);
+            push(s,z);
+            }
+        }
+        else if (token[0] == '!') nots(s);
+        else if (token[0] >= 65 && token[0] <91) 
+        {
+            int x = token[0];
+            push(s,vars[x-65]);
+        } 
+        else if (token[0] == ':') coloca(s,vars,token); 
+        else{
+           Container container;
+           container.label = 3;
+           container.type.car = *token;
+           push(s,container);
+       }
     }
 }
+
 
 int isFloat(char *token){
     for (size_t i = 0; token[i] != '\0'; i++)

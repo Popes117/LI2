@@ -61,8 +61,8 @@ void copy(STACK *s){
 
 }
 
-void nextLine(STACK *s){
-    parser(s);
+void nextLine(STACK *s, char *line){
+    parser(s,line);
 }
 
 void ConvChar(STACK *s)

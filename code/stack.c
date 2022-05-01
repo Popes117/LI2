@@ -4,7 +4,17 @@
 #include <limits.h>
 
 STACK * new_stack() {
-        return (STACK *) malloc(sizeof(STACK));
+        STACK *s = malloc(sizeof(STACK));
+        s->stack = malloc(40*sizeof(Container));
+        s->size = 40;
+        return s;
+}
+
+STACK* reallocSTACK(STACK *s){
+        STACK *ns = realloc(s,sizeof(STACK));
+        ns->stack = realloc(s->stack, (s->size*2)*sizeof(Container));
+        ns->size *= 2;
+        return ns;
 }
 
 void push(STACK *s, Container container){
