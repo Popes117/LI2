@@ -4,6 +4,7 @@
 #include "operators.h"
 #include "stack.h"
 #include <math.h>
+#include "macro.h"
 
 void sub(STACK *s)
 {
@@ -12,19 +13,23 @@ void sub(STACK *s)
     Container y = pop(s);
     Container z;
     
-    if (y.label == 3 || x.label == 3)
+    if (_Ylabel_ == 3 ||_Xlabel_ == 3)
     {
+        x = toChar(x);
+        y = toChar(y);
         z.label = 3;
-        z.type.car = toChar(y).type.car-toChar(x).type.car;
+        z.type.car = _Ycar_-_Xcar_;
     }
-    else if (y.label == 1 || x.label == 1)
+    else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
+        x = toDouble(x);
+        y = toDouble(y);
         z.label = 1;
-        z.type.numD = toDouble(y).type.numD-toDouble(x).type.numD;
+        z.type.numD = _YnumD_-_XnumD_;
     }
     else{
-        z.label = x.label;
-        z.type.numI = y.type.numI-x.type.numI;
+        z.label =_Xlabel_;
+        z.type.numI = _YnumI_-_XnumI_;
     }
     push(s,z);
 }
@@ -34,20 +39,24 @@ void add(STACK *s){
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (y.label == 3 || x.label == 3)
+    if (_Ylabel_ == 3 ||_Xlabel_ == 3)
     {
+        x = toChar(x);
+        y = toChar(y);
         z.label = 3;
-        z.type.car = toChar(x).type.car+toChar(y).type.car;
+        z.type.car = _Xcar_+_Ycar_;
     }
-    else if (y.label == 1 || x.label == 1)
+    else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
+        x = toDouble(x);
+        y = toDouble(y);
         z.label = 1;
-        z.type.numD = toDouble(x).type.numD+toDouble(y).type.numD;
+        z.type.numD = _XnumD_+_YnumD_;
     }
     else
     {
-        z.label = x.label;
-        z.type.numI = x.type.numI+y.type.numI;
+        z.label =_Xlabel_;
+        z.type.numI = _XnumI_+_YnumI_;
     }
     push(s,z);
 }
@@ -58,15 +67,17 @@ void mult(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (y.label == 1 || x.label == 1)
+    if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
+        x = toDouble(x);
+        y = toDouble(y);
         z.label = 1;
-        z.type.numD = toDouble(x).type.numD*toDouble(y).type.numD;
+        z.type.numD = _XnumD_*_YnumD_;
     }
     else
     {
-        z.label = x.label;
-        z.type.numI = x.type.numI*y.type.numI;
+        z.label =_Xlabel_;
+        z.type.numI = _XnumI_*_YnumI_;
     }
     push(s,z);
 }
@@ -76,15 +87,17 @@ void division(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (y.label == x.label && x.label == 2)
+    if (_Ylabel_ ==_Xlabel_ &&_Xlabel_ == 2)
     {
-        z.label = x.label;
-        z.type.numI = y.type.numI/x.type.numI;
+        z.label =_Xlabel_;
+        z.type.numI = _YnumI_/_XnumI_;
     }
     else
     {
+        x = toDouble(x);
+        y = toDouble(y);
         z.label = 1;
-        z.type.numD = toDouble(y).type.numD/toDouble(x).type.numD;
+        z.type.numD = _YnumD_/_XnumD_;
     }
     push(s,z);
 }
@@ -92,17 +105,17 @@ void division(STACK *s)
 void add1(STACK *s)
 {
     Container y = pop(s);
-    if(y.label == 1)y.type.numD++;
-    if(y.label == 2)y.type.numI++;
-    else y.type.car++;
+    if(_Ylabel_ == 1)_YnumD_++;
+    if(_Ylabel_ == 2)_YnumI_++;
+    else _Ycar_++;
     push(s,y);
 }
 
 void sub1(STACK *s)
 {
     Container y = pop(s);
-    if(y.label == 1)y.type.numD--;
-    if(y.label == 2)y.type.numI--;
+    if(_Ylabel_ == 1)_YnumD_--;
+    if(_Ylabel_ == 2)_YnumI_--;
     else y.type.car--;
     push(s,y);
 }
@@ -112,8 +125,10 @@ void mod(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
+    x = toInt(x);
+    y = toInt(y);
     z.label = 2;
-    z.type.numI= toInt(y).type.numI%toInt(x).type.numI;
+    z.type.numI= _YnumI_%_XnumI_;
     push(s,z);
 }
 
@@ -122,8 +137,10 @@ void expo(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
+    x = toDouble(x);
+    y = toDouble(y);
     z.label = 1;
-    z.type.numD = pow(toDouble(y).type.numD,toDouble(x).type.numD);
+    z.type.numD = pow(_YnumD_,_XnumD_);
     push(s,z);
 }
 
@@ -132,8 +149,10 @@ void e_bit(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
+    x = toInt(x);
+    y = toInt(y);
     z.label = 2;
-    z.type.numI = toInt(y).type.numI&toInt(x).type.numI;
+    z.type.numI = _YnumI_&_XnumI_;
     push(s,z);
 }
 
@@ -142,8 +161,10 @@ void ou_bit(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
+    x = toInt(x);
+    y = toInt(y);
     z.label = 2;
-    z.type.numI = toInt(y).type.numI|toInt(x).type.numI;
+    z.type.numI = _YnumI_|_XnumI_;
     push(s,z);
 }
 
@@ -152,8 +173,10 @@ void xor_bit(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
+    x = toInt(x);
+    y = toInt(y);
     z.label = 2;
-    z.type.numI = toInt(y).type.numI^toInt(x).type.numI;
+    z.type.numI = _YnumI_^_XnumI_;
     push(s,z);
 
 }
@@ -161,15 +184,7 @@ void xor_bit(STACK *s)
 void not_bit(STACK *s)
 {
     Container x = pop(s);
-    x.type.numI = ~toInt(x).type.numI;
+    x = toInt(x);
+    _XnumI_ = ~_XnumI_;
     push(s,x);
 }
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,5 @@ int main(){
             printf("%g",z.type.numD);
         }
     }
-printf("\n");
+    printf("\n");
 }
-
-
