@@ -19,10 +19,11 @@ void printer(STACK *s){
             }
             else if (z.label == 4){
                 printf("%s",z.str);
-                // Em vez do print dar free(z.str);
+                free(z.str);
             }
             else{
                 printer(z.a);
+                free(z.a);
             }
     }
 }
@@ -39,4 +40,5 @@ int main(){
         }
         printf("\n");
     }
+    free(s);
 }
