@@ -3,13 +3,8 @@
 #include "stack.h"
 #include "parser.h"
 
-int main(){
-    STACK *s = new_stack();
-    char line[BUFSIZ];
-    if (fgets(line,BUFSIZ,stdin) != NULL)
-    {
-        parser(s,line);
-        for (int i = 1; i <= s->sp; i++)
+void printer(STACK *s){
+    for (int i = 1; i <= s->sp; i++)
         {
             Container z = s->stack[i];
             if (z.label == 3)
@@ -26,6 +21,21 @@ int main(){
                 printf("%s",z.str);
                 // Em vez do print dar free(z.str);
             }
+            else{
+                printer(z.a);
+            }
+    }
+}
+
+int main(){
+    STACK *s = new_stack();
+    char line[BUFSIZ];
+    if (fgets(line,BUFSIZ,stdin) != NULL)
+    {
+        parser(s,line);
+        for (int i = 1; i <= s->sp; i++)
+        {
+            printer(s);
         }
         printf("\n");
     }

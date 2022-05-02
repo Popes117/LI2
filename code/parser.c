@@ -7,7 +7,7 @@
 #include <string.h>
 
 char* alloccStr(){
-    return malloc (100*sizeof(char));
+    return malloc (BUFSIZ*sizeof(char));
 }
 
 char* readString(STACK *s, char *rest, char *str)
@@ -119,7 +119,7 @@ char* parseArray(STACK *s, char *rest,Container *vars){
     char *token;
     STACK *arr = new_stack();
     while(strcmp((token = strtok_r(rest," \n",&rest)),"]")!=0){
-        handle(arr,token,rest,vars);
+        rest = handle(arr,token,rest,vars);
     }
     Container z;
     z.label = 5;
