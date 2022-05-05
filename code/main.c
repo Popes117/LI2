@@ -19,14 +19,13 @@ void printer(STACK *s){
             }
             else if (z.label == 4){
                 printf("%s",z.str);
-                free(z.str);
+                i++;
             }
-            else{
+            else if(z.label == 5){
                 printer(z.a);
-                free(z.a);
             }
     }
-}
+} 
 
 int main(){
     STACK *s = new_stack();
@@ -34,11 +33,7 @@ int main(){
     if (fgets(line,BUFSIZ,stdin) != NULL)
     {
         parser(s,line);
-        for (int i = 1; i <= s->sp; i++)
-        {
-            printer(s);
-        }
-        printf("\n");
+        printer(s);
     }
-    free(s);
+    printf("\n");
 }

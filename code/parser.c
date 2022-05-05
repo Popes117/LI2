@@ -5,27 +5,28 @@
 #include "type_changes.h"
 #include <stdio.h>
 #include <string.h>
-
+ 
 char* alloccStr(){
-    return malloc (BUFSIZ*sizeof(char));
-}
+    return malloc (8192*sizeof(char));
+} 
 
 char* readString(STACK *s, char *rest, char *str)
 {
     size_t i = 0;
-    for (size_t n = 0; rest[n] != '"';i++,n++)
+    for (size_t n = 0; rest[0] != '"';i++,n++)
     {
-        str[i] = rest[n];
+        str[i] = rest[0];
+        rest++;
     }
     str[i] = '\0';
-    return rest + i + 1;
+    return rest + 1;
 }
 
-void parseString(STACK *s, char *token, char *rest){
+char* parseString(STACK *s, char *token, char *rest){
     ++token;
     Container z;
     z.label = 4;
-    z.str = alloccStr();
+    z.str = alloca(BUFSIZ*sizeof(char));
     if (token[strlen(token)-1] == '"')
     {
         size_t i = 0;
@@ -43,8 +44,8 @@ void parseString(STACK *s, char *token, char *rest){
     z.str = strcat(token, z.str);
     push(s,z);
     }
+    return rest;
 }
-
 
 
 char* handle(STACK *s,char *token, char* rest, Container *vars){
@@ -104,7 +105,7 @@ char* handle(STACK *s,char *token, char* rest, Container *vars){
         push(s,vars[x-65]);
     } 
     else if (token[0] == ':') coloca(s,vars,token);
-    else if (token[0] == '"') parseString(s,token,rest);
+    else if (token[0] == '\"') rest = parseString(s,token,rest);
     else if (strcmp(token, "[") == 0) rest = parseArray(s,rest,vars);
     else{
        Container container;

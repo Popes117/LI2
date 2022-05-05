@@ -21,3 +21,13 @@ void readFile(STACK *s)
     push(s,z);
 }
 
+void arrcat(STACK *s, STACK *aux) {
+    for (size_t i = 1; i <= aux->sp; i++)
+    {  
+        push(s,aux->stack[i]);
+        if(aux->stack[i].label == 4) free(aux->stack[i].str);
+    }
+    free(aux->stack);
+    free(aux);
+}
+

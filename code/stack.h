@@ -9,6 +9,7 @@ typedef union HoldType {
         } Type;
 
 typedef struct stack STACK;
+
 typedef struct Container{
         int label; 
         /* 
@@ -30,7 +31,6 @@ struct stack {
         Container *stack;
         int sp;
 };
-
 
 STACK* new_stack();
 

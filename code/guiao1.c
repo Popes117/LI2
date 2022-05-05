@@ -5,6 +5,7 @@
 #include "stack.h"
 #include <math.h>
 #include "macro.h"
+#include "parser.h"
 
 void sub(STACK *s)
 {
@@ -67,7 +68,18 @@ void mult(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (_Ylabel_ == 1 ||_Xlabel_ == 1)
+    if(_Ylabel_ == 4)
+    {
+        z.label = 4;
+        z.str = alloccStr();
+        z.str = strcpy(z.str,y.str);
+        while (_XnumI_ > 1)
+        {
+            z.str = strcat(z.str,y.str);
+            _XnumI_--;
+        }
+    }
+    else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
         x = toDouble(x);
         y = toDouble(y);
