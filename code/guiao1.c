@@ -5,6 +5,7 @@
 #include "stack.h"
 #include <math.h>
 #include "macro.h"
+#include "parser.h"
 
 void sub(STACK *s)
 {
@@ -52,6 +53,11 @@ void add(STACK *s){
         y = toDouble(y);
         _Zlabel_ = 1;
         _ZnumD_ = _XnumD_+_YnumD_;
+    }
+    else if(_Ylabel_ == 5 ||_Xlabel_ == 5){
+        // Container z;
+        _Zlabel_ = 2;
+        z.str = strcat(x.str,y.str);
     }
     else
     {
@@ -184,7 +190,18 @@ void xor_bit(STACK *s)
 void not_bit(STACK *s)
 {
     Container x = pop(s);
+    Container y = pop(s);
+    if(y.label == 5 || _Xlabel_ == 5){
+    int i;
+    STACK *aux = x.a;
+    for(i = 0; i <= aux->sp; i++) {
+        Container y = aux->stack[i];
+        push(s,y);
+        }
+    }
+    else{
     x = toInt(x);
     _XnumI_ = ~_XnumI_;
     push(s,x);
+    }
 }

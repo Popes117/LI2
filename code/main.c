@@ -17,10 +17,10 @@ void printer(STACK *s){
             else if (z.label == 1){
                 printf("%g",z.type.numD);
             }
-            else if (z.label == 4){
-                printf("%s",z.str);
-                // Em vez do print dar free(z.str);
-            }
+            // else if (z.label == 4){
+            //     printf("%s",z.str);
+            //     // Em vez do print dar free(z.str);
+            // }
             else{
                 printer(z.a);
             }
@@ -33,10 +33,7 @@ int main(){
     if (fgets(line,BUFSIZ,stdin) != NULL)
     {
         parser(s,line);
-        for (int i = 1; i <= s->sp; i++)
-        {
-            printer(s);
-        }
+        printer(s);
         printf("\n");
     }
 }

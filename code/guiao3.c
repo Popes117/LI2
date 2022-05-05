@@ -32,6 +32,12 @@ void igual(STACK *s){
         _TruenumI_ = 1;
         push(s,True);
     }
+    else if(_Ylabel_ == 5 ||_Xlabel_ == 5){
+        int w = pop(s).type.numI;
+        STACK *aux = y.a;
+        Container z = aux->stack[w+1];
+        push(s,z);
+    }
     else
     {
         Container False;
