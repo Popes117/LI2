@@ -67,3 +67,5 @@ void eMaior(STACK *s);
 void eMenor(STACK *s);
 
 void nots(STACK *s);
+
+void readFile(STACK *s);

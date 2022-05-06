@@ -1,26 +1,40 @@
 #define MAX 1000
 #pragma once
 
-typedef struct {
+
+typedef union HoldType {
+                long numI;
+                double numD;
+                char car;
+        } Type;
+
+typedef struct stack STACK;
+typedef struct Container{
         int label; 
         /* 
            1 - Double
            2 - Long
            3 - Char
+           4 - String
+           5 - Array
         */
-        union HoldType {
-                long numI;
-                double numD;
-                char car;
-        } type;
+       union{
+                char *str;
+                STACK *a;
+                Type type;
+       };
 } Container;
 
-typedef struct {
-        Container stack[MAX];
+struct stack {
+        int size;
+        Container *stack;
         int sp;
-} STACK;
+};
 
-STACK *new_stack();
+
+STACK* new_stack();
+
+STACK* reallocSTACK(STACK *s);
 
 void push(STACK *s, Container container);
 
