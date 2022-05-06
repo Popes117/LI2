@@ -57,14 +57,24 @@ void igual(STACK *s){
         }
     }
 }
+
 void maior(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
     if(_Xlabel_ == 4){
-
+        x.str += (strlen(x.str)-y.type.numI);
+        push(s,x);
     }
     else if(_Xlabel_ == 5){
-
+        Container z;
+        z.label = 5;
+        z.a = new_stack();
+        while (y.type.numI>0)
+        {
+            y.type.numI--;
+            prepush(z.a,pop(x.a));
+        }
+        push(s,z);
     }
     else{
         x = toDouble(x);
@@ -96,11 +106,13 @@ void menor(STACK *s){
         push(s,z);
     }
     else if(_Xlabel_ == 5){
-        while (x.a->sp > y.type.numI)
+        printf("%d\n",x.a->sp);
+        while (y.type.numI <= x.a->sp)
         {
+            y.type.numI++;
             pop(x.a);
-            push(s,x);
         }
+        push(s,x);
     }
     else{
         x = toDouble(x);

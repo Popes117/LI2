@@ -98,6 +98,8 @@ char* handle(STACK *s,char *token, char* rest, Container *vars){
     else if (strcmp(token, "e|") == 0) eOr(s);
     else if (strcmp(token, "e>") == 0) eMaior(s);
     else if (strcmp(token, "e<") == 0) eMenor(s);
+    else if (strcmp(token, "S/") == 0) strtoke(s);
+    else if (strcmp(token, "N/") == 0) strtoke2(s);
     else if (token[0] == '!') nots(s);
     else if (token[0] >= 65 && token[0] <91) 
     {

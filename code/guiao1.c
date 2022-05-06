@@ -6,6 +6,7 @@
 #include <math.h>
 #include "macro.h"
 #include "parser.h"
+#include "alloca.h"
 
 void sub(STACK *s)
 {
@@ -117,7 +118,20 @@ void division(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (_Ylabel_ ==_Xlabel_ && _Xlabel_ == 2)
+    if (_Ylabel_ == 4)
+    {
+        z.label = 5;
+        z.a = new_stack();
+        char *token = alloca(BUFSIZ);
+        while ((token = strtok_r(y.str,x.str,&y.str))!= NULL)
+        {
+            Container aux;
+            aux.label = 4;
+            aux.str = token;
+            push(z.a,aux);
+        }
+    }
+    else if (_Ylabel_ ==_Xlabel_ && _Xlabel_ == 2)
     {
         _Zlabel_ =_Xlabel_;
         _ZnumI_ = _YnumI_/_XnumI_;

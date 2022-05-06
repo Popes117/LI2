@@ -39,6 +39,11 @@ void tamanho(STACK *s) {
         z.type.numI = aux->sp;
         push(s,z);
     }
+    else
+     {   
+        for(;x.str[_YnumI_]!='\0';_YnumI_++);
+        push(s,y);
+    }
 }
 
 void til(STACK *s) {
@@ -65,6 +70,40 @@ void arrcat(STACK *s, Container z) {
     free(z.a->stack);
     free(z.a);
     }
+}
+
+void strtoke(STACK *s)
+{
+    Container y = pop(s);
+    Container z;
+    z.label = 5;
+    z.a = new_stack();
+    char *token = alloca(BUFSIZ);
+    while ((token = strtok_r(y.str," \n",&y.str))!= NULL)
+    {
+        Container aux;
+        aux.label = 4;
+        aux.str = token;
+        push(z.a,aux);
+    }
+    push(s,z);
+}
+
+void strtoke2(STACK *s)
+{
+    Container y = pop(s);
+    Container z;
+    z.label = 5;
+    z.a = new_stack();
+    char *token = alloca(BUFSIZ);
+    while ((token = strtok_r(y.str,"\n",&y.str))!= NULL)
+    {
+        Container aux;
+        aux.label = 4;
+        aux.str = token;
+        push(z.a,aux);
+    }
+    push(s,z);
 }
 
 // void indice(STACK *s) {
