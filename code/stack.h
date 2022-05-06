@@ -36,6 +36,10 @@ STACK* new_stack();
 
 STACK* reallocSTACK(STACK *s);
 
+void prepush(STACK *s, Container container);
+
 void push(STACK *s, Container container);
 
 Container pop(STACK *s);
+
+void printer(STACK *s);

@@ -20,13 +20,7 @@ void popes(STACK *s)
 {
     {
         pop(s);
-        Container y = pop(s);
-        Container z = pop(s);
-
-        push(s,z);
-        push(s,y);
     }
-
 }
 
 void switch2(STACK *s)
@@ -65,7 +59,10 @@ void nextLine(STACK *s){
     char linha[BUFSIZ];
     if (fgets(linha,BUFSIZ,stdin) != NULL)
     {
-        parser(s,linha);
+        Container z;
+        z.label = 4;
+        z.str = linha;
+        push(s,z);
     }
 }
 

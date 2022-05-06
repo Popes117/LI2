@@ -10,7 +10,7 @@ char* alloccStr(){
     return malloc (8192*sizeof(char));
 } 
 
-char* readString(STACK *s, char *rest, char *str)
+char* readString(char *rest, char *str)
 {
     size_t i = 0;
     for (size_t n = 0; rest[0] != '"';i++,n++)
@@ -26,7 +26,7 @@ char* parseString(STACK *s, char *token, char *rest){
     ++token;
     Container z;
     z.label = 4;
-    z.str = alloca(BUFSIZ*sizeof(char));
+    z.str = malloc(BUFSIZ*sizeof(char));
     if (token[strlen(token)-1] == '"')
     {
         size_t i = 0;
@@ -39,7 +39,7 @@ char* parseString(STACK *s, char *token, char *rest){
     }
     else
     {
-    rest = readString(s,rest,z.str);
+    rest = readString(rest,z.str);
     token = strcat(token," ");
     z.str = strcat(token, z.str);
     push(s,z);
@@ -107,6 +107,8 @@ char* handle(STACK *s,char *token, char* rest, Container *vars){
     else if (token[0] == ':') coloca(s,vars,token);
     else if (token[0] == '\"') rest = parseString(s,token,rest);
     else if (strcmp(token, "[") == 0) rest = parseArray(s,rest,vars);
+    else if (token[0] == ',') tamanho(s);
+    // else if (strcmp(token, ">")) maioR(s);
     else{
        Container container;
        container.label = 3;

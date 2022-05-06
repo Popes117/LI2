@@ -2,6 +2,12 @@
 #include "macro.h"
 
 Container toInt(Container x){
+    if ( _Xlabel_ == 4){
+        _Xlabel_ = 2;
+        long z;
+        sscanf(x.str,"%ld",&z);
+        x.type.numI = z;
+    }
     if ( _Xlabel_ == 1)
     {
          _Xlabel_ = 2;
@@ -16,7 +22,14 @@ Container toInt(Container x){
 }
 
 Container toDouble(Container x){
-    if ( _Xlabel_ == 2)
+    if ( _Xlabel_ == 4){
+        _Xlabel_ = 1;
+        double z;
+        sscanf(x.str,"%lf",&z);
+        //free(x.str);
+        x.type.numD = z;
+    }
+    else if ( _Xlabel_ == 2)
     {
          _Xlabel_ = 1;
         _XnumD_= _XnumI_;
@@ -30,6 +43,12 @@ Container toDouble(Container x){
 }
 
 Container toChar(Container x){
+    if ( _Xlabel_ == 4){
+        _Xlabel_ = 3;
+        char z;
+        sscanf(x.str,"%c",&z);
+        x.type.car = z;
+    }
     if ( _Xlabel_ == 1)
     {
         int n = _XnumD_;
@@ -69,7 +88,7 @@ void fill(Container *vars){
     vars[25].type.numI = 2;
 }
 
-int comparaCont(Container x, Container y){
+int comparaCont( Container x, Container y){
     if( _Xlabel_ != 3 && y.label != 3)
     {
         x = toDouble(x);

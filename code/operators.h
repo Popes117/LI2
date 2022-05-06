@@ -69,3 +69,14 @@ void eMenor(STACK *s);
 void nots(STACK *s);
 
 void readFile(STACK *s);
+
+void tamanho(STACK *s);
+
+void til(STACK *s);
+
+void concatena(STACK *s);
+
+void maioR(STACK *s);
+
+void arrcat(STACK *s, Container z);
+
