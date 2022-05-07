@@ -166,11 +166,31 @@ void rmarr2(STACK *s, Container x) {
 void add1(STACK *s)
 {
     Container y = pop(s);
-    if(_Ylabel_ == 1)_YnumD_++;
-    if(_Ylabel_ == 2)_YnumI_++;
-    if(_Ylabel_ == 5) rmarr2(s,y);
-    else _Ycar_++;
-    push(s,y);
+    if (_Ylabel_ == 4) 
+    {
+        Container x;
+        x.label = 3;
+        x.type.car = y.str[strlen(y.str)-1];
+        y.str[strlen(y.str)-1] = '\0';
+        push(s,y);
+        push(s,x);
+    }
+    else if(_Ylabel_ == 1){
+        _YnumD_++;
+        push(s,y);
+    }
+    else if(_Ylabel_ == 2){
+        _YnumI_++;
+        push(s,y);
+    }
+    else if(_Ylabel_ == 5) {
+        rmarr2(s,y);
+        push(s,y);
+    }
+    else {
+        _Ycar_++;
+        push(s,y);
+    }
 }
 
 // ( guião 4
@@ -193,11 +213,31 @@ void rmarr1(STACK *s, Container x) {
 void sub1(STACK *s)
 {
     Container y = pop(s);
-    if(_Ylabel_ == 1)_YnumD_--;
-    if(_Ylabel_ == 2)_YnumI_--;
-    if(_Ylabel_ == 5) rmarr1(s,y);
-    else y.type.car--;
-    push(s,y);
+    if (_Ylabel_ == 4) 
+    {
+        Container x;
+        x.label = 3;
+        x.type.car = y.str[0];
+        y.str++;
+        push(s,y);
+        push(s,x);
+    }
+    else if(_Ylabel_ == 1){
+        _YnumD_--;
+        push(s,y);
+    }
+    else if(_Ylabel_ == 2){
+        _YnumI_--;
+        push(s,y);
+    }
+    else if(_Ylabel_ == 5) {
+        rmarr1(s,y);
+        push(s,y);
+    }
+    else {
+        _Ycar_--;
+        push(s,y);
+    }
 }
 
 void mod(STACK *s)
