@@ -182,7 +182,7 @@ void division(STACK *s)
 }
 
 // ) guião 4
-void rmarr2(STACK *s, Container x) {
+Container rmarr2(STACK *s, Container x) {
     int i;
     Container y;
     y.label = 5;
@@ -195,7 +195,7 @@ void rmarr2(STACK *s, Container x) {
     Container z = pop(aux);
     while(aux->sp >= 1) pop(aux);
     push(s,y);
-    push(s,z);
+    return z;
 }
 
 void add1(STACK *s)
@@ -219,8 +219,8 @@ void add1(STACK *s)
         push(s,y);
     }
     else if(_Ylabel_ == 5) {
-        rmarr2(s,y);
-        push(s,y);
+        Container z = rmarr2(s,y);
+        push(s,z);
     }
     else {
         _Ycar_++;
@@ -306,7 +306,7 @@ void expo(STACK *s)
                 for (; x.str[z] != '\0' && val; z++){
                     if(x.str[z] != y.str[i]) val = 0;
                 }
-                if ((val = 1) && (pos == -1))
+                if (val = 1 && pos == -1)
                 {
                     pos = i;
                 } 
