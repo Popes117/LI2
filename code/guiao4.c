@@ -27,10 +27,14 @@ void tamanho(STACK *s) {
     Container y;
     y.label = 2;
     if(_Xlabel_ == 2){
+        Container z;
+        z.label = 5;
+        z.a = new_stack();
         for(int i = 0; i < x.type.numI; i++){
             y.type.numI = i;
-            push(s,y);
+            push(z.a,y);
         }
+        push(s,z);
     }
     else if(_Xlabel_ == 5){
         STACK *aux = x.a;
