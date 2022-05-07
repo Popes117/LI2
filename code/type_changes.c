@@ -109,5 +109,6 @@ int comparaCont( Container x, Container y){
 int isZero(Container x){
     if ( _Xlabel_ == 1) return (_XnumD_ != 0);
     else if ( _Xlabel_ == 2) return (_XnumI_ != 0);
+    else if (_Xlabel_ == 5) return (x.a->sp != 0);
     return 0;
 }

@@ -50,16 +50,6 @@ void tamanho(STACK *s) {
     }
 }
 
-void til(STACK *s) {
-    int i;
-    Container x = pop(s);
-    STACK *aux = x.a;
-    for(i = 1; i <= aux->sp; i++) {
-        Container y = aux->stack[i];
-        push(s,y);
-    }
-}
-
 void arrcat(STACK *s, Container z) {
     if (z.label != 5)
     {

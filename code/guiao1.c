@@ -364,18 +364,26 @@ void xor_bit(STACK *s)
 void not_bit(STACK *s)
 {
     Container x = pop(s);
-    Container y = pop(s);
-    if(y.label == 5 || _Xlabel_ == 5){
-    int i;
-    STACK *aux = x.a;
-    for(i = 0; i <= aux->sp; i++) {
-        Container y = aux->stack[i];
-        push(s,y);
+     if (_Xlabel_ == 5)
+    {
+        for(int i = 1; i <= x.a->sp; i++) {
+        push(s,x.a->stack[i]);
         }
     }
     else{
-    x = toInt(x);
-    _XnumI_ = ~_XnumI_;
-    push(s,x);
+        Container y = pop(s);
+        if(y.label == 5 || _Xlabel_ == 5){
+        int i;
+        STACK *aux = x.a;
+        for(i = 0; i <= aux->sp; i++) {
+            Container y = aux->stack[i];
+            push(s,y);
+            }
+        }
+        else{
+        x = toInt(x);
+        _XnumI_ = ~_XnumI_;
+        push(s,x);
+        }
     }
 }
