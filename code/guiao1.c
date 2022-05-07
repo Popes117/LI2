@@ -306,7 +306,7 @@ void expo(STACK *s)
                 for (; x.str[z] != '\0' && val; z++){
                     if(x.str[z] != y.str[i]) val = 0;
                 }
-                if (val = 1 && pos == -1)
+                if ((val = 1) && (pos == -1))
                 {
                     pos = i;
                 } 

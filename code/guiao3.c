@@ -18,21 +18,47 @@ void ifelse(STACK *s){
     Container z = pop(s);
     Container y = pop(s);
     Container x = pop(s);
-    if(isZero(x)) push(s,y);
+    if(_Ylabel_ == 4 && _Zlabel_ == 4)
+    {
+        if(isZero(x)) push(s,y);
+        else push(s,z);
+    }
+    else if(_Ylabel_ == 5 && _Zlabel_ == 5)
+    {
+        if(isZero(x)) push(s,y);
+        else push(s,z);
+    }
+    else if(isZero(x)) push(s,y);
     else push(s,z);
 }
 
 void igual(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    if(_Xlabel_ == 4){
+    if(_Xlabel_ == 4 && _Ylabel_ == 4)
+    {
+        if(strcmp(x.str,y.str) == 0){
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
+    }
+    else if(_Xlabel_ == 4){
         Container z;
         z.label = 3;
         z.type.car = x.str[y.type.numI];
         push(s,z);
     }
     else if(_Xlabel_ == 5){
-        push(s,x.a->stack[y.type.numI]);
+        push(s,x.a->stack[(y.type.numI)+1]);
     }
     else{
         if(comparaCont(x,y) == 1)
@@ -61,7 +87,39 @@ void igual(STACK *s){
 void maior(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    if(_Xlabel_ == 4){
+    if(_Xlabel_ == 4 && _Ylabel_ == 4){
+        if(strcmp(x.str,y.str) > 0)
+        {
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
+    }
+    else if(_Xlabel_ == 5 && _Ylabel_ == 5){
+        if(x.a->sp > y.a->sp)
+        {
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
+    }
+    else if(_Xlabel_ == 4){
         x.str += (strlen(x.str)-y.type.numI);
         push(s,x);
     }
@@ -98,7 +156,39 @@ void maior(STACK *s){
 void menor(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    if(_Xlabel_ == 4)
+    if(_Xlabel_ == 4 && _Ylabel_ == 4)
+    {
+        if(strcmp(x.str,y.str) < 0){
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
+    }
+    else if(_Xlabel_ == 5 && _Ylabel_ == 5){
+        if(x.a->sp < y.a->sp)
+        {
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
+    }
+    else if(_Xlabel_ == 4)
     {
         Container z;
         z.label = 4;
@@ -170,7 +260,24 @@ void eOr(STACK *s){
 void eMaior(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    if(comparaCont(x,y) == 3)
+    if(_Xlabel_ == 4 && _Ylabel_ == 4)
+    {
+        if(strcmp(x.str,y.str) > 0)      
+            push(s,x);
+        else
+            push(s,y);
+    }
+    else if(_Xlabel_ == 5 && _Ylabel_ == 5){
+        if(x.a->sp > y.a->sp)
+        {
+            push(s,x);
+        }
+        else
+        {
+            push(s,y);
+        }
+    }
+    else if(comparaCont(x,y) == 3)
     {
         push(s,y);
     }
@@ -183,7 +290,24 @@ void eMaior(STACK *s){
 void eMenor(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    if(comparaCont(x,y) == 3)
+    if(_Xlabel_ == 4 && _Ylabel_ == 4)
+    {
+        if(strcmp(x.str,y.str) < 0)      
+            push(s,x);
+        else
+            push(s,y);
+    }
+    else if(_Xlabel_ == 5 && _Ylabel_ == 5){
+        if(x.a->sp < y.a->sp)
+        {
+            push(s,x);
+        }
+        else
+        {
+            push(s,y);
+        }
+    }
+    else if(comparaCont(x,y) == 3)
     {
         push(s,x);
     }
