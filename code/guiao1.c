@@ -229,7 +229,7 @@ void add1(STACK *s)
 }
 
 // ( guião 4
-void rmarr1(STACK *s, Container x) {
+Container rmarr1(STACK *s, Container x) {
     int i;
     Container y;
     y.label = 5;
@@ -242,7 +242,7 @@ void rmarr1(STACK *s, Container x) {
     Container z = aux->stack[1];
     while(aux->sp >= 1) pop(aux);
     push(s,y);
-    push(s,z);
+    return z;
 }
 
 void sub1(STACK *s)
@@ -266,8 +266,8 @@ void sub1(STACK *s)
         push(s,y);
     }
     else if(_Ylabel_ == 5) {
-        rmarr1(s,y);
-        push(s,y);
+        Container z = rmarr1(s,y);
+        push(s,z);
     }
     else {
         _Ycar_--;
