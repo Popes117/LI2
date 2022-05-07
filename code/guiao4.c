@@ -66,7 +66,7 @@ void arrcat(STACK *s, Container z) {
         push(s,z);
     }
     else {
-        for (size_t i = 1; i <= z.a->sp; i++)
+        for (int i = 1; i <= z.a->sp; i++)
         {  
             push(s,z.a->stack[i]);
            if(z.a->stack[i].label == 4) free(z.a->stack[i].str);
