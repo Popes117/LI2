@@ -41,7 +41,17 @@ void add(STACK *s){
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if(_Xlabel_ == 5 && _Ylabel_ != 5){
+    if (_Ylabel_ == 3 && _Xlabel_ == 4)
+    {
+        x.str[strlen(x.str)+1] = '\0';
+        for (int i = strlen(x.str); i>0; i--)
+        {
+            x.str[i] = x.str[i-1];
+        }
+        x.str[0] = y.type.car;
+        push(s,x);
+    }
+    else if(_Xlabel_ == 5 && _Ylabel_ != 5){
         prepush(x.a,y);
         push(s,x);
     }
@@ -53,7 +63,15 @@ void add(STACK *s){
             free(x.a);
         }
     }
-    else if(_Ylabel_ == 4 ){
+    else if (_Ylabel_ ==  4 && _Xlabel_ == 3) 
+    {
+        char aux[2];
+        aux[0] = x.type.car;
+        aux[1] = '\0';
+        y.str = strcat(y.str,aux);
+        push(s,y);
+    }
+    else if(_Ylabel_ == 4){
         y.str = strcat(y.str,x.str);
         push(s,y);
     }
