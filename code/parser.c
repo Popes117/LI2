@@ -27,7 +27,7 @@ char* parseString(STACK *s, char *token, char *rest){
     Container z;
     z.label = 4;
     z.str = malloc(BUFSIZ*sizeof(char));
-    if (token[strlen(token)-1] == '"')
+    if (token[0]!= '\0' &&token[strlen(token)-1] == '"')
     {
         size_t i = 0;
         for (; token[i] != '"';i++)
@@ -110,7 +110,6 @@ char* handle(STACK *s,char *token, char* rest, Container *vars){
     else if (token[0] == '\"') rest = parseString(s,token,rest);
     else if (strcmp(token, "[") == 0) rest = parseArray(s,rest,vars);
     else if (token[0] == ',') tamanho(s);
-    // else if (strcmp(token, ">")) maioR(s);
     else{
        Container container;
        container.label = 3;
