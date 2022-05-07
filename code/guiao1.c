@@ -48,6 +48,10 @@ void add(STACK *s){
     else if (_Ylabel_ == 5){
         arrcat(y.a,x);
         push(s,y);
+        if(_Xlabel_ == 5){
+            free(x.a->stack);
+            free(x.a);
+        }
     }
     else if(_Ylabel_ == 4 ){
         y.str = strcat(y.str,x.str);
@@ -85,7 +89,18 @@ void mult(STACK *s)
     Container z;
     if (_Ylabel_ == 5)
     {
-        
+        Container aux;
+        aux.label = 5;
+        aux.a = new_stack();
+        arrcat(aux.a,y);
+        while (x.type.numI > 1)
+        {
+            arrcat(y.a,aux);
+            x.type.numI--;
+        } 
+        push(s,y);
+        free(aux.a->stack);
+        free(aux.a);
     }
     else if(_Ylabel_ == 4)
     {
@@ -97,6 +112,7 @@ void mult(STACK *s)
             z.str = strcat(z.str,y.str);
             _XnumI_--;
         }
+        push(s,z);
     }
     else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
     {
@@ -104,13 +120,14 @@ void mult(STACK *s)
         y = toDouble(y);
         _Zlabel_ = 1;
         _ZnumD_ = _XnumD_*_YnumD_;
+        push(s,z);
     }
     else
     {
         _Zlabel_ =_Xlabel_;
         _ZnumI_ = _XnumI_*_YnumI_;
+        push(s,z);
     }
-    push(s,z);
 }
 
 void division(STACK *s)

@@ -5,20 +5,21 @@
 
 STACK * new_stack() {
         STACK *s = malloc(sizeof(STACK));
-        s->stack = malloc(40*sizeof(Container));
-        s->size = 40;
+        s->stack = malloc(BUFSIZ*sizeof(Container));
+        //s->size = 40;
         return s;
 }
 
-STACK* reallocSTACK(STACK *s){
+/* STACK* reallocSTACK(STACK *s){
+
         STACK *ns = realloc(s,sizeof(STACK));
-        ns->stack = realloc(s->stack, (s->size*2)*sizeof(Container));
         ns->size *= 2;
+        ns->stack = realloc(s->stack,(s->size)*sizeof(Container));
         return ns;
-}
+} */
 
 void prepush(STACK *s, Container container){
-        if(s->size == s->sp) s = reallocSTACK(s);
+        //if(s->size == s->sp) s = reallocSTACK(s);
         s->sp++;
         for (int i = s->sp; i > 1; i--)
         {
@@ -28,7 +29,7 @@ void prepush(STACK *s, Container container){
 }
 
 void push(STACK *s, Container container){
-        if(s->size == s->sp) s = reallocSTACK(s);
+        //if(s->size == s->sp) s = reallocSTACK(s);
         s->sp++;
         s->stack[s->sp] = container;
 }

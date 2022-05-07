@@ -27,7 +27,7 @@ typedef struct Container{
 } Container;
 
 struct stack {
-        int size;
+        //int size;
         Container *stack;
         int sp;
 };
