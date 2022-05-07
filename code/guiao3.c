@@ -25,64 +25,114 @@ void ifelse(STACK *s){
 void igual(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    if(comparaCont(x,y) == 1)
-    {
-        Container True;
-        _Truelabel_ = 2;
-        _TruenumI_ = 1;
-        push(s,True);
+    if(_Xlabel_ == 4){
+        Container z;
+        z.label = 3;
+        z.type.car = x.str[y.type.numI];
+        push(s,z);
     }
-    else
-    {
-        Container False;
-        _Falselabel_ = 2;
-        _FalsenumI_ = 0;
-        push(s,False);
+    else if(_Xlabel_ == 5){
+        push(s,x.a->stack[y.type.numI]);
+    }
+    else{
+        if(comparaCont(x,y) == 1)
+        {
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else if(_Ylabel_ == 5 ||_Xlabel_ == 5){
+            int w = pop(s).type.numI;
+            STACK *aux = y.a;
+            Container z = aux->stack[w+1];
+            push(s,z);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
     }
 }
 
 void maior(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    x = toDouble(x);
-    y = toDouble(y);
-    if(comparaCont(x,y) == 2)
-    {
-        Container True;
-        _Truelabel_ = 2;
-        _TruenumI_ = 1;
-        push(s,True);
+    if(_Xlabel_ == 4){
+        x.str += (strlen(x.str)-y.type.numI);
+        push(s,x);
     }
-    else
-    {
-        Container False;
-        _Falselabel_ = 2;
-        _FalsenumI_ = 0;
-        push(s,False);
+    else if(_Xlabel_ == 5){
+        Container z;
+        z.label = 5;
+        z.a = new_stack();
+        while (y.type.numI>0)
+        {
+            y.type.numI--;
+            prepush(z.a,pop(x.a));
+        }
+        push(s,z);
     }
+    else{
+        x = toDouble(x);
+        y = toDouble(y);
+        if(comparaCont(x,y) == 2)
+        {
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
+    }   
 }
-
 void menor(STACK *s){
     Container y = pop(s);
     Container x = pop(s);
-    x = toDouble(x);
-    y = toDouble(y);
-    if(comparaCont(x,y) == 3)
+    if(_Xlabel_ == 4)
     {
-        Container True;
-        _Truelabel_ = 2;
-        _TruenumI_ = 1;
-        push(s,True);
+        Container z;
+        z.label = 4;
+        z.str = strndup(x.str,y.type.numI);
+        push(s,z);
     }
-    else
-    {
-        Container False;
-        _Falselabel_ = 2;
-        _FalsenumI_ = 0;
-        push(s,False);
+    else if(_Xlabel_ == 5){
+        printf("%d\n",x.a->sp);
+        while (y.type.numI <= x.a->sp)
+        {
+            y.type.numI++;
+            pop(x.a);
+        }
+        push(s,x);
+    }
+    else{
+        x = toDouble(x);
+        y = toDouble(y);
+        if(comparaCont(x,y) == 3)
+        {
+            Container True;
+            _Truelabel_ = 2;
+            _TruenumI_ = 1;
+            push(s,True);
+        }
+        else
+        {
+            Container False;
+            _Falselabel_ = 2;
+            _FalsenumI_ = 0;
+            push(s,False);
+        }
     }
 }
-
 void eAnd(STACK *s){
     Container y = pop(s);
     Container x = pop(s);

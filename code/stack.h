@@ -9,6 +9,7 @@ typedef union HoldType {
         } Type;
 
 typedef struct stack STACK;
+
 typedef struct Container{
         int label; 
         /* 
@@ -31,11 +32,14 @@ struct stack {
         int sp;
 };
 
-
 STACK* new_stack();
 
 STACK* reallocSTACK(STACK *s);
 
+void prepush(STACK *s, Container container);
+
 void push(STACK *s, Container container);
 
 Container pop(STACK *s);
+
+void printer(STACK *s);

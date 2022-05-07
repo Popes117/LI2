@@ -5,27 +5,28 @@
 #include "type_changes.h"
 #include <stdio.h>
 #include <string.h>
-
+ 
 char* alloccStr(){
-    return malloc (BUFSIZ*sizeof(char));
-}
+    return malloc (8192*sizeof(char));
+} 
 
-char* readString(STACK *s, char *rest, char *str)
+char* readString(char *rest, char *str)
 {
     size_t i = 0;
-    for (; rest[i] != '"';i++)
+    for (size_t n = 0; rest[0] != '"';i++,n++)
     {
-        str[i] = rest[i];
+        str[i] = rest[0];
+        rest++;
     }
     str[i] = '\0';
-    return rest + i + 1;
+    return rest + 1;
 }
 
-void parseString(STACK *s, char *token, char *rest){
+char* parseString(STACK *s, char *token, char *rest){
     ++token;
     Container z;
     z.label = 4;
-    z.str = alloccStr();
+    z.str = malloc(BUFSIZ*sizeof(char));
     if (token[strlen(token)-1] == '"')
     {
         size_t i = 0;
@@ -38,13 +39,13 @@ void parseString(STACK *s, char *token, char *rest){
     }
     else
     {
-    rest = readString(s,rest,z.str);
+    rest = readString(rest,z.str);
     token = strcat(token," ");
     z.str = strcat(token, z.str);
     push(s,z);
     }
+    return rest;
 }
-
 
 
 char* handle(STACK *s,char *token, char* rest, Container *vars){
@@ -97,6 +98,8 @@ char* handle(STACK *s,char *token, char* rest, Container *vars){
     else if (strcmp(token, "e|") == 0) eOr(s);
     else if (strcmp(token, "e>") == 0) eMaior(s);
     else if (strcmp(token, "e<") == 0) eMenor(s);
+    else if (strcmp(token, "S/") == 0) strtoke(s);
+    else if (strcmp(token, "N/") == 0) strtoke2(s);
     else if (token[0] == '!') nots(s);
     else if (token[0] >= 65 && token[0] <91) 
     {
@@ -104,8 +107,10 @@ char* handle(STACK *s,char *token, char* rest, Container *vars){
         push(s,vars[x-65]);
     } 
     else if (token[0] == ':') coloca(s,vars,token);
-    else if (token[0] == '"') parseString(s,token,rest);
+    else if (token[0] == '\"') rest = parseString(s,token,rest);
     else if (strcmp(token, "[") == 0) rest = parseArray(s,rest,vars);
+    else if (token[0] == ',') tamanho(s);
+    // else if (strcmp(token, ">")) maioR(s);
     else{
        Container container;
        container.label = 3;
