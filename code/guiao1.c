@@ -257,11 +257,36 @@ void expo(STACK *s)
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    x = toDouble(x);
-    y = toDouble(y);
-    _Zlabel_ = 1;
-    _ZnumD_ = pow(_YnumD_,_XnumD_);
-    push(s,z);
+    if (_Ylabel_ == 4)
+    {
+        long pos = -1;
+        short val = 1;
+        z.label = 2;
+        for (int i = 0; y.str[i] != '\0'; i++)
+        {
+            val = 1;
+            int z = 0;
+            if (x.str[z] == y.str[i])
+            {
+                for (; x.str[z] != '\0' && val; z++){
+                    if(x.str[z] != y.str[i]) val = 0;
+                }
+                if (val = 1 && pos == -1)
+                {
+                    pos = i;
+                } 
+            }
+        }
+        z.type.numI = pos;
+        push(s,z);
+    }
+    else{
+        x = toDouble(x);
+        y = toDouble(y);
+        _Zlabel_ = 1;
+        _ZnumD_ = pow(_YnumD_,_XnumD_);
+        push(s,z);
+    }
 }
 
 void e_bit(STACK *s)
