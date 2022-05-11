@@ -7,7 +7,7 @@
 #include <string.h>
  
 char* alloccStr(){
-    return malloc (8192*sizeof(char));
+    return malloc (15000*sizeof(char));
 } 
 
 char* readString(char *rest, char *str)
@@ -26,7 +26,7 @@ char* parseString(STACK *s, char *token, char *rest){
     ++token;
     Container z;
     z.label = 4;
-    z.str = malloc(BUFSIZ*sizeof(char));
+    z.str = malloc(15000*sizeof(char));
     if (token[0]!= '\0' &&token[strlen(token)-1] == '"')
     {
         size_t i = 0;

@@ -5,7 +5,7 @@
 
 STACK * new_stack() {
         STACK *s = malloc(sizeof(STACK));
-        s->stack = malloc(BUFSIZ*sizeof(Container));
+        s->stack = malloc(15000*sizeof(Container));
         //s->size = 40;
         return s;
 }
@@ -59,8 +59,8 @@ void printer(STACK *s){
             } 
             else{
                 printer(z.a);
-                free(z.a->stack);
-                free(z.a);
+                // free(z.a->stack);
+                // free(z.a);
             }
     }
 } 

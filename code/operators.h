@@ -72,8 +72,6 @@ void readFile(STACK *s);
 
 void tamanho(STACK *s);
 
-void til(STACK *s);
-
 void concatena(STACK *s);
 
 void maioR(STACK *s);

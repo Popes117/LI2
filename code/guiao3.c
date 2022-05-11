@@ -8,10 +8,18 @@
 #include "macro.h"
 
 void coloca(STACK *s, Container *vars, char *token){
-    Container x = pop(s);
+   Container x = pop(s);
     int ascii = token[1];
-    vars[ascii-65] = x;
-    push(s,x);
+    if(_Xlabel_ == 5){
+        vars[ascii-65].label = 5;
+        vars[ascii-65].a = new_stack();
+        arrcat(vars[ascii-65].a,x);
+        push(s,x);
+    }
+    else{
+       vars[ascii-65] = x; 
+       push(s,x); 
+    }
 }
 
 void ifelse(STACK *s){
@@ -196,14 +204,17 @@ void menor(STACK *s){
         push(s,z);
     }
     else if(_Xlabel_ == 5){
-        printf("%d\n",x.a->sp);
-        while (y.type.numI <= x.a->sp)
-        {
-            y.type.numI++;
-            pop(x.a);
+        int f = x.a->sp-y.type.numI;
+        if(x.a->sp-y.type.numI == 0) push(s,x);
+        else{
+            while (f > 0)
+            {
+                f--;
+                pop(x.a);
+            }
+            push(s,x);
+            }
         }
-        push(s,x);
-    }
     else{
         x = toDouble(x);
         y = toDouble(y);
