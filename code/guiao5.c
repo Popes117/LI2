@@ -5,7 +5,7 @@
 #include "stack.h"
 #include <math.h>
 
-void fold(STACK *s, Container x, Container y){
+void fold2(STACK *s, Container x, Container y){
     STACK *min = ministack();
     push(min,y.a->stack[1]);
     push(min,y.a->stack[2]);

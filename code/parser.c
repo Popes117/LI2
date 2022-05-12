@@ -65,7 +65,8 @@ char *parse_block(STACK *s, char *rest)
     Container z;
     z.label = 6;
     z.str = malloc(120 * sizeof(char));
-    size_t i = 0;
+    size_t i = 1;
+    z.str[0] = ' ';
     for (; rest[0] != '}'; i++)
     {
         z.str[i] = rest[0];
