@@ -446,12 +446,20 @@ void xor_bit(STACK *s)
 void not_bit(STACK *s)
 {
     Container x = pop(s);
+    //Container y = pop(s);
      if (_Xlabel_ == 5)
     {
         for(int i = 1; i <= x.a->sp; i++) {
         push(s,x.a->stack[i]);
         }
     }
+    //  else if( _Ylabel_ == 6)
+    // {
+    //     for(int i = 1; i <= y.a->sp; i++) {
+    //     push(s,y.a->stack[i]);
+    //     }
+    //     push(s,x);
+    // }
     else{
         Container y = pop(s);
         if(y.label == 5 || _Xlabel_ == 5){
