@@ -72,8 +72,10 @@ void add(STACK *s){
         push(s,y);
     }
     else if(_Ylabel_ == 4){
-        y.str = strcat(y.str,x.str);
-        push(s,y);
+        z.label = 4;
+        z.str = realloc(y.str,strlen(y.str)+strlen(x.str));
+        z.str = strcat(z.str,x.str);
+        push(s,z);
     }
     else if (_Ylabel_ == 3 ||_Xlabel_ == 3)
     {
@@ -120,7 +122,7 @@ void mult(STACK *s)
         free(aux.a->stack);
         free(aux.a);
     }
-    else if(_Ylabel_ == 4)
+    else  if(_Ylabel_ == 4)
     {
         z.label = 4;
         z.str = alloccStr();
@@ -183,7 +185,7 @@ void division(STACK *s)
 
 // ) guião 4
 Container rmarr2(STACK *s, Container x) {
-    int i;
+    /* int i;
     Container y;
     y.label = 5;
     y.a = new_stack();
@@ -195,6 +197,9 @@ Container rmarr2(STACK *s, Container x) {
     Container z = pop(aux);
     while(aux->sp >= 1) pop(aux);
     push(s,y);
+    return z; */
+    Container z = pop(x.a);
+    push(s,x);
     return z;
 }
 
@@ -294,25 +299,35 @@ void expo(STACK *s)
     Container z;
     if (_Ylabel_ == 4)
     {
-        long pos = -1;
+        long pos = 0;
         short val = 1;
-        z.label = 2;
-        for (int i = 0; y.str[i] != '\0'; i++)
+        short end = 1;
+        while (y.str[0] != '\0' && end)
         {
-            val = 1;
-            int z = 0;
-            if (x.str[z] == y.str[i])
+            if (y.str[0] == x.str[0])
             {
-                for (; x.str[z] != '\0' && val; z++){
-                    if(x.str[z] != y.str[i]) val = 0;
-                }
-                if (val = 1 && pos == -1)
+                int i = 0;
+                val = 1;
+                for (; i < strlen(x.str) && val; i++)
                 {
-                    pos = i;
-                } 
+                    if (y.str[i] != x.str[i])
+                    {
+                        val = 0;
+                    }
+                }
+                if(i == strlen(x.str)){
+                    end = 0;
+                }
             }
+            pos++;
+            y.str++;
         }
-        z.type.numI = pos;
+        if (end)
+        {
+            pos = 0;
+        }
+        z.label = 2;
+        z.type.numI = --pos;
         push(s,z);
     }
     else{

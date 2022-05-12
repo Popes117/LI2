@@ -26,7 +26,6 @@ Container toDouble(Container x){
         _Xlabel_ = 1;
         double z;
         sscanf(x.str,"%lf",&z);
-        //free(x.str);
         x.type.numD = z;
     }
     else if ( _Xlabel_ == 2)

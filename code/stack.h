@@ -43,3 +43,5 @@ void push(STACK *s, Container container);
 Container pop(STACK *s);
 
 void printer(STACK *s);
+
+STACK* ministack();

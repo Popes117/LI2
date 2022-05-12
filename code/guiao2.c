@@ -15,35 +15,26 @@ void duplica(STACK *s)
             
 }
 
-void popes(STACK *s)
-{
-    {
-        pop(s);
-    }
-}
-
 void switch2(STACK *s)
 {
-        Container x = pop(s);
-        Container y = pop(s);
-         
-        push(s,x);
-        push(s,y);
-
+    Container x = pop(s);
+    Container y = pop(s);
+     
+    push(s,x);
+    push(s,y);
 }
 
 
 void roda3(STACK *s)
 {
-    {
-        Container x = pop(s);
-        Container y = pop(s);
-        Container z = pop(s);
 
-        push(s,y); 
-        push(s,x); 
-        push(s,z);
-    }
+   Container x = pop(s);
+   Container y = pop(s);
+   Container z = pop(s);
+   push(s,y); 
+   push(s,x); 
+   push(s,z);
+
 }
 
 void copy(STACK *s){

@@ -5,8 +5,8 @@
 
 int main(){
     STACK *s = new_stack();
-    char line[BUFSIZ];
-    if (fgets(line,BUFSIZ,stdin) != NULL)
+    char line[15000];
+    if (fgets(line,15000,stdin) != NULL)
     {
         parser(s,line);
         printer(s);

@@ -32,8 +32,6 @@ void not_bit(STACK *s);
 
 void duplica(STACK *s);
 
-void popes(STACK *s);
-
 void switch2(STACK *s);
 
 void roda3(STACK *s);
@@ -71,8 +69,6 @@ void nots(STACK *s);
 void readFile(STACK *s);
 
 void tamanho(STACK *s);
-
-void til(STACK *s);
 
 void concatena(STACK *s);
 
