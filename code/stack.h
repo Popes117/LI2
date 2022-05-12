@@ -34,6 +34,8 @@ struct stack {
 
 STACK* new_stack();
 
+STACK * ministack();
+
 STACK* reallocSTACK(STACK *s);
 
 void prepush(STACK *s, Container container);

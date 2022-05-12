@@ -79,4 +79,3 @@ void arrcat(STACK *s, Container z);
 void strtoke(STACK *s);
 
 void strtoke2(STACK *s);
-

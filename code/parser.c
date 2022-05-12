@@ -18,7 +18,9 @@
     Container y = pop(s); \
     Container z = pop(s); 
 
-#
+char *alloccStr(){
+    return malloc(12000*sizeof(char));
+}
 
 char *readString(char *rest, char *str)
 {
@@ -64,14 +66,14 @@ char *parse_block(STACK *s, char *rest)
     z.label = 6;
     z.str = malloc(120 * sizeof(char));
     size_t i = 0;
-    for (size_t n = 0; rest[0] != '}'; i++, n++)
+    for (; rest[0] != '}'; i++)
     {
         z.str[i] = rest[0];
         rest++;
     }
     z.str[i] = '\0';
     rest++;
-    push(s, z);
+    push(s,z);
     return rest;
 }
 
@@ -162,7 +164,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
         strtoke(s);
     else if (strcmp(token, "N/") == 0)
         strtoke2(s);
-    else if (strcmp(token, "N/") == 0)
+    else if (strcmp(token, "{") == 0)
         rest = parse_block(s,rest);
     else if (token[0] == '!')
         nots(s);

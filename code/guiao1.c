@@ -105,13 +105,36 @@ void add(STACK *s){
     }
 }
 
+void fold(STACK *s, Container x, Container y){
+    STACK *min = ministack();
+    push(min,y.a->stack[1]);
+    push(min,y.a->stack[2]);
+    int i = 3;
+    while (i <= y.a->sp)
+    {
+        char *helper = strdup(x.str);
+        parser(min,helper);
+        push(min,y.a->stack[i]);
+        i++;
+        free(helper);
+    }
+    Container z = min->stack[1];
+    free(y.a->stack);
+    free(y.a);
+    push(s,z);
+}
+
 void mult(STACK *s)
 {
     
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    if (_Ylabel_ == 5)
+    if (_Xlabel_ == 6)
+    {
+        fold(s,x,y);
+    }
+    else if (_Ylabel_ == 5)
     {
         Container aux;
         aux.label = 5;
@@ -285,15 +308,55 @@ void sub1(STACK *s)
 }
 
 void mod(STACK *s)
-{
+{   
     Container x = pop(s);
     Container y = pop(s);
     Container z;
-    x = toInt(x);
-    y = toInt(y);
-    _Zlabel_ = 2;
-    _ZnumI_= _YnumI_%_XnumI_;
-    push(s,z);
+    if (_Xlabel_ == 6)
+    {
+        STACK *min = ministack();
+        if (_Ylabel_ == 5)
+        {   
+            for (int i = 1; i <= y.a->sp;i++)
+            {
+                push(min,y.a->stack[i]);
+                char *helper = strdup(x.str);
+/* printf("%s\n",helper);
+printf("%ld\n",y.a->stack[i].type.numI);
+printf("%ld\n",min->stack[1].type.numI); */
+//printer(min);
+                parser(min,helper);
+// printer(min); 
+// printf("\n");
+                y.a->stack[i] = min->stack[1];
+                pop(min);
+                free(helper);
+                }
+        }
+        else
+        {
+            z.label = 3;
+            for (int i = 0; y.str[i] != '\0';i++)
+            {
+                z.type.car = y.str[i];
+                char *helper = strdup(x.str);
+                push(min,z);
+                parser(min,helper);
+                y.str[i] = min->stack[1].type.car;
+                pop(min);
+                free(helper);
+            }
+        }
+        push(s,y);
+    }
+    else
+    {
+        x = toInt(x);
+        y = toInt(y);
+        _Zlabel_ = 2;
+        _ZnumI_= _YnumI_%_XnumI_;
+        push(s,z);
+    }
 }
 
 void expo(STACK *s)
