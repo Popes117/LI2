@@ -37,8 +37,8 @@ char *parseString(STACK *s, char *token, char *rest)
     ++token;
     Container z;
     z.label = 4;
-    z.str = malloc(12000 * sizeof(char));
-    if (token[0] != '\0' && token[strlen(token) - 1] == '"')
+    z.str = malloc(15000*sizeof(char));
+    if (token[0]!= '\0' &&token[strlen(token)-1] == '"')
     {
         size_t i = 0;
         for (; token[i] != '"'; i++)

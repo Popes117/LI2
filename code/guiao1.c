@@ -72,10 +72,14 @@ void add(STACK *s){
         push(s,y);
     }
     else if(_Ylabel_ == 4){
-        z.label = 4;
-        z.str = realloc(y.str,strlen(y.str)+strlen(x.str));
-        z.str = strcat(z.str,x.str);
-        push(s,z);
+        size_t l1 = strlen(y.str);
+        size_t l2 = strlen(x.str);
+        char* res = malloc(l1 + l2 + 1);
+        memcpy(res,y.str,l1);
+        memcpy(res+l1,x.str,l2+1);
+        memcpy(y.str,res,l1+l2+1);
+        free(res);
+        push(s,y);
     }
     else if (_Ylabel_ == 3 ||_Xlabel_ == 3)
     {
@@ -306,7 +310,7 @@ void expo(STACK *s)
         {
             if (y.str[0] == x.str[0])
             {
-                int i = 0;
+                size_t i = 0;
                 val = 1;
                 for (; i < strlen(x.str) && val; i++)
                 {

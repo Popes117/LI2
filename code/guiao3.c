@@ -8,7 +8,7 @@
 #include "macro.h"
 
 void coloca(STACK *s, Container *vars, char *token){
-    Container x = pop(s);
+   Container x = pop(s);
     int ascii = token[1];
     if(_Xlabel_ == 5){
         vars[ascii-65].label = 5;
@@ -213,9 +213,8 @@ void menor(STACK *s){
                 pop(x.a);
             }
             push(s,x);
+            }
         }
-        
-    }
     else{
         x = toDouble(x);
         y = toDouble(y);
