@@ -446,7 +446,17 @@ void xor_bit(STACK *s)
 void not_bit(STACK *s)
 {
     Container x = pop(s);
-     if (_Xlabel_ == 5)
+    if(_Xlabel_ == 6){
+        Container y = pop(s);
+        STACK *min = ministack();
+        push(min,y);
+        char *helper = strdup(x.str);
+        parser(min,helper);
+        push(s,min->stack[1]);
+        free(min->stack);
+        free(min);
+    }
+    else if (_Xlabel_ == 5)
     {
         for(int i = 1; i <= x.a->sp; i++) {
         push(s,x.a->stack[i]);

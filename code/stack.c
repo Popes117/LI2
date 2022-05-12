@@ -65,7 +65,7 @@ void printer(STACK *s){
                 printf("%s",z.str);
             } 
             else if (z.label == 6 ){
-                printf("{%s}",z.str);
+                printf("{ %s}",z.str);
             } 
             else{
                 printer(z.a);
