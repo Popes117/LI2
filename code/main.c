@@ -8,7 +8,7 @@ int main(){
     char line[15000];
     if (fgets(line,15000,stdin) != NULL)
     {
-        parser(s,line);
+        parser(s,line,1);
         printer(s);
         printf("\n");
         free(s->stack);

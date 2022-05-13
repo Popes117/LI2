@@ -105,7 +105,7 @@ void add(STACK *s){
     }
 }
 
-void fold(STACK *s, Container x, Container y){
+void foldr(STACK *s, Container x, Container y){
     STACK *min = ministack();
     push(min,y.a->stack[1]);
     push(min,y.a->stack[2]);
@@ -113,11 +113,17 @@ void fold(STACK *s, Container x, Container y){
     while (i <= y.a->sp)
     {
         char *helper = strdup(x.str);
-        parser(min,helper);
+        parser(min,helper,2);
         push(min,y.a->stack[i]);
+        //printf("%ld\n",min->stack[2].type.numI);
         i++;
         free(helper);
     }
+    char *helper = strdup(x.str);
+    parser(min,helper,2);
+    free(helper);
+    /* printer(min);
+    printf("\n"); */
     Container z = min->stack[1];
     free(y.a->stack);
     free(y.a);
@@ -132,7 +138,7 @@ void mult(STACK *s)
     Container z;
     if (_Xlabel_ == 6)
     {
-        fold(s,x,y);
+        foldr(s,x,y);
     }
     else if (_Ylabel_ == 5)
     {
@@ -321,13 +327,7 @@ void mod(STACK *s)
             {
                 push(min,y.a->stack[i]);
                 char *helper = strdup(x.str);
-/* printf("%s\n",helper);
-printf("%ld\n",y.a->stack[i].type.numI);
-printf("%ld\n",min->stack[1].type.numI); */
-//printer(min);
-                parser(min,helper);
-// printer(min); 
-// printf("\n");
+                parser(min,helper,2);
                 y.a->stack[i] = min->stack[1];
                 pop(min);
                 free(helper);
@@ -336,15 +336,17 @@ printf("%ld\n",min->stack[1].type.numI); */
         else
         {
             z.label = 3;
-            for (int i = 0; y.str[i] != '\0';i++)
+            char *str = strdup(y.str);
+            for (int i = 0; str[i] != '\0';i++)
             {
-                z.type.car = y.str[i];
+                z.type.car = str[i];
                 char *helper = strdup(x.str);
                 push(min,z);
-                parser(min,helper);
+                parser(min,helper,2);
                 y.str[i] = min->stack[1].type.car;
                 pop(min);
                 free(helper);
+
             }
         }
         push(s,y);
@@ -451,7 +453,7 @@ void not_bit(STACK *s)
         STACK *min = ministack();
         push(min,y);
         char *helper = strdup(x.str);
-        parser(min,helper);
+        parser(min,helper,2);
         push(s,min->stack[1]);
         free(min->stack);
         free(min);
@@ -462,13 +464,6 @@ void not_bit(STACK *s)
         push(s,x.a->stack[i]);
         }
     }
-    //  else if( _Ylabel_ == 6)
-    // {
-    //     for(int i = 1; i <= y.a->sp; i++) {
-    //     push(s,y.a->stack[i]);
-    //     }
-    //     push(s,x);
-    // }
     else{
         Container y = pop(s);
         if(y.label == 5 || _Xlabel_ == 5){
@@ -485,4 +480,20 @@ void not_bit(STACK *s)
         push(s,x);
         }
     }
+}
+
+void truthy(STACK *s){
+    Container x = pop(s);
+    Container y = pop(s);
+    STACK *min = ministack();
+    Container z;
+    push(min,y);
+    do
+    {
+        z = y;
+        char *helper = strdup(x.str);
+        parser(min,helper,2);
+        free(helper);
+    } while (y.type.numI != 0 || y.type.numD != 0);
+    push(s,y);
 }

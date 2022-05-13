@@ -13,7 +13,7 @@ STACK * new_stack() {
 
 STACK * ministack() {
         STACK *s = malloc(sizeof(STACK));
-        s->stack = malloc(10*sizeof(Container));
+        s->stack = malloc(50*sizeof(Container));
         return s;
 }
 

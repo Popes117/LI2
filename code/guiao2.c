@@ -6,13 +6,11 @@
 #include <math.h>
 #include "parser.h"
 
-void duplica(STACK *s)
+Container duplica(STACK *s)
 {
     Container x = pop(s);
-
     push(s,x);
-    push(s,x);
-            
+    return x;
 }
 
 void switch2(STACK *s)

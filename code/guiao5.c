@@ -1,3 +1,5 @@
+#include "macro.h"
+#include "parser.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,21 +7,20 @@
 #include "stack.h"
 #include <math.h>
 
-void fold2(STACK *s, Container x, Container y){
+void truthy(STACK *s){
+    Container x = pop(s);
+    Container y = pop(s);
     STACK *min = ministack();
-    push(min,y.a->stack[1]);
-    push(min,y.a->stack[2]);
-    int i = 3;
-    while (i <= y.a->sp)
+    while(y.a->stack[y.a->sp] != 0)
     {
-        char *helper = strdup(x.str);
-        parser(min,helper);
-        push(min,y.a->stack[i]);
-        i++;
-        free(helper);
+        for (int i = 1; i <= y.a->sp;i++)
+        {
+            push(min,y.a->stack[i]);
+            char *helper = strdup(x.str);
+            parser(min,helper);
+            y.a->stack[i] = min->stack[1];
+            pop(min);
+            free(helper);
+        }
     }
-    Container z = min->stack[1];
-    free(y.a->stack);
-    free(y.a);
-    push(s,z);
 }

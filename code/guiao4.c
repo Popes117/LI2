@@ -22,10 +22,24 @@ void readFile(STACK *s)
     push(s,z);
 }
 
+void tamanho2(STACK *s, Container z){
+    z.label = 2;
+    int x = strlen(z.str);
+    while (z.str[x]!='\0')
+    {
+        x++;
+        printf("\n");
+    }
+    
+    z.type.numI = x;
+    push(s,z);
+}
+
 void tamanho(STACK *s) {
     Container x = pop(s);
     Container y;
     y.label = 2;
+    printf("\n");
     if(_Xlabel_ == 2){
         Container z;
         z.label = 5;
@@ -45,7 +59,8 @@ void tamanho(STACK *s) {
     }
     else
      {   
-        for(;x.str[_YnumI_]!='\0';_YnumI_++);
+        int n = strlen(x.str);
+        y.type.numI = n;
         push(s,y);
     }
 }
@@ -98,73 +113,3 @@ void strtoke2(STACK *s)
     push(s,z);
 }
 
-/* ()
-void rmarr1(STACK *s, Container x) {
-    Container y;
-    y.label = 5;
-    y.a = new_stack();
-    STACK *aux = x.a;
-    while(aux->sp != 1) {
-        Container z = pop(aux);
-        push(y.a,z);
-    }
-    Container z = pop(aux);
-    push(s,y);
-    push(s,z);
-    // ciclo que vai passando os elementos da aux para outra stack e dps da pop(aux)
-}
-*/
-
-// void indice(STACK *s) {
-//     int x = pop(s).type.numI;
-//     Container y = pop(s);
-//     STACK *aux = y.a;
-//     Container z = aux->stack[x+1];
-//     push(s,z);
-// }
-
-// void concatena(STACK *s){
-//     Container x = pop(s);
-//     Container y = pop(s);
-//     y.label = 2;
-//     if(_Xlabel_ == 5){
-//         STACK *auxX = x.a;
-//         Container z;
-//         _Zlabel_ = 2;
-//         z.str = x.str; //strcat(x.str,y.str);
-//     }
-// }
-
-// void maioR(STACK *s) {
-//     Container x = pop(s);
-//     Container y = pop(s);
-//     Container z;
-//     z.str = alloccStr();
-//     int l;
-//     if (_Ylabel_ == 4) {
-//         l = strlen(y.str) - x.type.numI;
-//         while(l <= (l+x.type.numI)) {
-//             z.str = strcat(z.str,y.str[l]);
-//             l++;
-//         }
-//         push(s,z);
-//     }
-// }
-
-
-//  Tá feito o ~ e a , 
-//  DONE *
-//  DONE +
-
-//  Falta: 
-
-//  = (Quase feita)
-//  < 
-//  >
-//  ( 
-//  )
-//  #
-//  t
-//  /
-//  S/
-//  N/

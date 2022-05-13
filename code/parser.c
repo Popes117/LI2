@@ -78,7 +78,7 @@ char *parse_block(STACK *s, char *rest)
     return rest;
 }
 
-char *handle(STACK *s, char *token, char *rest, Container *vars)
+char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
 {
     if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
     {
@@ -126,7 +126,10 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
     else if (strcmp(token, "~") == 0)
         not_bit(s);
     else if (strcmp(token, "_") == 0)
-        duplica(s);
+        {
+           Container z = duplica(s);
+            push(s,z);
+        }
     else if (strcmp(token, ";") == 0)
         pop(s);
     else if (strcmp(token, "\\") == 0)
@@ -137,6 +140,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
         copy(s);
     else if (strcmp(token, "l") == 0)
         nextLine(s);
+    else if (strcmp(token, "w") == 0)
+        truthy(s);
     else if (strcmp(token, "t") == 0)
         readFile(s);
     else if (strcmp(token, "f") == 0)
@@ -198,7 +203,7 @@ char *parseArray(STACK *s, char *rest, Container *vars)
     STACK *arr = new_stack();
     while (strcmp((token = strtok_r(rest, " \n", &rest)), "]") != 0)
     {
-        rest = handle(arr, token, rest, vars);
+        rest = handle(arr, token, rest, vars, 1);
     }
     Container z;
     z.label = 5;
@@ -207,14 +212,14 @@ char *parseArray(STACK *s, char *rest, Container *vars)
     return rest;
 }
 
-void parser(STACK *s, char *rest)
+void parser(STACK *s, char *rest, int x)
 {
     char *token;
     Container vars[26];
     fill(vars);
     while ((token = strtok_r(rest, " \n", &rest)) != NULL)
     {
-        rest = handle(s, token, rest, vars);
+        rest = handle(s, token, rest, vars, 1);
     }
 }
 

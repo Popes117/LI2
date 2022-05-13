@@ -7,6 +7,6 @@ char* alloccStr();
 
 char* parseArray(STACK *s, char *rest,Container *vars);
 
-void parser(STACK *s, char *line);
+void parser(STACK *s, char *line,int x);
 
 int isFloat(char *token);
