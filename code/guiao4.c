@@ -34,10 +34,43 @@ void tamanho2(STACK *s, Container z){
     push(s,z);
 }
 
+void compare(STACK *s, Container x, Container y){
+    STACK *min = new_stack();
+    if (_Xlabel_ == 6)
+    {   
+        for (int i = 1; i <= y.a->sp;i++)
+        {
+            push(min,y.a->stack[i]);
+            char *helper = strdup(x.str);
+            parser(min,helper,vars);
+            free(helper);
+        }
+        int  i = 1;
+        int n = 1;
+        while (i <= min->sp)
+        {
+            if (min->stack[i].type.numI == 1 || min->stack[i].type.numD == 1)
+            {
+                    y.a->stack[n] = y.a->stack[i];
+                    n++;
+            }
+            i++;
+        }
+        y.a->sp = n-1;
+    }
+    free(min->stack);
+    free(min);
+    push(s,y);
+}
+
 void tamanho(STACK *s, Container *vars) {
     Container x = pop(s);
     Container y;
     y.label = 2;
+    if(_Xlabel_ == 6)
+    {
+        compare(s,x,pop(s),vars);
+    }
     if(_Xlabel_ == 2){
         Container z;
         z.label = 5;
@@ -111,32 +144,4 @@ void strtoke2(STACK *s)
     push(s,z);
 }
 
-/* void compare(STACK *s, Container x, Container y){
-    STACK *min = new_stack();
-    if (_Xlabel_ == 6)
-    {   
-        for (int i = 1; i <= y.a->sp;i++)
-        {
-            push(min,y.a->stack[i]);
-            char *helper = strdup(x.str);
-            parser(min,helper,2);
-            free(helper);
-        }
-        int  i = 1;
-        int n = 1;
-        while (i <= min->sp)
-        {
-            if (min->stack[i].type.numI == 1 || min->stack[i].type.numD == 1)
-            {
-                    y.a->stack[n] = y.a->stack[i];
-                    n++;
-            }
-            i++;
-        }
-        y.a->sp = n-1;
-    }
-    free(min->stack);
-    free(min);
-    push(s,y);
-}
- */
+
