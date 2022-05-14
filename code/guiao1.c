@@ -105,7 +105,7 @@ void add(STACK *s){
     }
 }
 
-void foldr(STACK *s, Container x, Container y){
+void foldr(STACK *s, Container x, Container y, Container *vars){
     STACK *min = ministack();
     push(min,y.a->stack[1]);
     push(min,y.a->stack[2]);
@@ -113,13 +113,13 @@ void foldr(STACK *s, Container x, Container y){
     while (i <= y.a->sp)
     {
         char *helper = strdup(x.str);
-        parser(min,helper,2);
+        parser(min,helper,vars);
         push(min,y.a->stack[i]);
         i++;
         free(helper);
     }
     char *helper = strdup(x.str);
-    parser(min,helper,2);
+    parser(min,helper,vars);
     free(helper);
     Container z = min->stack[1];
     free(y.a->stack);
@@ -127,7 +127,7 @@ void foldr(STACK *s, Container x, Container y){
     push(s,z);
 }
 
-void mult(STACK *s)
+void mult(STACK *s, Container *vars)
 {
     
     Container x = pop(s);
@@ -135,7 +135,7 @@ void mult(STACK *s)
     Container z;
     if (_Xlabel_ == 6)
     {
-        foldr(s,x,y);
+        foldr(s,x,y,vars);
     }
     else if (_Ylabel_ == 5)
     {
@@ -310,7 +310,7 @@ void sub1(STACK *s)
     }
 }
 
-void mod(STACK *s)
+void mod(STACK *s, Container *vars)
 {   
     Container x = pop(s);
     Container y = pop(s);
@@ -324,7 +324,7 @@ void mod(STACK *s)
             {
                 push(min,y.a->stack[i]);
                 char *helper = strdup(x.str);
-                parser(min,helper,2);
+                parser(min,helper,vars);
                 free(helper);
             }
             free(y.a->stack);
@@ -341,7 +341,7 @@ void mod(STACK *s)
                 z.type.car = str[i];
                 char *helper = strdup(x.str);
                 push(min,z);
-                parser(min,helper,2);
+                parser(min,helper,vars);
                 y.str[i] = min->stack[1].type.car;
                 pop(min);
                 free(helper);
@@ -444,7 +444,7 @@ void xor_bit(STACK *s)
 
 }
 
-void not_bit(STACK *s)
+void not_bit(STACK *s, Container *vars)
 {
     Container x = pop(s);
     if(_Xlabel_ == 6){
@@ -452,7 +452,7 @@ void not_bit(STACK *s)
         STACK *min = ministack();
         push(min,y);
         char *helper = strdup(x.str);
-        parser(min,helper,2);
+        parser(min,helper,vars);
         push(s,min->stack[1]);
         free(min->stack);
         free(min);

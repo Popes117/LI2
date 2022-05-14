@@ -5,6 +5,7 @@
 #include "stack.h"
 #include <math.h>
 #include "parser.h"
+#include "macro.h"
 
 Container duplica(STACK *s)
 {
@@ -35,12 +36,45 @@ void roda3(STACK *s)
 
 }
 
-void copy(STACK *s){
+void copy(STACK *s, Container *vars){
 
-    int x = pop(s).type.numI;
-    Container y = s->stack[s->sp - x];
-    push(s,y);
-
+    Container x = pop(s);
+    if (_Xlabel_ = 6)
+    {
+        Container y = pop(s);
+        STACK *min = new_stack();
+        if (_Xlabel_ == 6)
+        {
+            for (int i = 1; i <= y.a->sp;i++)
+            {
+                push(min,y.a->stack[i]);
+                char *helper = strdup(x.str);
+                parser(min,helper,vars);
+                free(helper);
+            }
+            int i = 1;
+            while (i <= min->sp)
+            {
+                for (int j = 1; j <= min->sp - i; j++){
+                   if (min->stack[j].type.numI > min->stack[j+1].type.numI){
+                        Container z = min->stack[j];
+                        min->stack[j] = min->stack[j+1];
+                        min->stack[j+1] = z;
+                        z = y.a->stack[j];
+                        y.a->stack[j] = y.a->stack[j+1];
+                        y.a->stack[j+1] = z;
+                    }
+                }
+                i++;   
+            }
+        }
+        push(s,y);
+    }
+    else 
+    {
+        Container y = s->stack[s->sp - x.type.numI];
+        push(s,y);
+    }
 }
 
 void nextLine(STACK *s){

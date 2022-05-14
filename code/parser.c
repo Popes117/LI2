@@ -78,9 +78,8 @@ char *parse_block(STACK *s, char *rest)
     return rest;
 }
 
-char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
+char *handle(STACK *s, char *token, char *rest, Container *vars)
 {
-    if(ver != 0){
     if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
     {
         if (isFloat(token))
@@ -107,7 +106,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
     else if (strcmp(token, "+") == 0)
         add(s);
     else if (strcmp(token, "*") == 0)
-        mult(s);
+        mult(s,vars);
     else if (strcmp(token, "/") == 0)
         division(s);
     else if (strcmp(token, "(") == 0)
@@ -115,7 +114,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
     else if (strcmp(token, ")") == 0)
         add1(s);
     else if (strcmp(token, "%") == 0)
-        mod(s);
+        mod(s,vars);
     else if (strcmp(token, "#") == 0)
         expo(s);
     else if (strcmp(token, "&") == 0)
@@ -125,7 +124,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
     else if (strcmp(token, "^") == 0)
         xor_bit(s);
     else if (strcmp(token, "~") == 0)
-        not_bit(s);
+        not_bit(s,vars);
     else if (strcmp(token, "_") == 0)
         {
            Container z = duplica(s);
@@ -138,7 +137,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
     else if (strcmp(token, "@") == 0)
         roda3(s);
     else if (strcmp(token, "$") == 0)
-        copy(s);
+        copy(s,vars);
     else if (strcmp(token, "l") == 0)
         nextLine(s);
     // else if (strcmp(token, "w") == 0)
@@ -187,7 +186,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
     else if (strcmp(token, "[") == 0)
         rest = parseArray(s, rest, vars);
     else if (token[0] == ',')
-        tamanho(s);
+        tamanho(s,vars);
     else
     {
         Container container;
@@ -195,10 +194,9 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
         container.type.car = *token;
         push(s, container);
     }
-}
     return rest;
-
 }
+
 
 char *parseArray(STACK *s, char *rest, Container *vars)
 {
@@ -206,7 +204,7 @@ char *parseArray(STACK *s, char *rest, Container *vars)
     STACK *arr = new_stack();
     while (strcmp((token = strtok_r(rest, " \n", &rest)), "]") != 0)
     {
-        rest = handle(arr, token, rest, vars, 1);
+        rest = handle(arr, token, rest, vars);
     }
     Container z;
     z.label = 5;
@@ -215,18 +213,16 @@ char *parseArray(STACK *s, char *rest, Container *vars)
     return rest;
 }
 
-void parser(STACK *s, char *rest, int x)
+void parser(STACK *s, char *rest, Container *vars)
 {
-    if(x != 0){
+    
     char *token;
-    Container vars[26];
-    fill(vars);
     while ((token = strtok_r(rest, " \n", &rest)) != NULL)
     {
-        rest = handle(s, token, rest, vars, 1);
+        rest = handle(s, token, rest, vars);
     }
 }
-}
+
 
 int isFloat(char *token)
 {

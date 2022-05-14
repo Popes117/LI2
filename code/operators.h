@@ -10,7 +10,7 @@ void sub(STACK *s);
 
 void add(STACK *s);
 
-void mult(STACK *s);
+void mult(STACK *s, Container *vars);
 
 void division(STACK *s);
 
@@ -18,7 +18,7 @@ void add1(STACK *s);
 
 void sub1(STACK *s);
 
-void mod(STACK *s);
+void mod(STACK *s, Container *vars);
 
 void expo(STACK *s);
 
@@ -28,7 +28,7 @@ void ou_bit(STACK *s);
 
 void xor_bit(STACK *s);
 
-void not_bit(STACK *s);
+void not_bit(STACK *s, Container *vars);
 
 Container duplica(STACK *s);
 
@@ -38,7 +38,7 @@ void switch2(STACK *s);
 
 void roda3(STACK *s);
 
-void copy(STACK *s);
+void copy(STACK *s, Container *vars);
 
 void nextLine(STACK *s);
 
@@ -70,7 +70,7 @@ void nots(STACK *s);
 
 void readFile(STACK *s);
 
-void tamanho(STACK *s);
+void tamanho(STACK *s, Container *vars);
 
 void concatena(STACK *s);
 
