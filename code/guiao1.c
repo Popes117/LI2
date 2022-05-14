@@ -115,15 +115,12 @@ void foldr(STACK *s, Container x, Container y){
         char *helper = strdup(x.str);
         parser(min,helper,2);
         push(min,y.a->stack[i]);
-        //printf("%ld\n",min->stack[2].type.numI);
         i++;
         free(helper);
     }
     char *helper = strdup(x.str);
     parser(min,helper,2);
     free(helper);
-    /* printer(min);
-    printf("\n"); */
     Container z = min->stack[1];
     free(y.a->stack);
     free(y.a);
@@ -320,7 +317,7 @@ void mod(STACK *s)
     Container z;
     if (_Xlabel_ == 6)
     {
-        STACK *min = ministack();
+        STACK *min = new_stack();
         if (_Ylabel_ == 5)
         {   
             for (int i = 1; i <= y.a->sp;i++)
@@ -328,10 +325,12 @@ void mod(STACK *s)
                 push(min,y.a->stack[i]);
                 char *helper = strdup(x.str);
                 parser(min,helper,2);
-                y.a->stack[i] = min->stack[1];
-                pop(min);
                 free(helper);
-                }
+            }
+            free(y.a->stack);
+            free(y.a);
+            y.a = min;
+            push(s,y);
         }
         else
         {
@@ -348,8 +347,8 @@ void mod(STACK *s)
                 free(helper);
 
             }
+            push(s,y);
         }
-        push(s,y);
     }
     else
     {
@@ -494,6 +493,7 @@ void truthy(STACK *s){
         char *helper = strdup(x.str);
         parser(min,helper,2);
         free(helper);
-    } while (y.type.numI != 0 || y.type.numD != 0);
+    } 
+    while (y.type.numI != 0 || y.type.numD != 0);
     push(s,y);
 }

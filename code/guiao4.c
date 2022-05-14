@@ -28,7 +28,6 @@ void tamanho2(STACK *s, Container z){
     while (z.str[x]!='\0')
     {
         x++;
-        printf("\n");
     }
     
     z.type.numI = x;
@@ -39,7 +38,6 @@ void tamanho(STACK *s) {
     Container x = pop(s);
     Container y;
     y.label = 2;
-    printf("\n");
     if(_Xlabel_ == 2){
         Container z;
         z.label = 5;
