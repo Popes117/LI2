@@ -80,6 +80,7 @@ char *parse_block(STACK *s, char *rest)
 
 char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
 {
+    if(ver != 0){
     if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
     {
         if (isFloat(token))
@@ -140,8 +141,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
         copy(s);
     else if (strcmp(token, "l") == 0)
         nextLine(s);
-    else if (strcmp(token, "w") == 0)
-        truthy(s);
+    // else if (strcmp(token, "w") == 0)
+    //     truthy(s);
     else if (strcmp(token, "t") == 0)
         readFile(s);
     else if (strcmp(token, "f") == 0)
@@ -194,7 +195,9 @@ char *handle(STACK *s, char *token, char *rest, Container *vars, int ver)
         container.type.car = *token;
         push(s, container);
     }
+}
     return rest;
+
 }
 
 char *parseArray(STACK *s, char *rest, Container *vars)
@@ -214,6 +217,7 @@ char *parseArray(STACK *s, char *rest, Container *vars)
 
 void parser(STACK *s, char *rest, int x)
 {
+    if(x != 0){
     char *token;
     Container vars[26];
     fill(vars);
@@ -221,6 +225,7 @@ void parser(STACK *s, char *rest, int x)
     {
         rest = handle(s, token, rest, vars, 1);
     }
+}
 }
 
 int isFloat(char *token)

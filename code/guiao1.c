@@ -481,19 +481,19 @@ void not_bit(STACK *s)
     }
 }
 
-void truthy(STACK *s){
-    Container x = pop(s);
-    Container y = pop(s);
-    STACK *min = ministack();
-    Container z;
-    push(min,y);
-    do
-    {
-        z = y;
-        char *helper = strdup(x.str);
-        parser(min,helper,2);
-        free(helper);
-    } 
-    while (y.type.numI != 0 || y.type.numD != 0);
-    push(s,y);
-}
+// void truthy(STACK *s){
+//     Container x = pop(s);
+//     Container y = pop(s);
+//     STACK *min = ministack();
+//     Container z;
+//     push(min,y);
+//     do
+//     {
+//         z = y;
+//         char *helper = strdup(x.str);
+//         parser(min,helper,2);
+//         free(helper);
+//     } 
+//     while (y.type.numI != 0 || y.type.numD != 0);
+//     push(s,y);
+// }

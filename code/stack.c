@@ -73,5 +73,4 @@ void printer(STACK *s){
                 free(z.a); */
             }
     }
-    printf("1");
 } 
