@@ -66,19 +66,19 @@ void add4str(STACK *s,Container x, Container y)
 {
     if(_Xlabel_ == 3){
         char aux[2];
-        aux[0] = x.type.car;
+        aux[0] = _Xcar_;
         aux[1] = '\0';
-        y.str = strcat(y.str,aux);
+        _Ystr_ = strcat(_Ystr_,aux);
         push(s,y);
 
     }
     else{
-        size_t l1 = strlen(y.str);
-        size_t l2 = strlen(x.str);
+        size_t l1 = strlen(_Ystr_);
+        size_t l2 = strlen(_Xstr_);
         char* res = malloc(l1 + l2 + 1);
-        memcpy(res,y.str,l1);
-        memcpy(res+l1,x.str,l2+1);
-        memcpy(y.str,res,l1+l2+1);
+        memcpy(res,_Ystr_,l1);
+        memcpy(res+l1,_Xstr_,l2+1);
+        memcpy(_Ystr_,res,l1+l2+1);
         free(res);
         push(s,y);
     }
@@ -90,24 +90,24 @@ void add(STACK *s){
     Container y = pop(s);
     if (_Ylabel_ == 3 && _Xlabel_ == 4)
     {
-        x.str[strlen(x.str)+1] = '\0';
-        for (int i = strlen(x.str); i>0; i--)
+        _Xstr_[strlen(_Xstr_)+1] = '\0';
+        for (int i = strlen(_Xstr_); i>0; i--)
         {
-            x.str[i] = x.str[i-1];
+            _Xstr_[i] = _Xstr_[i-1];
         }
-        x.str[0] = y.type.car;
+        _Xstr_[0] = _Ycar_;
         push(s,x);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ != 5){
-        prepush(x.a,y);
+        prepush(_Xarr_,y);
         push(s,x);
     }
     else if (_Ylabel_ == 5){
-        arrcat(y.a,x);
+        arrcat(_Yarr_,x);
         push(s,y);
         if(_Xlabel_ == 5){
-            free(x.a->stack);
-            free(x.a);
+            free(_Xarr_->stack);
+            free(_Xarr_);
         }
     }
     else if(_Ylabel_ == 4){
@@ -120,23 +120,23 @@ void add(STACK *s){
 
 void foldr(STACK *s, Container x, Container y, Container *vars){
     STACK *min = ministack();
-    push(min,y.a->stack[1]);
-    push(min,y.a->stack[2]);
+    push(min,_Yarr_->stack[1]);
+    push(min,_Yarr_->stack[2]);
     int i = 3;
-    while (i <= y.a->sp)
+    while (i <= _Yarr_->sp)
     {
-        char *helper = strdup(x.str);
+        char *helper = strdup(_Xstr_);
         parser(min,helper,vars);
-        push(min,y.a->stack[i]);
+        push(min,_Yarr_->stack[i]);
         i++;
         free(helper);
     }
-    char *helper = strdup(x.str);
+    char *helper = strdup(_Xstr_);
     parser(min,helper,vars);
     free(helper);
     Container z = min->stack[1];
-    free(y.a->stack);
-    free(y.a);
+    free(_Yarr_->stack);
+    free(_Yarr_);
     push(s,z);
 }
 
@@ -171,26 +171,26 @@ void mult(STACK *s, Container *vars)
     else if (_Ylabel_ == 5)
     {
         Container aux;
-        aux.label = 5;
-        aux.a = new_stack();
-        arrcat(aux.a,y);
-        while (x.type.numI > 1)
+        _Auxlabel_ = 5;
+        _Xarr_ = new_stack();
+        arrcat(_Auxarr_,y);
+        while (_XnumI_ > 1)
         {
-            arrcat(y.a,aux);
-            x.type.numI--;
+            arrcat(_Yarr_,aux);
+            _XnumI_--;
         } 
         push(s,y);
-        free(aux.a->stack);
-        free(aux.a);
+        free(_Auxarr_->stack);
+        free(_Auxarr_);
     }
     else if(_Ylabel_ == 4)
     {
-        z.label = 4;
-        z.str = alloccStr();
-        z.str = strcpy(z.str,y.str);
+        _Zlabel_ = 4;
+        _Zstr_ = alloccStr();
+        _Zstr_ = strcpy(_Zstr_,_Ystr_);
         while (_XnumI_ > 1)
         {
-            z.str = strcat(z.str,y.str);
+            _Zstr_ = strcat(_Zstr_,_Ystr_);
             _XnumI_--;
         }
         push(s,z);
@@ -207,15 +207,15 @@ void division(STACK *s)
     Container z;
     if (_Ylabel_ == 4)
     {
-        z.label = 5;
-        z.a = new_stack();
+        _Zlabel_ = 5;
+        _Zarr_ = new_stack();
         char *token = alloca(BUFSIZ);
-        while ((token = strtok_r(y.str,x.str,&y.str))!= NULL)
+        while ((token = strtok_r(_Ystr_,_Xstr_,&_Ystr_))!= NULL)
         {
             Container aux;
-            aux.label = 4;
-            aux.str = token;
-            push(z.a,aux);
+            _Auxlabel_ = 4;
+            _Auxstr_ = token;
+            push(_Zarr_,aux);
         }
     }
     else if (_Ylabel_ ==_Xlabel_ && _Xlabel_ == 2)
@@ -235,20 +235,7 @@ void division(STACK *s)
 
 // ) guião 4
 Container rmarr2(STACK *s, Container x) {
-    /* int i;
-    Container y;
-    y.label = 5;
-    y.a = new_stack();
-    STACK *aux = x.a;
-    for(i = 1; i < aux->sp; i++) {
-        Container z = aux->stack[i];
-        push(y.a,z);
-    }
-    Container z = pop(aux);
-    while(aux->sp >= 1) pop(aux);
-    push(s,y);
-    return z; */
-    Container z = pop(x.a);
+    Container z = pop(_Xarr_);
     push(s,x);
     return z;
 }
@@ -259,9 +246,9 @@ void add1(STACK *s)
     if (_Ylabel_ == 4) 
     {
         Container x;
-        x.label = 3;
-        x.type.car = y.str[strlen(y.str)-1];
-        y.str[strlen(y.str)-1] = '\0';
+        _Xlabel_ = 3;
+        _Xcar_ = _Ystr_[strlen(_Ystr_)-1];
+        _Ystr_[strlen(_Ystr_)-1] = '\0';
         push(s,y);
         push(s,x);
     }
@@ -287,12 +274,12 @@ void add1(STACK *s)
 Container rmarr1(STACK *s, Container x) {
     int i;
     Container y;
-    y.label = 5;
-    y.a = new_stack();
-    STACK *aux = x.a;
+    _Ylabel_ = 5;
+    _Yarr_ = new_stack();
+    STACK *aux = _Xarr_;
     for(i = 2; i <= aux->sp; i++) {
         Container z = aux->stack[i];
-        push(y.a,z);
+        push(_Yarr_,z);
     }
     Container z = aux->stack[1];
     while(aux->sp >= 1) pop(aux);
@@ -306,9 +293,9 @@ void sub1(STACK *s)
     if (_Ylabel_ == 4) 
     {
         Container x;
-        x.label = 3;
-        x.type.car = y.str[0];
-        y.str++;
+        _Xlabel_ = 3;
+        _Xcar_ = _Ystr_[0];
+        _Ystr_++;
         push(s,y);
         push(s,x);
     }
@@ -340,29 +327,29 @@ void mod(STACK *s, Container *vars)
         STACK *min = new_stack();
         if (_Ylabel_ == 5)
         {   
-            for (int i = 1; i <= y.a->sp;i++)
+            for (int i = 1; i <= _Yarr_->sp;i++)
             {
-                push(min,y.a->stack[i]);
-                char *helper = strdup(x.str);
+                push(min,_Yarr_->stack[i]);
+                char *helper = strdup(_Xstr_);
                 parser(min,helper,vars);
                 free(helper);
             }
-            free(y.a->stack);
-            free(y.a);
-            y.a = min;
+            free(_Yarr_->stack);
+            free(_Yarr_);
+            _Yarr_ = min;
             push(s,y);
         }
         else
         {
-            z.label = 3;
-            char *str = strdup(y.str);
+            _Zlabel_ = 3;
+            char *str = strdup(_Ystr_);
             for (int i = 0; str[i] != '\0';i++)
             {
-                z.type.car = str[i];
-                char *helper = strdup(x.str);
+                _Zcar_ = str[i];
+                char *helper = strdup(_Xstr_);
                 push(min,z);
                 parser(min,helper,vars);
-                y.str[i] = min->stack[1].type.car;
+                _Ystr_[i] = min->stack[1].type.car;
                 pop(min);
                 free(helper);
 
@@ -381,9 +368,9 @@ void mod(STACK *s, Container *vars)
 }
 size_t forloop(Container x,Container y, short *val){
     size_t i = 0;
-    for (; i < strlen(x.str) && *val; i++)
+    for (; i < strlen(_Xstr_) && *val; i++)
     {
-        if (y.str[i] != x.str[i])
+        if (_Ystr_[i] != _Xstr_[i])
         {
             *val = 0;
         }
@@ -401,26 +388,26 @@ void expo(STACK *s)
         long pos = 0;
         short val = 1;
         short end = 1;
-        while (y.str[0] != '\0' && end)
+        while (_Ystr_[0] != '\0' && end)
         {
-            if (y.str[0] == x.str[0])
+            if (_Ystr_[0] == _Xstr_[0])
             {
                 size_t i = 0;
                 val = 1;
                 i = forloop(x,y,&val);
-                if(i == strlen(x.str)){
+                if(i == strlen(_Xstr_)){
                     end = 0;
                 }
             }
             pos++;
-            y.str++;
+            _Ystr_++;
         }
         if (end)
         {
             pos = 0;
         }
-        z.label = 2;
-        z.type.numI = --pos;
+        _Zlabel_ = 2;
+        _ZnumI_ = --pos;
         push(s,z);
     }
     else{
@@ -477,7 +464,7 @@ void not_bit(STACK *s, Container *vars)
         Container y = pop(s);
         STACK *min = ministack();
         push(min,y);
-        char *helper = strdup(x.str);
+        char *helper = strdup(_Xstr_);
         parser(min,helper,vars);
         push(s,min->stack[1]);
         free(min->stack);
@@ -485,8 +472,8 @@ void not_bit(STACK *s, Container *vars)
     }
     else if (_Xlabel_ == 5)
     {
-        for(int i = 1; i <= x.a->sp; i++) {
-        push(s,x.a->stack[i]);
+        for(int i = 1; i <= _Xarr_->sp; i++) {
+        push(s,_Xarr_->stack[i]);
         }
     }
     else if(s->sp == 1){
@@ -498,7 +485,7 @@ void not_bit(STACK *s, Container *vars)
         Container y = pop(s);
         if(_Ylabel_==5){
             int i;
-            STACK *aux = x.a;
+            STACK *aux = _Xarr_;
             for(i = 0; i <= aux->sp; i++) {
                 Container y = aux->stack[i];
                 push(s,y);
@@ -519,10 +506,10 @@ void truthy(STACK *s, Container *vars){
     STACK *min = new_stack();
     Container z;
     push(min,y);
-    while (y.type.numI != 0)
+    while (_ZnumI_ != 0)
     {
         z = min->stack[1];
-        char *helper = strdup(x.str);
+        char *helper = strdup(_Xstr_);
         parser(min,helper,vars);
         free(helper);
     }

@@ -3,12 +3,16 @@
 #include <ctype.h>
 #include "macro.h"
 
+/**
+ * @file Ficheiro responsável pelas alterações e comparações de tipos e Containers
+ */
+
 Container toInt(Container x){
     if ( _Xlabel_ == 4){
         _Xlabel_ = 2;
         long z;
-        sscanf(x.str,"%ld",&z);
-        x.type.numI = z;
+        sscanf(_Xstr_,"%ld",&z);
+        _XnumI_ = z;
     }
     if ( _Xlabel_ == 1)
     {
@@ -27,8 +31,8 @@ Container toDouble(Container x){
     if ( _Xlabel_ == 4){
         _Xlabel_ = 1;
         double z;
-        sscanf(x.str,"%lf",&z);
-        x.type.numD = z;
+        sscanf(_Xstr_,"%lf",&z);
+        _XnumD_ = z;
     }
     else if ( _Xlabel_ == 2)
     {
@@ -47,8 +51,8 @@ Container toChar(Container x){
     if ( _Xlabel_ == 4){
         _Xlabel_ = 3;
         char z;
-        sscanf(x.str,"%c",&z);
-        x.type.car = z;
+        sscanf(_Xstr_,"%c",&z);
+        _Xcar_ = z;
     }
     if ( _Xlabel_ == 1)
     {
@@ -100,11 +104,11 @@ int hash_function(char *token){
 }
 
 int comparaCont( Container x, Container y){
-    if( _Xlabel_ != 3 && y.label != 3)
+    if( _Xlabel_ != 3 && _Ylabel_ != 3)
     {
         x = toDouble(x);
         y = toDouble(y);
-        if (_XnumD_== _YnumD_) return 1;
+        if (_XnumD_ == _YnumD_) return 1;
         else if (_XnumD_ > _YnumD_) return 2;
         else return 3;
     }
@@ -120,6 +124,6 @@ int comparaCont( Container x, Container y){
 int isZero(Container x){
     if ( _Xlabel_ == 1) return (_XnumD_ != 0);
     else if ( _Xlabel_ == 2) return (_XnumI_ != 0);
-    else if (_Xlabel_ == 5) return (x.a->sp != 0);
+    else if (_Xlabel_ == 5) return (_Xarr_->sp != 0);
     return 0;
 }

@@ -5,6 +5,7 @@
 #include "type_changes.h"
 #include <stdio.h>
 #include <string.h>
+#include "macro.h"
 
 #define _REST_ return rest;
 
@@ -40,23 +41,23 @@ char *parseString(STACK *s, char *token, char *rest)
 {
     ++token;
     Container z;
-    z.label = 4;
-    z.str = malloc(15000*sizeof(char));
+    _Zlabel_ = 4;
+    _Zstr_ = malloc(15000*sizeof(char));
     if (token[0]!= '\0' &&token[strlen(token)-1] == '"')
     {
         size_t i = 0;
         for (; token[i] != '"'; i++)
         {
-            z.str[i] = token[i];
+            _Zstr_[i] = token[i];
         }
-        z.str[i] = '\0';
+        _Zstr_[i] = '\0';
         push(s, z);
     }
     else
     {
-        rest = readString(rest, z.str);
+        rest = readString(rest, _Zstr_);
         token = strcat(token, " ");
-        z.str = strcat(token, z.str);
+        _Zstr_ = strcat(token, _Zstr_);
         push(s, z);
     }
     return rest;
@@ -65,16 +66,16 @@ char *parseString(STACK *s, char *token, char *rest)
 char *parse_block(STACK *s, char *rest)
 {
     Container z;
-    z.label = 6;
-    z.str = malloc(120 * sizeof(char));
+    _Zlabel_ = 6;
+    _Zstr_ = malloc(120 * sizeof(char));
     size_t i = 1;
-    z.str[0] = ' ';
+    _Zstr_[0] = ' ';
     for (; rest[0] != '}'; i++)
     {
-        z.str[i] = rest[0];
+        _Zstr_[i] = rest[0];
         rest++;
     }
-    z.str[i] = '\0';
+    _Zstr_[i] = '\0';
     rest++;
     push(s,z);
     return rest;
@@ -101,8 +102,8 @@ char *handle6(STACK *s, char *token, char *rest, Container *vars)
         not_bit(s,vars);
         _REST_
     default:
-        container.label = 3;
-        container.type.car = *token;
+        _Containerlabel_ = 3;
+        _Containercar_ = *token;
         push(s, container);
         _REST_
     }
@@ -240,8 +241,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
             double x;
             sscanf(token, "%lf", &x);
             Container container;
-            container.label = 1;
-            container.type.numD = x;
+            _Containerlabel_ = 1;
+            _ContainernumD_ = x;
             push(s, container);
         }
         else
@@ -249,8 +250,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
             long x;
             sscanf(token, "%li", &x);
             Container container;
-            container.label = 2;
-            container.type.numI = x;
+            _Containerlabel_ = 2;
+            _ContainernumI_ = x;
             push(s, container);
         } 
         _REST_
@@ -362,8 +363,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
     else
     {
         Container container;
-        container.label = 3;
-        container.type.car = *token;
+        _Containerlabel_ = 3;
+        _Containercar_ = *token;
         push(s, container);
     }
     return rest; */
@@ -379,8 +380,8 @@ char *parseArray(STACK *s, char *rest, Container *vars)
         rest = handle(arr, token, rest, vars);
     }
     Container z;
-    z.label = 5;
-    z.a = arr;
+    _Zlabel_ = 5;
+    _Zarr_ = arr;
     push(s, z);
     return rest;
 }

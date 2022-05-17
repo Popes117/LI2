@@ -37,10 +37,10 @@ void roda3(STACK *s)
 }
 
 void copy_help(STACK *min,Container x, Container y, Container *vars){
-    for (int i = 1; i <= y.a->sp;i++)
+    for (int i = 1; i <= _Yarr_->sp;i++)
         {
-            push(min,y.a->stack[i]);
-            char *helper = strdup(x.str);
+            push(min,_Yarr_->stack[i]);
+            char *helper = strdup(_Xstr_);
             parser(min,helper,vars);
             free(helper);
         }
@@ -64,9 +64,9 @@ void copy(STACK *s, Container *vars){
                         Container z = min->stack[j];
                         min->stack[j] = min->stack[j+1];
                         min->stack[j+1] = z;
-                        z = y.a->stack[j];
-                        y.a->stack[j] = y.a->stack[j+1];
-                        y.a->stack[j+1] = z;
+                        z = _Yarr_->stack[j];
+                        _Yarr_->stack[j] = _Yarr_->stack[j+1];
+                        _Yarr_->stack[j+1] = z;
                     }
             }
                 i++;   
@@ -76,7 +76,7 @@ void copy(STACK *s, Container *vars){
     }
     else 
     {
-        Container y = s->stack[s->sp - x.type.numI];
+        Container y = s->stack[s->sp - _XnumI_];
         push(s,y);
     }
 }
@@ -86,8 +86,8 @@ void nextLine(STACK *s){
     if (fgets(linha,BUFSIZ,stdin) != NULL)
     {
         Container z;
-        z.label = 4;
-        z.str = linha;
+        _Zlabel_ = 4;
+        _Zstr_ = linha;
         push(s,z);
     }
 }

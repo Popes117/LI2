@@ -51,7 +51,7 @@ void igual(STACK *s){
     Container x = pop(s);
     if(_Xlabel_ == 4 && _Ylabel_ == 4)
     {
-        if(strcmp(x.str,y.str) == 0){
+        if(strcmp(_Xstr_,_Ystr_) == 0){
             Container True;
             _Truelabel_ = 2;
             _TruenumI_ = 1;
@@ -67,12 +67,12 @@ void igual(STACK *s){
     }
     else if(_Xlabel_ == 4){
         Container z;
-        z.label = 3;
-        z.type.car = x.str[y.type.numI];
+        _Zlabel_ = 3;
+        _Zcar_ = _Xstr_[_YnumI_];
         push(s,z);
     }
     else if(_Xlabel_ == 5){
-        push(s,x.a->stack[(y.type.numI)+1]);
+        push(s,_Xarr_->stack[(_YnumI_)+1]);
     }
     else{
         if(comparaCont(x,y) == 1)
@@ -84,7 +84,7 @@ void igual(STACK *s){
         }
         else if(_Ylabel_ == 5 ||_Xlabel_ == 5){
             int w = pop(s).type.numI;
-            STACK *aux = y.a;
+            STACK *aux = _Yarr_;
             Container z = aux->stack[w+1];
             push(s,z);
         }
@@ -100,7 +100,7 @@ void igual(STACK *s){
 
 void strmaior(STACK *s,Container x, Container y)
 {
-    if(strcmp(x.str,y.str) > 0){
+    if(strcmp(_Xstr_,_Ystr_) > 0){
             Container True;
             _Truelabel_ = 2;
             _TruenumI_ = 1;
@@ -122,7 +122,7 @@ void maior(STACK *s){
         strmaior(s,x,y);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ == 5){
-        if(x.a->sp > y.a->sp)
+        if(_Xarr_->sp > _Yarr_->sp)
         {
             Container True;
             _Truelabel_ = 2;
@@ -138,17 +138,17 @@ void maior(STACK *s){
         }
     }
     else if(_Xlabel_ == 4){
-        x.str += (strlen(x.str)-y.type.numI);
+        _Xstr_ += (strlen(_Xstr_)-_YnumI_);
         push(s,x);
     }
     else if(_Xlabel_ == 5){
         Container z;
-        z.label = 5;
-        z.a = new_stack();
-        while (y.type.numI>0)
+        _Zlabel_ = 5;
+        _Zarr_ = new_stack();
+        while (_YnumI_>0)
         {
-            y.type.numI--;
-            prepush(z.a,pop(x.a));
+            _YnumI_--;
+            prepush(_Zarr_,pop(_Xarr_));
         }
         push(s,z);
     }
@@ -182,7 +182,7 @@ void popmachine(STACK *x , int f){
 
 void strmenor(STACK *s,Container x, Container y)
 {
-    if(strcmp(x.str,y.str) < 0){
+    if(strcmp(_Xstr_,_Ystr_) < 0){
             Container True;
             _Truelabel_ = 2;
             _TruenumI_ = 1;
@@ -205,7 +205,7 @@ void menor(STACK *s){
         strmenor(s,x,y);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ == 5){
-        if(x.a->sp < y.a->sp)
+        if(_Xarr_->sp < _Yarr_->sp)
         {
             _TRUE_
         }
@@ -220,15 +220,15 @@ void menor(STACK *s){
     else if(_Xlabel_ == 4)
     {
         Container z;
-        z.label = 4;
-        z.str = strndup(x.str,y.type.numI);
+        _Zlabel_ = 4;
+        _Zstr_ = strndup(_Xstr_,_YnumI_);
         push(s,z);
     }
     else if(_Xlabel_ == 5){
-        int f = x.a->sp-y.type.numI;
-        if(x.a->sp-y.type.numI == 0) push(s,x);
+        int f = _Xarr_->sp-_YnumI_;
+        if(_Xarr_->sp-_YnumI_ == 0) push(s,x);
         else{
-            popmachine(x.a,f);
+            popmachine(_Xarr_,f);
             push(s,x);
             }
         }
@@ -287,13 +287,13 @@ void eMaior(STACK *s){
     Container x = pop(s);
     if(_Xlabel_ == 4 && _Ylabel_ == 4)
     {
-        if(strcmp(x.str,y.str) > 0)      
+        if(strcmp(_Xstr_,_Ystr_) > 0)      
             push(s,x);
         else
             push(s,y);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ == 5){
-        if(x.a->sp > y.a->sp)
+        if(_Xarr_->sp > _Yarr_->sp)
         {
             push(s,x);
         }
@@ -317,13 +317,13 @@ void eMenor(STACK *s){
     Container x = pop(s);
     if(_Xlabel_ == 4 && _Ylabel_ == 4)
     {
-        if(strcmp(x.str,y.str) < 0)      
+        if(strcmp(_Xstr_,_Ystr_) < 0)      
             push(s,x);
         else
             push(s,y);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ == 5){
-        if(x.a->sp < y.a->sp)
+        if(_Xarr_->sp < _Yarr_->sp)
         {
             push(s,x);
         }
