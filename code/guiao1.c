@@ -36,52 +36,9 @@ void sub(STACK *s)
     push(s,z);
 }
 
-void add(STACK *s){
-    
-    Container x = pop(s);
-    Container y = pop(s);
+void realadd(STACK *s,Container x, Container y){
     Container z;
-    if (_Ylabel_ == 3 && _Xlabel_ == 4)
-    {
-        x.str[strlen(x.str)+1] = '\0';
-        for (int i = strlen(x.str); i>0; i--)
-        {
-            x.str[i] = x.str[i-1];
-        }
-        x.str[0] = y.type.car;
-        push(s,x);
-    }
-    else if(_Xlabel_ == 5 && _Ylabel_ != 5){
-        prepush(x.a,y);
-        push(s,x);
-    }
-    else if (_Ylabel_ == 5){
-        arrcat(y.a,x);
-        push(s,y);
-        if(_Xlabel_ == 5){
-            free(x.a->stack);
-            free(x.a);
-        }
-    }
-    else if (_Ylabel_ ==  4 && _Xlabel_ == 3) 
-    {
-        char aux[2];
-        aux[0] = x.type.car;
-        aux[1] = '\0';
-        y.str = strcat(y.str,aux);
-        push(s,y);
-    }
-    else if(_Ylabel_ == 4){
-        size_t l1 = strlen(y.str);
-        size_t l2 = strlen(x.str);
-        char* res = malloc(l1 + l2 + 1);
-        memcpy(res,y.str,l1);
-        memcpy(res+l1,x.str,l2+1);
-        memcpy(y.str,res,l1+l2+1);
-        free(res);
-        push(s,y);
-    }
-    else if (_Ylabel_ == 3 ||_Xlabel_ == 3)
+    if (_Ylabel_ == 3 ||_Xlabel_ == 3)
     {
         x = toChar(x);
         y = toChar(y);
@@ -105,6 +62,62 @@ void add(STACK *s){
     }
 }
 
+void add4str(STACK *s,Container x, Container y)
+{
+    if(_Xlabel_ == 3){
+        char aux[2];
+        aux[0] = x.type.car;
+        aux[1] = '\0';
+        y.str = strcat(y.str,aux);
+        push(s,y);
+
+    }
+    else{
+        size_t l1 = strlen(y.str);
+        size_t l2 = strlen(x.str);
+        char* res = malloc(l1 + l2 + 1);
+        memcpy(res,y.str,l1);
+        memcpy(res+l1,x.str,l2+1);
+        memcpy(y.str,res,l1+l2+1);
+        free(res);
+        push(s,y);
+    }
+}
+
+void add(STACK *s){
+    
+    Container x = pop(s);
+    Container y = pop(s);
+    if (_Ylabel_ == 3 && _Xlabel_ == 4)
+    {
+        x.str[strlen(x.str)+1] = '\0';
+        for (int i = strlen(x.str); i>0; i--)
+        {
+            x.str[i] = x.str[i-1];
+        }
+        x.str[0] = y.type.car;
+        push(s,x);
+    }
+    else if(_Xlabel_ == 5 && _Ylabel_ != 5){
+        prepush(x.a,y);
+        push(s,x);
+    }
+    else if (_Ylabel_ == 5){
+        arrcat(y.a,x);
+        push(s,y);
+        if(_Xlabel_ == 5){
+            free(x.a->stack);
+            free(x.a);
+        }
+    }
+    else if(_Ylabel_ == 4){
+        add4str(s,x,y);
+    }
+    else{
+        realadd(s,x,y);
+    }
+}
+
 void foldr(STACK *s, Container x, Container y, Container *vars){
     STACK *min = ministack();
     push(min,y.a->stack[1]);
@@ -125,6 +138,24 @@ void foldr(STACK *s, Container x, Container y, Container *vars){
     free(y.a->stack);
     free(y.a);
     push(s,z);
+}
+
+void realmult(STACK *s, Container x, Container y){
+    Container z;
+    if (_Ylabel_ == 1 ||_Xlabel_ == 1)
+    {
+        x = toDouble(x);
+        y = toDouble(y);
+        _Zlabel_ = 1;
+        _ZnumD_ = _XnumD_*_YnumD_;
+        push(s,z);
+    }
+    else
+    {
+        _Zlabel_ =_Xlabel_;
+        _ZnumI_ = _XnumI_*_YnumI_;
+        push(s,z);
+    }
 }
 
 void mult(STACK *s, Container *vars)
@@ -152,7 +183,7 @@ void mult(STACK *s, Container *vars)
         free(aux.a->stack);
         free(aux.a);
     }
-    else  if(_Ylabel_ == 4)
+    else if(_Ylabel_ == 4)
     {
         z.label = 4;
         z.str = alloccStr();
@@ -164,19 +195,8 @@ void mult(STACK *s, Container *vars)
         }
         push(s,z);
     }
-    else if (_Ylabel_ == 1 ||_Xlabel_ == 1)
-    {
-        x = toDouble(x);
-        y = toDouble(y);
-        _Zlabel_ = 1;
-        _ZnumD_ = _XnumD_*_YnumD_;
-        push(s,z);
-    }
-    else
-    {
-        _Zlabel_ =_Xlabel_;
-        _ZnumI_ = _XnumI_*_YnumI_;
-        push(s,z);
+    else{
+        realmult(s,x,y);
     }
 }
 
@@ -359,6 +379,17 @@ void mod(STACK *s, Container *vars)
         push(s,z);
     }
 }
+size_t forloop(Container x,Container y, short *val){
+    size_t i = 0;
+    for (; i < strlen(x.str) && *val; i++)
+    {
+        if (y.str[i] != x.str[i])
+        {
+            *val = 0;
+        }
+    }
+    return i;
+}
 
 void expo(STACK *s)
 {
@@ -376,13 +407,7 @@ void expo(STACK *s)
             {
                 size_t i = 0;
                 val = 1;
-                for (; i < strlen(x.str) && val; i++)
-                {
-                    if (y.str[i] != x.str[i])
-                    {
-                        val = 0;
-                    }
-                }
+                i = forloop(x,y,&val);
                 if(i == strlen(x.str)){
                     end = 0;
                 }
@@ -447,6 +472,7 @@ void xor_bit(STACK *s)
 void not_bit(STACK *s, Container *vars)
 {
     Container x = pop(s);
+    pop(s);
     if(_Xlabel_ == 6){
         Container y = pop(s);
         STACK *min = ministack();
@@ -463,37 +489,42 @@ void not_bit(STACK *s, Container *vars)
         push(s,x.a->stack[i]);
         }
     }
+    else if(s->sp == 1){
+            x = toInt(x);
+            _XnumI_ = ~_XnumI_;
+            push(s,x);
+        }
     else{
         Container y = pop(s);
-        if(y.label == 5 || _Xlabel_ == 5){
-        int i;
-        STACK *aux = x.a;
-        for(i = 0; i <= aux->sp; i++) {
-            Container y = aux->stack[i];
-            push(s,y);
+        if(_Ylabel_==5){
+            int i;
+            STACK *aux = x.a;
+            for(i = 0; i <= aux->sp; i++) {
+                Container y = aux->stack[i];
+                push(s,y);
             }
         }
         else{
-        x = toInt(x);
-        _XnumI_ = ~_XnumI_;
-        push(s,x);
+            x = toInt(x);
+            _XnumI_ = ~_XnumI_;
+            push(s,x);
+        }
+
         }
     }
-}
 
-// void truthy(STACK *s){
-//     Container x = pop(s);
-//     Container y = pop(s);
-//     STACK *min = ministack();
-//     Container z;
-//     push(min,y);
-//     do
-//     {
-//         z = y;
-//         char *helper = strdup(x.str);
-//         parser(min,helper,2);
-//         free(helper);
-//     } 
-//     while (y.type.numI != 0 || y.type.numD != 0);
-//     push(s,y);
-// }
+void truthy(STACK *s, Container *vars){
+    Container x = pop(s);
+    Container y = pop(s);
+    STACK *min = new_stack();
+    Container z;
+    push(min,y);
+    while (y.type.numI != 0)
+    {
+        z = min->stack[1];
+        char *helper = strdup(x.str);
+        parser(min,helper,vars);
+        free(helper);
+    }
+    push(s,z);
+}

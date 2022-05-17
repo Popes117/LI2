@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define _REST_ return rest;
+
 #define _POPONE_   \
     Container x = pop(s); 
 
@@ -78,10 +80,161 @@ char *parse_block(STACK *s, char *rest)
     return rest;
 }
 
+char *handle6(STACK *s, char *token, char *rest, Container *vars)
+{
+    Container container;
+    switch (hash_function(token))
+    {
+    case 76:
+        nextLine(s);
+        _REST_
+    case 84:
+        readFile(s);
+        _REST_
+    case 91:
+        rest = parse_block(s,rest);
+        _REST_
+    case 92:
+        ou_bit(s);
+        _REST_
+    case 94:
+        not_bit(s,vars);
+        _REST_
+    default:
+        container.label = 3;
+        container.type.car = *token;
+        push(s, container);
+        _REST_
+    }
+}
+
+char *handle3(STACK *s, char *token, char *rest, Container *vars)
+{
+    switch (hash_function(token))
+    {
+    case 35:
+        strtoke2(s);
+        _REST_
+    case 59:
+        rest = parseArray(s,rest,vars);
+        _REST_
+    case 60:
+        switch2(s);
+        _REST_
+    case 62:
+        xor_bit(s);
+        _REST_
+    case 63:
+        duplica(s);
+        _REST_
+    case 69:
+        if(token[1]=='<') eMenor(s);
+        if(token[1]=='>') eMaior(s);
+        if(token[1]=='&') eAnd(s);
+        if(token[1]=='|') eOr(s);
+        _REST_
+    case 67:
+        ConvChar(s);
+        _REST_
+    case 70:
+        ConvFloat(s);
+        _REST_
+    case 73:
+        ConvInt(s);
+        _REST_
+    default:
+        rest = handle6(s,token,rest,vars);
+        _REST_
+}
+}
+char *handle4(STACK *s, char *token, char *rest, Container *vars)
+{
+    int x;
+    switch (hash_function(token))
+    {
+        case 30:
+            maior(s);
+            _REST_
+        case 29:
+            igual(s);
+            _REST_
+        case 31:
+            ifelse(s);
+            _REST_
+        case 32:
+            roda3(s);
+            _REST_
+        case 33:
+            x = token[0];
+            push(s, vars[x - 65]);
+            _REST_
+        case 34:
+            strtoke(s);
+            _REST_
+        default:
+            rest = handle3(s,token,rest,vars);
+            _REST_
+    }
+}
+
+char *handle2(STACK *s, char *token, char *rest, Container *vars)
+{
+    switch (hash_function(token))
+    {
+        case 11:
+            add(s);
+            _REST_
+        case 12:
+            tamanho(s,vars);
+            _REST_
+        case 13:
+            sub(s);
+            _REST_
+        case 15:
+            division(s);
+            _REST_
+        case 26:
+            coloca(s, vars, token);
+            _REST_
+        case 27:
+            pop(s);
+            _REST_
+        case 28:
+            menor(s);
+            _REST_
+        default:
+            rest = handle4(s,token,rest,vars);
+            _REST_
+    }
+}
+
+char *handle5(STACK *s, char *token, char *rest, Container *vars)
+{
+    switch (hash_function(token))
+    {
+    case 6:
+        e_bit(s);
+        _REST_
+    case 8:
+        sub1(s);
+        _REST_
+    case 9:
+        add1(s);
+        _REST_
+    case 10:
+        mult(s,vars);
+        _REST_
+    default:
+        rest = handle2(s,token,rest,vars);
+        _REST_
+    }
+}
+
 char *handle(STACK *s, char *token, char *rest, Container *vars)
 {
-    if (isdigit(*token) || (token[0] == '-' && isdigit(token[1])))
+    switch (hash_function(token))
     {
+    case 0:
         if (isFloat(token))
         {
             double x;
@@ -99,9 +252,28 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
             container.label = 2;
             container.type.numI = x;
             push(s, container);
-        }
-    }
-    else if (strcmp(token, "-") == 0)
+        } 
+        _REST_
+    case 1:
+        nots(s);
+        _REST_
+    case 2:
+        rest = parseString(s, token, rest);
+        _REST_
+    case 3:
+        expo(s);
+        _REST_
+    case 4:
+        copy(s,vars);
+        _REST_
+    case 5:
+        mod(s,vars);
+        _REST_
+    default:
+        rest = handle5(s,token,rest,vars);
+        _REST_
+    } 
+    /* if (strcmp(token, "-") == 0)
         sub(s);
     else if (strcmp(token, "+") == 0)
         add(s);
@@ -140,8 +312,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
         copy(s,vars);
     else if (strcmp(token, "l") == 0)
         nextLine(s);
-    // else if (strcmp(token, "w") == 0)
-    //     truthy(s);
+    else if (strcmp(token, "w") == 0)
+        truthy(s,vars);
     else if (strcmp(token, "t") == 0)
         readFile(s);
     else if (strcmp(token, "f") == 0)
@@ -179,8 +351,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
         int x = token[0];
         push(s, vars[x - 65]);
     }
-    else if (token[0] == ':')
-        coloca(s, vars, token);
+     else if (token[0] == ':')
+        coloca(s, vars, token); 
     else if (token[0] == '\"')
         rest = parseString(s, token, rest);
     else if (strcmp(token, "[") == 0)
@@ -194,7 +366,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars)
         container.type.car = *token;
         push(s, container);
     }
-    return rest;
+    return rest; */
 }
 
 

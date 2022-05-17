@@ -1,4 +1,6 @@
 #include "type_changes.h"
+#include <math.h>
+#include <ctype.h>
 #include "macro.h"
 
 Container toInt(Container x){
@@ -85,6 +87,16 @@ void fill(Container *vars){
     vars[24].type.numI = 1;
     vars[25].label = 2;
     vars[25].type.numI = 2;
+}
+
+int hash_function(char *token){
+    int x = token[0]-'0';
+    if( (x<=9 && x>=0) || (token[0] == '-' && isdigit(token[1]))) return 0;
+    x = token[0]-'A';
+    if(strcmp(token,"S/")==0) return 34;
+    if(strcmp(token,"N/")==0) return 35;
+    if (x<=25 && x>=0) return 33;
+    return token[0]-32;
 }
 
 int comparaCont( Container x, Container y){

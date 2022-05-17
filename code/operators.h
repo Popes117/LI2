@@ -30,7 +30,7 @@ void xor_bit(STACK *s);
 
 void not_bit(STACK *s, Container *vars);
 
-Container duplica(STACK *s);
+void duplica(STACK *s);
 
 /* void duplica2(STACK *s); */
 
@@ -82,6 +82,6 @@ void strtoke(STACK *s);
 
 void strtoke2(STACK *s);
 
-void truthy(STACK *s);
+void truthy(STACK *s, Container *vars);
 
 void tamanho2(STACK *s, Container z);

@@ -34,7 +34,7 @@ void tamanho2(STACK *s, Container z){
     push(s,z);
 }
 
-void compare(STACK *s, Container x, Container y){
+void compare(STACK *s, Container x, Container y, Container *vars){
     STACK *min = new_stack();
     if (_Xlabel_ == 6)
     {   
@@ -45,7 +45,7 @@ void compare(STACK *s, Container x, Container y){
             parser(min,helper,vars);
             free(helper);
         }
-        int  i = 1;
+        int i = 1;
         int n = 1;
         while (i <= min->sp)
         {

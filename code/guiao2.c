@@ -7,11 +7,11 @@
 #include "parser.h"
 #include "macro.h"
 
-Container duplica(STACK *s)
+void duplica(STACK *s)
 {
     Container x = pop(s);
     push(s,x);
-    return x;
+    push(s,x);
 }
 
 void switch2(STACK *s)
@@ -36,22 +36,26 @@ void roda3(STACK *s)
 
 }
 
+void copy_help(STACK *min,Container x, Container y, Container *vars){
+    for (int i = 1; i <= y.a->sp;i++)
+        {
+            push(min,y.a->stack[i]);
+            char *helper = strdup(x.str);
+            parser(min,helper,vars);
+            free(helper);
+        }
+}
+
 void copy(STACK *s, Container *vars){
 
     Container x = pop(s);
-    if (_Xlabel_ = 6)
+    if (_Xlabel_ == 6)
     {
         Container y = pop(s);
         STACK *min = new_stack();
         if (_Xlabel_ == 6)
         {
-            for (int i = 1; i <= y.a->sp;i++)
-            {
-                push(min,y.a->stack[i]);
-                char *helper = strdup(x.str);
-                parser(min,helper,vars);
-                free(helper);
-            }
+            copy_help(min,x,y,vars);
             int i = 1;
             while (i <= min->sp)
             {
@@ -64,7 +68,7 @@ void copy(STACK *s, Container *vars){
                         y.a->stack[j] = y.a->stack[j+1];
                         y.a->stack[j+1] = z;
                     }
-                }
+            }
                 i++;   
             }
         }

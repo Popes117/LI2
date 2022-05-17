@@ -7,6 +7,12 @@
 #include "type_changes.h"
 #include "macro.h"
 
+#define _TRUE_      \
+    Container True; \
+    _Truelabel_ = 2;\
+    _TruenumI_ = 1; \
+    push(s,True); 
+
 void coloca(STACK *s, Container *vars, char *token){
    Container x = pop(s);
     int ascii = token[1];
@@ -92,12 +98,9 @@ void igual(STACK *s){
     }
 }
 
-void maior(STACK *s){
-    Container y = pop(s);
-    Container x = pop(s);
-    if(_Xlabel_ == 4 && _Ylabel_ == 4){
-        if(strcmp(x.str,y.str) > 0)
-        {
+void strmaior(STACK *s,Container x, Container y)
+{
+    if(strcmp(x.str,y.str) > 0){
             Container True;
             _Truelabel_ = 2;
             _TruenumI_ = 1;
@@ -110,6 +113,13 @@ void maior(STACK *s){
             _FalsenumI_ = 0;
             push(s,False);
         }
+}
+
+void maior(STACK *s){
+    Container y = pop(s);
+    Container x = pop(s);
+    if(_Xlabel_ == 4 && _Ylabel_ == 4){
+        strmaior(s,x,y);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ == 5){
         if(x.a->sp > y.a->sp)
@@ -161,12 +171,18 @@ void maior(STACK *s){
         }
     }   
 }
-void menor(STACK *s){
-    Container y = pop(s);
-    Container x = pop(s);
-    if(_Xlabel_ == 4 && _Ylabel_ == 4)
-    {
-        if(strcmp(x.str,y.str) < 0){
+
+void popmachine(STACK *x , int f){
+    while (f>0)
+            {
+                f--;
+                pop(x);
+            }
+}
+
+void strmenor(STACK *s,Container x, Container y)
+{
+    if(strcmp(x.str,y.str) < 0){
             Container True;
             _Truelabel_ = 2;
             _TruenumI_ = 1;
@@ -179,14 +195,19 @@ void menor(STACK *s){
             _FalsenumI_ = 0;
             push(s,False);
         }
+}
+
+void menor(STACK *s){
+    Container y = pop(s);
+    Container x = pop(s);
+    if(_Xlabel_ == 4 && _Ylabel_ == 4)
+    {
+        strmenor(s,x,y);
     }
     else if(_Xlabel_ == 5 && _Ylabel_ == 5){
         if(x.a->sp < y.a->sp)
         {
-            Container True;
-            _Truelabel_ = 2;
-            _TruenumI_ = 1;
-            push(s,True);
+            _TRUE_
         }
         else
         {
@@ -207,11 +228,7 @@ void menor(STACK *s){
         int f = x.a->sp-y.type.numI;
         if(x.a->sp-y.type.numI == 0) push(s,x);
         else{
-            while (f>0)
-            {
-                f--;
-                pop(x.a);
-            }
+            popmachine(x.a,f);
             push(s,x);
             }
         }
@@ -220,10 +237,7 @@ void menor(STACK *s){
         y = toDouble(y);
         if(comparaCont(x,y) == 3)
         {
-            Container True;
-            _Truelabel_ = 2;
-            _TruenumI_ = 1;
-            push(s,True);
+            _TRUE_
         }
         else
         {

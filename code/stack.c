@@ -6,7 +6,7 @@
 
 STACK * new_stack() {
         STACK *s = malloc(sizeof(STACK));
-        s->stack = malloc(15000*sizeof(Container));
+        s->stack = malloc(100001*sizeof(Container));
         //s->size = 40;
         return s;
 }
