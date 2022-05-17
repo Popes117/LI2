@@ -172,7 +172,7 @@ void mult(STACK *s, Container *vars)
     {
         Container aux;
         _Auxlabel_ = 5;
-        _Xarr_ = new_stack();
+        _Auxarr_ = new_stack();
         arrcat(_Auxarr_,y);
         while (_XnumI_ > 1)
         {
