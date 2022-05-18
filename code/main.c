@@ -4,6 +4,10 @@
 #include "parser.h"
 #include "type_changes.h"
 
+/**
+ * @file Ficheiro responsável pela main do código
+ */
+
 int main(){
     STACK *s = new_stack();
     char line[15000];

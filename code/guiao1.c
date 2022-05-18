@@ -234,7 +234,7 @@ void division(STACK *s)
 }
 
 // ) guião 4
-Container rmarr2(STACK *s, Container x) {
+Container rmarr2(STACK *s, Container x){
     Container z = pop(_Xarr_);
     push(s,x);
     return z;
@@ -271,7 +271,7 @@ void add1(STACK *s)
 }
 
 // ( guião 4
-Container rmarr1(STACK *s, Container x) {
+Container rmarr1(STACK *s, Container x){
     int i;
     Container y;
     _Ylabel_ = 5;
@@ -366,6 +366,7 @@ void mod(STACK *s, Container *vars)
         push(s,z);
     }
 }
+
 size_t forloop(Container x,Container y, short *val){
     size_t i = 0;
     for (; i < strlen(_Xstr_) && *val; i++)
