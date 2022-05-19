@@ -20,7 +20,14 @@ void sub(STACK *s);
  * @param STACK
  */
 void realadd(STACK *s,Container x, Container y);
-
+/**
+ * @brief Faz a adição de dois valores e coloca o resultado no topo da stack.
+ *        No caso de um dos containers recebidos ser um char, o resultado será também do tipo char.
+ * 
+ * @param STACK
+ * @param Container 
+ * @param Container 
+ */
 void add4str(STACK *s,Container x, Container y);
 
 void add(STACK *s);
@@ -30,9 +37,22 @@ void add(STACK *s);
  * @param STACK
  */
 void foldr(STACK *s, Container x, Container y, Container *vars);
-
+/**
+ * @brief Aplica um bloco a um Array ou String
+ * 
+ * @param STACK
+ * @param Container
+ * @param Container
+ * @param Container
+ */
 void realmult(STACK *s, Container x, Container y);
-
+/**
+ * @brief Faz a multiplicação de dois valores numéricos e coloca o resultado no topo da stack.
+ * 
+ * @param STACK
+ * @param Container 
+ * @param Container 
+ */
 void mult(STACK *s, Container *vars);
 /**
  * @brief Aplica a operação de multiplicação aos 2 elementos do topo da stack
@@ -47,7 +67,12 @@ void division(STACK *s);
  * @param STACK 
  */
 Container rmarr2(STACK *s, Container x);
-
+/**
+ * @brief Remove um elemento do fim de um array e coloca-o no topo da stack
+ * 
+ * @param STACK
+ * @param Container 
+ */
 void add1(STACK *s);
 /**
  * @brief Incrementa um valor
@@ -55,7 +80,12 @@ void add1(STACK *s);
  * @param STACK
  */
 Container rmarr1(STACK *s, Container x);
-
+/**
+ * @brief Remove um elemento do início de um array e coloca-o no topo da stack
+ * 
+ * @param STACK
+ * @param Container 
+ */
 void sub1(STACK *s);
 /**
  * @brief Decrementa um valor
@@ -70,7 +100,13 @@ void mod(STACK *s, Container *vars);
  * @param Container
  */
 size_t forloop(Container x,Container y, short *val);
-
+/**
+ * @brief Devolve o resto da divisão ou aplica um Bloco a um Array/String
+ * 
+ * @param Container
+ * @param Container
+ * @param short 
+ */
 void expo(STACK *s);
 /**
  * @brief Faz a exponenciação do primeiro elemento do topo da stack com o segundo
@@ -78,15 +114,33 @@ void expo(STACK *s);
  * @param STACK
  */
 void e_bit(STACK *s);
-
+/**
+ * @brief Aplica a função lógica E 
+ * 
+ * @param STACK
+ */
 void ou_bit(STACK *s);
-
+/**
+ * @brief Aplica a função lógica Ou
+ * 
+ * @param STACK
+ */
 void xor_bit(STACK *s);
 
 void not_bit(STACK *s, Container *vars);
-
+/**
+ * @brief Faz a negação do output esperado
+ * 
+ * @param STACK
+ * @param Container
+ */
 void truthy(STACK *s, Container *vars);
-
+/**
+ * @brief Executa o bloco enquanto ele deixar um truthy no topo da stack e Remove da stack a condição
+ * 
+ * @param STACK
+ * @param Container
+ */
 // Funções no Guião 2
 
 void duplica(STACK *s);
@@ -108,7 +162,14 @@ void roda3(STACK *s);
  * @param STACK
  */
 void copy_help(STACK *min,Container x, Container y, Container *vars);
-
+/**
+ * @brief Função auxiliar criada para uso na função copy
+ * 
+ * @param STACK
+ * @param Container
+ * @param Container
+ * @param Container 
+ */
 void copy(STACK *s, Container *vars);
 /**
  * @brief Copia o n-ésimo elemento para o topo da stack
@@ -119,7 +180,6 @@ void copy(STACK *s, Container *vars);
 void nextLine(STACK *s);
 
 void ConvChar(STACK *s);
-void ConvChar(STACK *s);
 /**
  * @brief Converte um Container para um char
  * 
@@ -129,7 +189,7 @@ void ConvInt(STACK *s);
 /**
  * @brief Converte um Container para um int
  * 
- * @param Stack
+ * @param STACK
  */
 void ConvFloat(STACK *s);
 /**
@@ -155,7 +215,13 @@ void igual(STACK *s);
  * @param STACK
  */
 void strmaior(STACK *s,Container x, Container y);
-
+/**
+ * @brief Compara os 2 elementos de tipo string do topo da stack e devolve True se X for maior 
+ * 
+ * @param STACK
+ * @param Container
+ * @param Container
+ */
 void maior(STACK *s);
 /**
  * @brief Compara os 2 elementos do topo da stack e devolve o maior
@@ -163,9 +229,20 @@ void maior(STACK *s);
  * @param STACK
  */
 void popmachine(STACK *x , int f);
-
+/**
+ * @brief Faz pop do topo da stack enquanto f é diferente de 0
+ * 
+ * @param STACK
+ * @param Int 
+ */
 void strmenor(STACK *s,Container x, Container y);
-
+/**
+ * @brief Compara os 2 elementos de tipo string do topo da stack e devolve True se X for menor
+ * 
+ * @param STACK
+ * @param Container
+ * @param Container
+ */
 void menor(STACK *s);
 /**
  * @brief Compara os 2 elementos do topo da stack e devolve o menor
@@ -189,7 +266,11 @@ void eMenor(STACK *s);
  * @param STACK
  */
 void nots(STACK *s);
-
+/**
+ * @brief Devolve o valor lógico oposto da operação afetada
+ * 
+ * @param STACK
+ */
 // Funções no Guião 4
 
 void readFile(STACK *s);
@@ -206,7 +287,12 @@ void tamanho(STACK *s, Container *vars);
  * @param Container
  */
 void arrcat(STACK *s, Container z);
-
+/**
+ * @brief Concatena Arrays 
+ * 
+ * @param STACK
+ * @param Container
+ */
 void strtoke(STACK *s);
 
 void strtoke2(STACK *s);

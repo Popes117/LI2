@@ -11,8 +11,8 @@ char *readString(char *rest, char *str);
 /**
  * \brief Lê a String 
  *
- * @param rest
- * @param str
+ * @param Char
+ * @param Char
  *
  */
 char *parseString(STACK *s, char *token, char *rest);
@@ -21,7 +21,7 @@ char *parseString(STACK *s, char *token, char *rest);
  *
  * @param STACK
  * @param token
- * @param rest
+ * @param Char
  * 
  */
 char *parse_block(STACK *s, char *rest);
@@ -29,7 +29,7 @@ char *parse_block(STACK *s, char *rest);
  * \brief Faz parse de Blocos
  *
  * @param STACK
- * @param rest
+ * @param Char
  *
  */
 char* parseArray(STACK *s, char *rest,Container *vars);
@@ -37,8 +37,8 @@ char* parseArray(STACK *s, char *rest,Container *vars);
  * \brief Faz parse de Arrays
  *
  * @param STACK
- * @param rest
- * @param vars
+ * @param Char
+ * @param Container 
  *
  */
 void parser(STACK *s, char *line, Container *vars);
@@ -46,15 +46,15 @@ void parser(STACK *s, char *line, Container *vars);
  * \brief Função principal responsável pelo parsing
  *
  * @param STACK
- * @param line
- * @param vars 
+ * @param Char
+ * @param Container  
  *
  */
 int isFloat(char *token);
 /**
  * \brief Determina se o token é Float
  *
- * @param token
+ * @param Char
  *
  */
 
@@ -66,8 +66,8 @@ char *handle(STACK *s, char *token, char *rest, Container *vars);
  * \brief Função responsável pela chamada das funções dos guiões
  *
  * @param STACK
- * @param token
- * @param rest
+ * @param Char
+ * @param Char
  * @param Container
  *
  */
@@ -76,8 +76,8 @@ char *handle2(STACK *s, char *token, char *rest, Container *vars);
  * \brief Função responsável pela chamada das funções dos guiões
  *
  * @param STACK
- * @param token
- * @param rest
+ * @param Char
+ * @param Char
  * @param Container
  *
  */
@@ -86,8 +86,8 @@ char *handle3(STACK *s, char *token, char *rest, Container *vars);
  * \brief Função responsável pela chamada das funções dos guiões
  *
  * @param STACK
- * @param token
- * @param rest
+ * @param Char  
+ * @param Char
  * @param Container
  *
  */
@@ -96,8 +96,8 @@ char *handle4(STACK *s, char *token, char *rest, Container *vars);
  * \brief Função responsável pela chamada das funções dos guiões
  *
  * @param STACK
- * @param token
- * @param rest
+ * @param Char
+ * @param Char
  * @param Container
  *
  */
@@ -106,8 +106,8 @@ char *handle5(STACK *s, char *token, char *rest, Container *vars);
  * \brief Função responsável pela chamada das funções dos guiões
  *
  * @param STACK
- * @param token
- * @param rest
+ * @param Char
+ * @param Char
  * @param Container
  *
  */
@@ -116,8 +116,8 @@ char *handle6(STACK *s, char *token, char *rest, Container *vars);
  * \brief Função responsável pela chamada das funções dos guiões
  *
  * @param STACK
- * @param token
- * @param rest
+ * @param Char
+ * @param Char
  * @param Container
  *
  */
