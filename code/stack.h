@@ -1,16 +1,27 @@
+/**
+ * \brief Definição do valor máximo como 1000
+ */
 #define MAX 1000
 #pragma once
 
+/**
+ * @file Biblioteca com as funções usadas na stack.c
+ */
+
 /** Estrutura responsável pelos tipos Long, Double e Char*/
 typedef union HoldType {
-                long numI;
                 /** Long*/
-                double numD;
+                long numI;
+                
                 /** Double*/
-                char car;
+                double numD;
+                
                 /** Char*/
+                char car;
+                
         } Type;
 
+/** Definição da estrutura Stack*/
 typedef struct stack STACK;
 
 /** Definição da estrutura Container*/
@@ -25,31 +36,51 @@ typedef struct Container{
            5 - Array
            6 - Bloco
         */
+       /**Union que distribui Arrays, Strings e tipos*/
        union{
-                char *str;
                 /** Tipo String para Container*/
-                STACK *a;
+                char *str;
+                
                 /** Tipo Array para Container*/
+                STACK *a;
+               
+                /** Tipo do Container*/
                 Type type;
        };
 } Container;
 
 /** Definição dos conteúdos da Stack*/
 struct stack {
+        /**Container*/
         Container *stack;
-        int sp;
         /** Tamanho da Stack*/
+        int sp;
+        
 };
 
+/**
+ * \brief Cria uma nova Stack 
+ *
+ * @param STACK
+ */
 STACK* new_stack();
 
+/**
+ * \brief Cria uma mini Stack 
+ *
+ * @param STACK
+ */
 STACK * ministack();
 
-STACK* reallocSTACK(STACK *s);
-
+/**
+ * \brief Faz push no início da Stack e não no final 
+ *
+ * @param STACK
+ * @param Container
+ *
+ */
 void prepush(STACK *s, Container container);
 
-void push(STACK *s, Container container);
 /**
  * \brief Devolve o topo da Stack
  *
@@ -58,15 +89,18 @@ void push(STACK *s, Container container);
  *
  * @returns O conteúdo do topo da Stack
  */
-Container pop(STACK *s);
+void push(STACK *s, Container container);
+
 /**
  * \brief Imprime a Stack
  *
  * @param STACK
  */
-void printer(STACK *s);
+Container pop(STACK *s);
+
 /**
  * \brief Faz print da Stack elemento a elemento, dependendo do tipo da label
  *
  * @param STACK
  */
+void printer(STACK *s);

@@ -8,6 +8,10 @@
 #include "parser.h"
 #include "alloca.h"
 
+/**
+ * @file Ficheiro que contém o Guião 1
+ */
+
 void sub(STACK *s)
 {
     

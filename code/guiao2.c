@@ -7,6 +7,11 @@
 #include "parser.h"
 #include "macro.h"
 
+/**
+ * @file Ficheiro que contém o Guião 2
+ */
+
+
 void duplica(STACK *s)
 {
     Container x = pop(s);

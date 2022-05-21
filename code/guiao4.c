@@ -8,6 +8,10 @@
 #include "type_changes.h"
 #include "macro.h"
 
+/**
+ * @file Ficheiro que contém o Guião 4
+ */
+
 void readFile(STACK *s)
 {
     char linha[BUFSIZ];
@@ -19,18 +23,6 @@ void readFile(STACK *s)
     {
         _Zstr_ = strcat(_Zstr_,linha);
     }
-    push(s,z);
-}
-
-void tamanho2(STACK *s, Container z){
-    _Zlabel_ = 2;
-    int x = strlen(_Zstr_);
-    while (_Zstr_[x]!='\0')
-    {
-        x++;
-    }
-    
-    _ZnumI_ = x;
     push(s,z);
 }
 
@@ -105,7 +97,6 @@ void arrcat(STACK *s, Container z) {
         for (int i = 1; i <= _Zarr_->sp; i++)
         {  
             push(s,_Zarr_->stack[i]);
-           /* if(_Zarr_->stack[i].label == 4) free(_Zarr_->stack[i].str); */
         }
     }
 }

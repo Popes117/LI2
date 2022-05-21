@@ -3,11 +3,15 @@
 #include "stack.h"
 #pragma once
 
-char* alloccStr();
+/**
+ * @file Biblioteca com as funções utilizadas na parser.c
+ */
+
 /**
  * \brief Aloca memória para as Strings
  */
-char *readString(char *rest, char *str);
+char* alloccStr();
+
 /**
  * \brief Lê a String 
  *
@@ -15,7 +19,8 @@ char *readString(char *rest, char *str);
  * @param Char
  *
  */
-char *parseString(STACK *s, char *token, char *rest);
+char *readString(char *rest, char *str);
+
 /**
  * \brief Faz parse de Strings
  *
@@ -24,7 +29,8 @@ char *parseString(STACK *s, char *token, char *rest);
  * @param Char
  * 
  */
-char *parse_block(STACK *s, char *rest);
+char *parseString(STACK *s, char *token, char *rest);
+
 /**
  * \brief Faz parse de Blocos
  *
@@ -32,7 +38,8 @@ char *parse_block(STACK *s, char *rest);
  * @param Char
  *
  */
-char* parseArray(STACK *s, char *rest,Container *vars);
+char *parse_block(STACK *s, char *rest);
+
 /**
  * \brief Faz parse de Arrays
  *
@@ -41,7 +48,8 @@ char* parseArray(STACK *s, char *rest,Container *vars);
  * @param Container 
  *
  */
-void parser(STACK *s, char *line, Container *vars);
+char* parseArray(STACK *s, char *rest,Container *vars);
+
 /**
  * \brief Função principal responsável pelo parsing
  *
@@ -50,18 +58,30 @@ void parser(STACK *s, char *line, Container *vars);
  * @param Container  
  *
  */
-int isFloat(char *token);
+void parser(STACK *s, char *line, Container *vars);
+
 /**
  * \brief Determina se o token é Float
  *
  * @param Char
  *
  */
+int isFloat(char *token);
+
 
 // __HANDLE__
 
-
+/**
+ * \brief Função responsável pela chamada das funções dos guiões
+ *
+ * @param STACK
+ * @param Char
+ * @param Char
+ * @param Container
+ *
+ */
 char *handle(STACK *s, char *token, char *rest, Container *vars);
+
 /**
  * \brief Função responsável pela chamada das funções dos guiões
  *
@@ -72,16 +92,7 @@ char *handle(STACK *s, char *token, char *rest, Container *vars);
  *
  */
 char *handle2(STACK *s, char *token, char *rest, Container *vars);
-/**
- * \brief Função responsável pela chamada das funções dos guiões
- *
- * @param STACK
- * @param Char
- * @param Char
- * @param Container
- *
- */
-char *handle3(STACK *s, char *token, char *rest, Container *vars);
+
 /**
  * \brief Função responsável pela chamada das funções dos guiões
  *
@@ -91,7 +102,19 @@ char *handle3(STACK *s, char *token, char *rest, Container *vars);
  * @param Container
  *
  */
+char *handle3(STACK *s, char *token, char *rest, Container *vars);
+
+/**
+ * \brief Função responsável pela chamada das funções dos guiões
+ *
+ * @param STACK
+ * @param Char
+ * @param Char
+ * @param Container
+ *
+ */
 char *handle4(STACK *s, char *token, char *rest, Container *vars);
+
 /**
  * \brief Função responsável pela chamada das funções dos guiões
  *
@@ -102,6 +125,7 @@ char *handle4(STACK *s, char *token, char *rest, Container *vars);
  *
  */
 char *handle5(STACK *s, char *token, char *rest, Container *vars);
+
 /**
  * \brief Função responsável pela chamada das funções dos guiões
  *
@@ -112,15 +136,7 @@ char *handle5(STACK *s, char *token, char *rest, Container *vars);
  *
  */
 char *handle6(STACK *s, char *token, char *rest, Container *vars);
-/**
- * \brief Função responsável pela chamada das funções dos guiões
- *
- * @param STACK
- * @param Char
- * @param Char
- * @param Container
- *
- */
+
 
 
 

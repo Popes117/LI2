@@ -7,15 +7,28 @@
 #include <string.h>
 #include "macro.h"
 
-#define _REST_ return rest;
+/**
+ * @file Ficheiro responsável pela definição do Parser utilizado.
+ */
 
+/**
+ * \brief Definição de rest para facilitar o uso deste valor
+ */
+#define _REST_ return rest;
+/**
+ * \brief Definição de um pop para facilitar o uso deste valor 
+ */
 #define _POPONE_   \
     Container x = pop(s); 
-
+/**
+ * \brief Definição de dois pops para facilitar o uso deste valor 
+ */
 #define _POPTWO_          \
     Container x = pop(s); \
     Container y = pop(s); 
-
+/**
+ * \brief Definição de três pops para facilitar o uso deste valor 
+ */
 #define _POPTHREE         \
     Container x = pop(s); \
     Container y = pop(s); \

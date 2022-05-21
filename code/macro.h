@@ -7,9 +7,12 @@
 #include "type_changes.h"
 
 /**
- * @file Ficheiro responsável pela facilidade da leitura, uso e controlo de tipos.
+ * @file Biblioteca responsável pela facilidade da leitura, uso e controlo de tipos.
  */
 
+/**
+ * \brief Introduz facilidade ao controlo de tipos.
+ */
 #define _XnumD_ x.type.numD
 /**
  * \brief Introduz facilidade ao controlo de tipos.
@@ -123,8 +126,5 @@
  * \brief Introduz facilidade ao controlo de tipos.
  */
 #define _Containerlabel_ container.label
-/**
- * \brief Introduz facilidade ao controlo de tipos.
- */
 
 

@@ -8,6 +8,9 @@
  * @file Ficheiro responsável pela main do código
  */
 
+/**
+ * \brief Main do código 
+ */
 int main(){
     STACK *s = new_stack();
     char line[15000];

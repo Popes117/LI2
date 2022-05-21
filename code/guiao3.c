@@ -7,6 +7,13 @@
 #include "type_changes.h"
 #include "macro.h"
 
+/**
+ * @file Ficheiro que contém o Guião 3
+ */
+
+/**
+ * \brief Definição do valor lógico True para facilitar o uso deste valor
+ */
 #define _TRUE_      \
     Container True; \
     _Truelabel_ = 2;\
