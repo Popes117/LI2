@@ -1,5 +1,18 @@
 # LI2-
 
-Aqui vai ser feito o trabalho de Laboratórios de Informática II.
+Aqui está feito o trabalho de Laboratórios de Informática II.
 
-Só queremos commits com nomes todos javardados CARALHO ahahahah.
+
+Este trabalho foi feito pelos membros do Grupo PL7G01 AKA:
+
+Zé Oliveira GitHub: Wally1906
+
+Pedro Lopes GitHub: LerdoPopes
+
+Duarte Araujo GitHub : duartearaujo 
+
+João Pereira GitHub : joaopereira75
+
+
+Digamos que os commits estão com nomes todos javardados Ahahahah.
+
